@@ -1,6 +1,7 @@
-## frfit
+## friar_fit
 # Wrapper function to fit functional response curves
-fr_fit <- function(formula, data, response, start=list(), fixed=list(), boot=FALSE, nboot=999, para=TRUE, ncores=NaN, WARN.ONLY=FALSE){
+# The workhorse of the friar package
+friar_fit <- function(formula, data, response, start=list(), fixed=list(), boot=FALSE, nboot=1500, para=TRUE, ncores=NaN, WARN.ONLY=FALSE){
 	# Parse call, can check formula...
 	call <- match.call()
 	mf <- match.call(expand.dots = FALSE)
@@ -51,9 +52,6 @@ fr_fit <- function(formula, data, response, start=list(), fixed=list(), boot=FAL
     	stop("The items in fixed must be named numeric values.")
     }
    
-    optimised_vals <- names(start)
-    fixed_vals <- names(fixed)
-    
     # Check we have everything we need
     req_input <- names(formals(response))
     req_input  <- req_input[req_input!='X']
@@ -69,7 +67,8 @@ fr_fit <- function(formula, data, response, start=list(), fixed=list(), boot=FAL
     
     ## Go time!
     # Common output
-    out <- list('call' = call, 'x' = moddata$X, 'y'=moddata$Y, 'response'=response, 'xvar' = rightside, 'yvar' = leftside)
+    out <- list('call' = call, 'x' = moddata$X, 'y'=moddata$Y, 'response'=response, 'xvar' = rightside, 'yvar' = leftside, optimvars=names(start), fixedvars=names(fixed))
+    
     ## Bootstrapping ##
 	if(boot){
     	# Setup output
@@ -97,7 +96,7 @@ fr_fit <- function(formula, data, response, start=list(), fixed=list(), boot=FAL
         }
     	
     	# Print some output to calm people's nerves!
-    	cat('\nNow bootstrapping.  Please be patient...\n')
+    	cat('\nNow bootstrapping.  Please be patient...\n\n')
     	flush.console()
     	
     	## Case specific fitting...
@@ -122,7 +121,7 @@ fr_fit <- function(formula, data, response, start=list(), fixed=list(), boot=FAL
     	# Add the (original) coefficients to the output
     	out[['coefficients']] <- frout$t0[req_input]
         # Add the (bootstrapped) coefficients to the output
-    	out[['bootcoefs']] <- frout$t[,match(req_input, names(frout$t0))]
+    	out[['bootcoefs']] <- as.matrix(frout$t[,match(req_input, names(frout$t0))])
         dimnames(out[['bootcoefs']]) <- list(NULL, names(frout$t0[match(req_input, names(frout$t0))]))
         # Add sample
     	out[['sample']] <- frout$t[,names(frout$t0)=='']
@@ -178,23 +177,4 @@ fr_fit <- function(formula, data, response, start=list(), fixed=list(), boot=FAL
     }
     # Finally return our object!
     return(out)
-}
-
-## Methods ##
-print.frfit <- function(x, ...){
-    cat('Functional response fit\n')
-    cat('Call:\n')
-    print(x$call)
-    cat('\nOptimised coefficients:\n')
-    print(x$coefficients)
-    cat(paste('\nNOTE: It is recomended you inspect the raw fit information too (contained in object$fit)', sep=''))
-}
-
-print.frboot <- function(x, ...){
-    cat('Bootstrapped functional response fit\n')
-    cat('Call:\n')
-    print(x$call)
-    cat('\nOptimised coefficients (original data):\n')
-    print(x$coefficients)
-    cat(paste('\nNOTE: It is recomended you inspect the raw fit information too (contained in object$fit)', sep=''))
 }

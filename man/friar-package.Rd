@@ -5,6 +5,8 @@
 \title{Functional Response Analysis in R}
 \description{A (draft) package for functional response analysis.}
 \details{
+The main workhorse is \code{\link{friar_fit}} and this shoudl be the starting point for most users.
+
 \tabular{ll}{
 Package: \tab friar\cr
 Type: \tab Package\cr

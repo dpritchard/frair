@@ -26,7 +26,7 @@
   \item{Y }{The Y variable.  Usually the number of prey consumed.}
 }
 \details{
-None of these functions are designed to be called directly, though they can be if desired.  The intention is that they are called via \code{\link{fr_fit}}, which calls them in the order they are specified above.
+None of these functions are designed to be called directly, though they can be if desired.  The intention is that they are called via \code{\link{friar_fit}}, which calls them in the order they are specified above.
 
 \code{rogersII_fit} does the heavy lifting and also pulls double duty as the \code{statistic} function for bootstrapping (via \code{boot()} in the boot package).  The \code{windows} argument if required to prevent needless calls to \code{require()} on platforms that can manage sane parallel processing.
 
@@ -42,7 +42,7 @@ Daniel Pritchard
 }
 
 \seealso{
-\code{\link{fr_fit}}.
+\code{\link{friar_fit}}.
 }
 
 \references{
