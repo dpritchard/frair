@@ -54,7 +54,7 @@ lines.frboot <- function(x, all=FALSE, col=1, alpha=1/sqrt(x$n_boot), ...){
     } else {
         # Plotting bootlines
         # Sort out colour
-        if(is.vector(col) & match(length(col),c(3,4))){
+        if(is.vector(col) && match(length(col),c(3,4),nomatch=0)){
             # Assumed to be RGB
             col[4] <- alpha
         } else {
@@ -89,5 +89,5 @@ polygon.frboot <- function(x, probs=c(0.025, 0.975), ...){
         outdd[a,] <- fitfun(newx, as.list(as.list(bootcoefs[a,])))
     }
     dd <- apply(outdd, 2, quantile, na.rm=T, probs = probs)
-    polygon(c(newx, rev(newx), newx[1]), c(dd[1,], rev(dd[2,]), dd[1,1]), ...)
+    polygon(x=c(newx, rev(newx), y=newx[1]), c(dd[1,], rev(dd[2,]), dd[1,1]), ...)
 }
