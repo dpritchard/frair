@@ -3,6 +3,10 @@
 
 ## Type I functional response ##
 typeI <- function(X, c) {
+    if(is.list(c)){
+        coefs <- c
+        c <- coefs[['c']]
+    }
     X*c
 }
 

@@ -72,4 +72,6 @@ dat <- data.frame(density=den, eaten=eat)
 out <- frair_fit(eaten~density, data=dat, response=rogersII, 
         start=list(a = 1.2, h = 0.015), 
         fixed=list(P=1, T=1), boot=FALSE)
+outlin <- frair_fit(eaten~density, data=dat, response=typeI, 
+        start=list(c=0.5), boot=FALSE)
 }

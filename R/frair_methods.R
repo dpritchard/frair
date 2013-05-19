@@ -44,7 +44,7 @@ lines.frfit <- function(x, ...){
     lines(newx, newy, ...)
 }
 
-lines.frboot <- function(x, all=FALSE, col=1, alpha=1/sqrt(x$n_boot), ...){
+lines.frboot <- function(x, all=FALSE, colour=1, alpha=1/sqrt(x$n_boot), ...){
     newx <- seq(from=0, to=max(x$x), by=0.1)
     fitfun <- get(x$response)
     if(!all){
@@ -54,13 +54,13 @@ lines.frboot <- function(x, all=FALSE, col=1, alpha=1/sqrt(x$n_boot), ...){
     } else {
         # Plotting bootlines
         # Sort out colour
-        if(is.vector(col) && match(length(col),c(3,4),nomatch=0)){
+        if(is.vector(colour) && match(length(colour),c(3,4),nomatch=0)){
             # Assumed to be RGB
-            col[4] <- alpha
+            colour[4] <- alpha
         } else {
             # Assumed to be another colour spec.
-            col <- col2rgb(col, alpha=T)
-            col[4] <- alpha
+            colour <- col2rgb(colour, alpha=T)[,1]/255
+            colour[4] <- alpha
         }
         
         bootcoefs <- na.omit(x$bootcoefs)
@@ -72,12 +72,18 @@ lines.frboot <- function(x, all=FALSE, col=1, alpha=1/sqrt(x$n_boot), ...){
             outdd[a,] <- fitfun(newx, as.list(as.list(bootcoefs[a,])))
         }
         for(a in 1:nrow(outdd)){
-            lines(newx, outdd[a,], col=col, ...)
+            lines(x=newx, y=outdd[a,], col=rgb(colour['red'], colour['green'], colour['blue'], colour['alpha']), ...)
         }
     }
 }
 
-polygon.frboot <- function(x, probs=c(0.025, 0.975), ...){
+drawpoly <- function(x, ...) UseMethod("drawpoly")
+
+drawpoly.default <- function(x, ...){
+    polygon(x, ...)
+}
+
+drawpoly.frboot <- function(x, probs=c(0.025, 0.975), ...){
     newx <- seq(from=0, to=max(x$x), by=0.1)
     fitfun <- get(x$response)
     bootcoefs <- na.omit(x$bootcoefs)
@@ -88,6 +94,32 @@ polygon.frboot <- function(x, probs=c(0.025, 0.975), ...){
     for(a in 1:nrow(bootcoefs)){
         outdd[a,] <- fitfun(newx, as.list(as.list(bootcoefs[a,])))
     }
-    dd <- apply(outdd, 2, quantile, na.rm=T, probs = probs)
-    polygon(x=c(newx, rev(newx), y=newx[1]), c(dd[1,], rev(dd[2,]), dd[1,1]), ...)
+    
+    dd <- apply(outdd, 2, quantile, na.rm=T, probs=probs)
+    polygon(x=c(newx, rev(newx), newx[1]), y=c(dd[1,], rev(dd[2,]), dd[1,1]), ...)
+}
+
+confint.frboot <- function(object, parm, level=0.95, ...){
+    optimnames <- object$optimvars
+    frbcis <- matrix(nrow=5, ncol=length(optimnames)*2)
+    cinames <- NULL
+    for(x in 1:length(optimnames)){
+        cinames <- c(cinames, paste(optimnames[x], '_lower', sep=''))
+        cinames <- c(cinames, paste(optimnames[x], '_upper', sep=''))
+    }
+    citypes <- c("normal","basic", "student", "percent", "bca")
+    dimnames(frbcis) <- list(citypes, cinames)
+    
+    for(x in 1:length(optimnames)){
+        loc <- which(names(object$fit$t0)==optimnames[x])
+        locvar <- which(names(object$fit$t0)==paste0(optimnames[1], 'var'))
+        bootcivals <- boot.ci(object$fit, index=c(loc, locvar), conf=level, type='all')
+        frbcis['normal', paste0(optimnames[x], '_lower')] <- bootcivals[['normal']][2]
+        frbcis['normal', paste0(optimnames[x], '_upper')] <- bootcivals[['normal']][3]
+        for(y in 2:length(citypes)){
+            frbcis[citypes[y], paste0(optimnames[x], '_lower')] <- bootcivals[[citypes[y]]][4]
+            frbcis[citypes[y], paste0(optimnames[x], '_upper')] <- bootcivals[[citypes[y]]][5]
+        }
+    }
+    return(frbcis)
 }

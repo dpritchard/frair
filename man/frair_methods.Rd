@@ -5,7 +5,7 @@
 \alias{print.frboot}
 \alias{plot.frboot}
 \alias{lines.frboot}
-\alias{polygon.frboot}
+\alias{drawpoly.frboot}
 
 \title{frair methods}
 \description{Documentation for methods for classes frfit and frboot}
@@ -17,8 +17,8 @@
 
 \method{print}{frboot}(x, \dots)
 \method{plot}{frboot}(x, xlab=x$xvar, ylab=x$yvar, \ldots)
-\method{lines}{frboot}(x, all=FALSE, col=1, alpha=1/sqrt(x$n_boot), ...)
-\method{polygon}{frboot}(x, probs=c(0.025, 0.975), ...)
+\method{lines}{frboot}(x, all=FALSE, colour=1, alpha=1/sqrt(x$n_boot), ...)
+\method{drawpoly}{frboot}(x, probs=c(0.025, 0.975), ...)
 }
 
 \arguments{
@@ -26,7 +26,7 @@
   \item{all }{A logical. Should the bootstrapped results be plotted?.  See Details.}
   \item{xlab }{Label for the x-axis.}
   \item{ylab }{Label for the y-axis.}
-  \item{col }{A valid colour for the plotted lines.}
+  \item{colour }{A valid colour for the plotted lines.}
   \item{alpha }{A transparency for the (inevitably overlapping) lines.}
   \item{probs }{Lower and upper tails for confidence interval polygons. See \code{\link{quantile}}.}
   \item{\ldots }{Other items passed to underlying functions.}
