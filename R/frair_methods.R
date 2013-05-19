@@ -9,7 +9,7 @@ print.frfit <- function(x, ...){
     cat('\n')
     
     cat('\nCoefficients:\n')
-    print(x$coefficients)
+    print(round(x$coefficients, 3))
     cat('\nNOTE: It is recomended you inspect the raw fit information too (contained in object$fit)')
 }
 
@@ -25,7 +25,11 @@ print.frboot <- function(x, ...){
     cat(paste('\nDuplicated fits:    ', x$n_duplicated))
     cat('\n')
     cat('\nCoefficients (original data):\n')
-    print(x$coefficients)
+    print(round(x$coefficients,3))
+    
+    cat('\n95% bootstrapped confidence intervals (for more info, see ?boot.ci):\n')
+    print(round(confint(x),4))
+    
     cat(paste('\nNOTE: It is recomended you inspect the raw fit information too (contained in object$fit)', sep=''))
 }
 
