@@ -1,5 +1,5 @@
-\name{friar_utils}
-\alias{friar_utils}
+\name{frair_utils}
+\alias{frair_utils}
 \alias{fr_responses}
 \alias{fr_setupout}
 
@@ -18,7 +18,7 @@
   \item{samp }{A numeric vector. The sample.}
 }
 \details{
-\code{fr_responses} is both a vector of useful information (via \code{show=TRUE}) and a vechicle to keep track of implimented functional responses.  The later is enforced by matching responses supplied to \code{\link{friar_fit}} to the \code{names} returned by \code{fr_responses(show=FALSE)}.
+\code{fr_responses} is both a vector of useful information (via \code{show=TRUE}) and a vechicle to keep track of implimented functional responses.  The later is enforced by matching responses supplied to \code{\link{frair_fit}} to the \code{names} returned by \code{fr_responses(show=FALSE)}.
 
 \code{fr_setupout} is a utility function to help clean up the code in the various statitic functions. It returns a vector of (correctly) named NA's, based on the start and fixed input to the statistic function. 
 }
@@ -28,7 +28,7 @@ Daniel Pritchard
 }
 
 \seealso{
-\code{\link{friar_fit}}.
+\code{\link{frair_fit}}.
 }
 
 \section{todo }{

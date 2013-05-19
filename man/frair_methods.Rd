@@ -22,7 +22,7 @@
 }
 
 \arguments{
-  \item{x }{Output from a call to \code{friar_fit}.}
+  \item{x }{Output from a call to \code{frair_fit}.}
   \item{all }{A logical. Should the bootstrapped results be plotted?.  See Details.}
   \item{xlab }{Label for the x-axis.}
   \item{ylab }{Label for the y-axis.}
@@ -42,7 +42,7 @@ By default \code{all} is FALSE.  The simple reason for this is because the code 
 }
 
 \seealso{
-\code{\link{friar_fit}}, \code{\link{lines}}, \code{\link{polygon}}.
+\code{\link{frair_fit}}, \code{\link{lines}}, \code{\link{polygon}}.
 }
 
 \author{

@@ -29,7 +29,7 @@ fr_responses <- function(show=FALSE){
 
 # fr_setupout
 # Utility function to help clean up the code in the various statitic functions
-# NB: This setups a single vector, as used by the various dual-duty functional response functions (e.g. rogersII_fit) NOT the output of friar_fit
+# NB: This setups a single vector, as used by the various dual-duty functional response functions (e.g. rogersII_fit) NOT the output of frair_fit
 # Returns a vector of (correctly) named NA's, based on the start and fixed input to the statitic function
 fr_setupout <- function(start, fixed, samp){
     out <- c(rep(NA, times=length(names(start))*2), rep(NA, times=length(names(fixed))), samp)

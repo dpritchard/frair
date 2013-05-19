@@ -1,11 +1,11 @@
-\name{friar_fit}
-\alias{friar_fit}
+\name{frair_fit}
+\alias{frair_fit}
 
 \title{Fit predator-prey functional responses.}
 \description{Fits predator-prey function responses and returns data in a consistent, predictable way, exposing some useful methods.}
 
 \usage{
-friar_fit(formula, data, response, start=list(), fixed=list(), 
+frair_fit(formula, data, response, start=list(), fixed=list(), 
         boot=FALSE, nboot=1500, para=TRUE, ncores=NaN, WARN.ONLY=FALSE)
 }
 
@@ -36,9 +36,9 @@ If more than 10\% of the bootstrapped fits fail then a warning is generated and 
 This function returns a named list of class \code{frfit} or \code{frboot}, depending on the way in which the function is called.
 
 Lists of class \code{frfit} have the following named items:
-\item{call }{The original call to \code{friar_fit}.}
-\item{x }{The original x data supplied to \code{friar_fit}.}
-\item{y }{The original y data supplied to \code{friar_fit}.}
+\item{call }{The original call to \code{frair_fit}.}
+\item{x }{The original x data supplied to \code{frair_fit}.}
+\item{y }{The original y data supplied to \code{frair_fit}.}
 \item{response }{A string. The fitted response.}
 \item{xvar }{A string. The righthand side of \code{formula}.}
 \item{yvar }{A string. The lefthand side of \code{formula}.}
@@ -69,7 +69,7 @@ den <- c(2,2,2,2,4,4,4,4,6,6,6,6,8,8,8,8,10,10,10,
 eat <- c(0,2,2,2,4,4,4,4,5,6,6,3,3,8,6,5,5,3,0,7,
         5,14,9,7,18,4,17,8,4,16,46,13)
 dat <- data.frame(density=den, eaten=eat)
-out <- friar_fit(eaten~density, data=dat, response=rogersII, 
+out <- frair_fit(eaten~density, data=dat, response=rogersII, 
         start=list(a = 1.2, h = 0.015), 
         fixed=list(P=1, T=1), boot=FALSE)
 }
