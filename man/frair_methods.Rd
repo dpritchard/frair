@@ -1,4 +1,4 @@
-\name{friar_methods}
+\name{frair_methods}
 \alias{print.frfit}
 \alias{plot.frfit}
 \alias{lines.frfit}
@@ -7,7 +7,7 @@
 \alias{lines.frboot}
 \alias{polygon.frboot}
 
-\title{friar methods}
+\title{frair methods}
 \description{Documentation for methods for classes frfit and frboot}
 
 \usage{
@@ -34,7 +34,7 @@
 
 
 \details{
-This documents modifications to standrd methods used in friar objects of classes \code{frfit} and \code{frboot}. However, becuase standard naming conventions have been used, utility funcitons might also work (e.g. \code{\link{coefficients}})
+This documents modifications to standrd methods used in frair objects of classes \code{frfit} and \code{frboot}. However, becuase standard naming conventions have been used, utility funcitons might also work (e.g. \code{\link{coefficients}})
 
 \code{lines} and \code{polygon} only adds lines or polygons to an existing plot, so an active graphics device needs to be present.  
 

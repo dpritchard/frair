@@ -23,7 +23,7 @@ friar_fit(formula, data, response, start=list(), fixed=list(),
 }
 
 \details{
-The \code{response} requested must be known to friar.  To establish what is supported inspect the output from \code{fr_responses(show=TRUE)}. All parameters listed by \code{fr_responses(show=TRUE)} (except \code{X}) must be provided in either \code{start} or \code{fixed}.  
+The \code{response} requested must be known to frair.  To establish what is supported inspect the output from \code{fr_responses(show=TRUE)}. All parameters listed by \code{fr_responses(show=TRUE)} (except \code{X}) must be provided in either \code{start} or \code{fixed}.  
 
 The underlying fitting is response-specific and users should consult the help page for each function for more information about what is being done in the background.  
 

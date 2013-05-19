@@ -1,4 +1,4 @@
-## Friar methods
+## frair methods
 
 print.frfit <- function(x, ...){
     cat('\nFUNCTIONAL RESPONSE FIT\n')

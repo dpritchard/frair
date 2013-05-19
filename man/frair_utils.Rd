@@ -3,7 +3,7 @@
 \alias{fr_responses}
 \alias{fr_setupout}
 
-\title{friar utility functions}
+\title{frair utility functions}
 \description{Utility functions for fitting predator-prey functional responses.}
 
 \usage{
