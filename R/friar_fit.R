@@ -1,7 +1,7 @@
 ## frair_fit
 # Wrapper function to fit functional response curves
 # The workhorse of the frair package
-frair_fit <- function(formula, data, response, start=list(), fixed=list(), strata=NA, boot=FALSE, nboot=1500, para=TRUE, ncores=NaN, WARN.ONLY=FALSE){
+frair_fit <- function(formula, data, response, start=list(), fixed=list(), strata=NULL, boot=FALSE, nboot=1500, para=TRUE, ncores=NaN, WARN.ONLY=FALSE){
 	# Parse call, can check formula...
 	call <- match.call()
 	mf <- match.call(expand.dots = FALSE)
@@ -24,6 +24,15 @@ frair_fit <- function(formula, data, response, start=list(), fixed=list(), strat
     # Plausibly, 'response' might be the function itself, which isn't helpful at this point.
     if(is.function(response)){
     	response <- as.character(mf_list$response)
+    }
+    
+    # Check that we can get strata from the data. It needs to be a factor
+    stdat=rep(1,nrow(data))
+    if(!is.null(strata)){
+        if(!is.character(strata) | !match(strata, names(data), nomatch=FALSE)){
+            stop('Strata must be a charater string and denote a column in the data')
+        }
+        stdat <- as.factor(data[,strata])
     }
     
     # Check we can deal with the requested response
@@ -102,13 +111,13 @@ frair_fit <- function(formula, data, response, start=list(), fixed=list(), strat
     	## Case specific fitting...
     	# rogersII
     	if(response=='rogersII'){
-    		frout <- boot(data=moddata, statistic=rogersII_fit, R=nboot, start=start, fixed=fixed, boot=TRUE, windows=iswindows, parallel=paramode, ncpus=ncores)
+    		frout <- boot(data=moddata, statistic=rogersII_fit, R=nboot, start=start, fixed=fixed, strata=stdat, boot=TRUE, windows=iswindows, parallel=paramode, ncpus=ncores)
     		if(nrow(frout$t)!=nboot){
                 stop("Bootstrap function didn't return nboot rows. This should be impossible!")
     		}
 		# Generic Type I
 		} else if(response=='typeI'){
-    		frout <- boot(data=moddata, statistic=typeI_fit, R=nboot, start=start, fixed=fixed, boot=TRUE, windows=iswindows, parallel=paramode, ncpus=ncores)
+    		frout <- boot(data=moddata, statistic=typeI_fit, R=nboot, start=start, fixed=fixed, strata=stdat, boot=TRUE, windows=iswindows, parallel=paramode, ncpus=ncores)
     		if(nrow(frout$t)!=nboot){
                 stop("Bootstrap function didn't return nboot rows. This should be impossible!")
     		}
@@ -162,7 +171,7 @@ frair_fit <- function(formula, data, response, start=list(), fixed=list(), strat
     }
     
     # For bootstrapped data, we need to check the number of failures
-    if(inherits(out, 'fr_boot')){
+    if(inherits(out, 'frboot')){
     	prop_fail <- out[['n_failed']]/out[['n_boot']]
     	if(prop_fail>0.5){
     		out <- NA
