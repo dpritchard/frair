@@ -162,7 +162,7 @@ frair_fit <- function(formula, data, response, start=list(), fixed=list(), boot=
     }
     
     # For bootstrapped data, we need to check the number of failures
-    if(inherits(out, 'fr_boot')){
+    if(inherits(out, 'frboot')){
     	prop_fail <- out[['n_failed']]/out[['n_boot']]
     	if(prop_fail>0.5){
     		out <- NA
