@@ -45,3 +45,10 @@ fr_setupout <- function(start, fixed, samp){
     names(out) <- c(outnames, rep('', times=length(samp)))
     return(out)
 }
+
+
+
+## The startup method
+.onAttach <- function(lib, pkg)  {
+    packageStartupMessage("This is frair, version ",utils::packageDescription("frair", field="Version"), appendLF = TRUE)
+}
