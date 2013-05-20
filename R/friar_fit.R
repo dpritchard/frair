@@ -1,7 +1,7 @@
 ## frair_fit
 # Wrapper function to fit functional response curves
 # The workhorse of the frair package
-frair_fit <- function(formula, data, response, start=list(), fixed=list(), boot=FALSE, nboot=1500, para=TRUE, ncores=NaN, WARN.ONLY=FALSE){
+frair_fit <- function(formula, data, response, start=list(), fixed=list(), strata=NA, boot=FALSE, nboot=1500, para=TRUE, ncores=NaN, WARN.ONLY=FALSE){
 	# Parse call, can check formula...
 	call <- match.call()
 	mf <- match.call(expand.dots = FALSE)
