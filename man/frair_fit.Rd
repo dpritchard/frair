@@ -5,7 +5,7 @@
 \description{Fits predator-prey function responses and returns data in a consistent, predictable way, exposing some useful methods.}
 
 \usage{
-frair_fit(formula, data, response, start=list(), fixed=list(), 
+frair_fit(formula, data, response, start=list(), fixed=list(), strata=NULL,
         boot=FALSE, nboot=1500, para=TRUE, ncores=NaN, WARN.ONLY=FALSE)
 }
 
@@ -15,6 +15,7 @@ frair_fit(formula, data, response, start=list(), fixed=list(),
   \item{response }{A string denoting the response to fit.  See Details.}
   \item{start }{A named list. Starting values for optimised parameters.}
   \item{fixed }{A named list. Values that are not optimised.}
+  \item{strata }{A character string. Specifies a column in the data.}
   \item{boot }{A logical. Should bootstrapped estimates be generated?}
   \item{nboot }{An integer. How many bootstraps to perform?}
   \item{para }{A logical. Should the bootstrapping be performed in parallel?}
