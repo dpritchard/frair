@@ -48,7 +48,7 @@ lines.frfit <- function(x, ...){
     lines(newx, newy, ...)
 }
 
-lines.frboot <- function(x, all=FALSE, colour=1, alpha=1/sqrt(x$n_boot), ...){
+lines.frboot <- function(x, all=FALSE, bootcol=1, bootalpha=1/sqrt(x$n_boot), ...){
     newx <- seq(from=0, to=max(x$x), by=0.1)
     fitfun <- get(x$response)
     if(!all){
@@ -58,13 +58,13 @@ lines.frboot <- function(x, all=FALSE, colour=1, alpha=1/sqrt(x$n_boot), ...){
     } else {
         # Plotting bootlines
         # Sort out colour
-        if(is.vector(colour) && match(length(colour),c(3,4),nomatch=0)){
+        if(is.vector(bootcol) && match(length(bootcol),c(3,4),nomatch=0)){
             # Assumed to be RGB
-            colour[4] <- alpha
+            bootcol[4] <- bootalpha
         } else {
             # Assumed to be another colour spec.
-            colour <- col2rgb(colour, alpha=T)[,1]/255
-            colour[4] <- alpha
+            bootcol <- col2rgb(bootcol, alpha=T)[,1]/255
+            bootcol[4] <- bootalpha
         }
         
         bootcoefs <- na.omit(x$bootcoefs)
@@ -76,7 +76,7 @@ lines.frboot <- function(x, all=FALSE, colour=1, alpha=1/sqrt(x$n_boot), ...){
             outdd[a,] <- fitfun(newx, as.list(as.list(bootcoefs[a,])))
         }
         for(a in 1:nrow(outdd)){
-            lines(x=newx, y=outdd[a,], col=rgb(colour['red'], colour['green'], colour['blue'], colour['alpha']), ...)
+            lines(x=newx, y=outdd[a,], col=rgb(bootcol['red'], bootcol['green'], bootcol['blue'], bootcol['alpha']), ...)
         }
     }
 }
