@@ -70,9 +70,11 @@ den <- c(2,2,2,2,4,4,4,4,6,6,6,6,8,8,8,8,10,10,10,
 eat <- c(0,2,2,2,4,4,4,4,5,6,6,3,3,8,6,5,5,3,0,7,
         5,14,9,7,18,4,17,8,4,16,46,13)
 dat <- data.frame(density=den, eaten=eat)
+# A typeII fit
 out <- frair_fit(eaten~density, data=dat, response=rogersII, 
         start=list(a = 1.2, h = 0.015), 
         fixed=list(P=1, T=1), boot=FALSE)
+# A linear fit
 outlin <- frair_fit(eaten~density, data=dat, response=typeI, 
         start=list(c=0.5), boot=FALSE)
 }
