@@ -40,7 +40,8 @@ rogersII_fit <- function(data, samp, start, fixed, boot=FALSE, windows=FALSE) {
     try_rogersII <- try(mle2(rogersII_nll, start=start, data=c(fixed, list('X'=dat$X, 'Y'=dat$Y))), silent=T) 
 	## Remove 'silent=T' for more verbose output
 	# Hard coded upper limits: TODO: Fix this, allow variable data
-	if (inherits(try_rogersII, "try-error") || as.numeric(coef(try_rogersII)['a']) > 10 || as.numeric(coef(try_rogersII)['h']) > 1){
+	# if (inherits(try_rogersII, "try-error") || as.numeric(coef(try_rogersII)['a']) > 10 || as.numeric(coef(try_rogersII)['h']) > 1){
+	if (inherits(try_rogersII, "try-error")) {
  		# The fit failed...
  		if(boot){
  			return(out)
