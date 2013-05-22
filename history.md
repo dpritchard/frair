@@ -15,4 +15,4 @@ Added 'strata' for specification of stratified bootstrapped.
 ### v. 0.2.6
 Fixed bug in colour handelling for bootstrapped lines.
 - Colour specification for lines.frboot(x, all=T) now requires bootcol and bootalpha
-
+Removed upper limits on 'a' and 'h'
