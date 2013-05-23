@@ -50,5 +50,5 @@ fr_setupout <- function(start, fixed, samp){
 
 ## The startup method
 .onAttach <- function(lib, pkg)  {
-    packageStartupMessage("This is the development version of frair (v. ", utils::packageDescription("frair", field="Version"), appendLF = TRUE)
+    packageStartupMessage('This is the development version of frair (v. ', utils::packageDescription("frair", field="Version"), ')', appendLF = TRUE)
 }
