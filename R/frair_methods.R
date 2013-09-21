@@ -42,16 +42,16 @@ plot.frboot <- function(x, xlab=x$xvar, ylab=x$yvar, ...){
 }
 
 lines.frfit <- function(x, ...){
-    newx <- seq(from=0, to=max(x$x), by=0.1)
+    newx <- seq(from=0, to=max(x$x), by=1)
     fitfun <- get(x$response)
     newy <- fitfun(newx, as.list(x$coefficients))
     lines(newx, newy, ...)
 }
 
-lines.frboot <- function(x, all=FALSE, bootcol=1, bootalpha=1/sqrt(x$n_boot), ...){
-    newx <- seq(from=0, to=max(x$x), by=0.1)
+lines.frboot <- function(x, all_lines=FALSE, bootcol=1, bootalpha=1/sqrt(x$n_boot), ...){
+    newx <- seq(from=0, to=max(x$x), by=1)
     fitfun <- get(x$response)
-    if(!all){
+    if(!all_lines){
         # Plot the mean (original) fit
         newy <- fitfun(newx, as.list(x$coefficients))
         lines(newx, newy, ...)
@@ -88,7 +88,7 @@ drawpoly.default <- function(x, ...){
 }
 
 drawpoly.frboot <- function(x, probs=c(0.025, 0.975), ...){
-    newx <- seq(from=0, to=max(x$x), by=0.1)
+    newx <- seq(from=0, to=max(x$x), by=1)
     fitfun <- get(x$response)
     bootcoefs <- na.omit(x$bootcoefs)
     outdd <- matrix(ncol=length(newx), nrow=nrow(bootcoefs))

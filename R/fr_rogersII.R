@@ -37,7 +37,7 @@ rogersII_fit <- function(data, samp, start, fixed, boot=FALSE, windows=FALSE) {
 	dat <- data[samp,]
 	out <- fr_setupout(start, fixed, samp)
 
-    try_rogersII <- try(mle2(rogersII_nll, start=start, data=c(fixed, list('X'=dat$X, 'Y'=dat$Y))), silent=T) 
+    try_rogersII <- try(mle2(rogersII_nll, start=start, fixed=fixed, data=list('X'=dat$X, 'Y'=dat$Y)), silent=T) 
 	## Remove 'silent=T' for more verbose output
 	# Hard coded upper limits: TODO: Fix this, allow variable data
 	# if (inherits(try_rogersII, "try-error") || as.numeric(coef(try_rogersII)['a']) > 10 || as.numeric(coef(try_rogersII)['h']) > 1){
