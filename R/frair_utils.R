@@ -46,7 +46,17 @@ fr_setupout <- function(start, fixed, samp){
     return(out)
 }
 
-
+# fr_setpara parallel
+# Utility to setup parallel processing in Windows
+fr_setpara <- function(boot, windows){
+		if(boot && windows){
+		emdbook_load <- require(emdbook, warn.conflicts=FALSE, quietly=TRUE)
+		bbmle_load <- require(bbmle, warn.conflicts=FALSE, quietly=TRUE)
+		if(any(c(emdbook_load, bbmle_load)==FALSE)){
+			stop('Error establishing workspace for parallel computing in Windows.')
+		}
+	}
+}
 
 ## The startup method
 .onAttach <- function(lib, pkg)  {

@@ -26,13 +26,9 @@ rogersII <- function(X, a, h, P, T) {
 # Note required packages are reloaded here so Windows can do parallel computing!
 # Not also that the statistic now (2013-04-13) now returns the variance 
 rogersII_fit <- function(data, samp, start, fixed, boot=FALSE, windows=FALSE) {
-	if(windows && boot){
-		emdbook_load <- require(emdbook, warn.conflicts=FALSE, quietly=TRUE)
-		bbmle_load <- require(bbmle, warn.conflicts=FALSE, quietly=TRUE)
-		if(any(c(emdbook_load, bbmle_load)==FALSE)){
-			stop('Error establishing workspace for parallel computing in Windows.')
-		}
-	}
+	# Setup windows parallel processing
+	fr_setpara()
+	
 	samp <- sort(samp)
 	dat <- data[samp,]
 	out <- fr_setupout(start, fixed, samp)
