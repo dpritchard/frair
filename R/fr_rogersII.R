@@ -27,16 +27,12 @@ rogersII <- function(X, a, h, P, T) {
 # Not also that the statistic now (2013-04-13) now returns the variance 
 rogersII_fit <- function(data, samp, start, fixed, boot=FALSE, windows=FALSE) {
 	# Setup windows parallel processing
-	fr_setpara()
-	
+	fr_setpara(boot, windows)
 	samp <- sort(samp)
 	dat <- data[samp,]
 	out <- fr_setupout(start, fixed, samp)
 
-    try_rogersII <- try(mle2(rogersII_nll, start=start, fixed=fixed, data=list('X'=dat$X, 'Y'=dat$Y)), silent=T) 
-	## Remove 'silent=T' for more verbose output
-	# Hard coded upper limits: TODO: Fix this, allow variable data
-	# if (inherits(try_rogersII, "try-error") || as.numeric(coef(try_rogersII)['a']) > 10 || as.numeric(coef(try_rogersII)['h']) > 1){
+    try_rogersII <- try(mle2(rogersII_nll, start=start, fixed=fixed, data=list('X'=dat$X, 'Y'=dat$Y)), silent=T) # Remove 'silent=T' for more verbose output
 	if (inherits(try_rogersII, "try-error")) {
  		# The fit failed...
  		if(boot){

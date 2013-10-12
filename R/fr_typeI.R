@@ -17,7 +17,7 @@ typeI <- function(X, c) {
 
 typeI_fit <- function(data, samp, start, fixed, boot=FALSE, windows=FALSE) {
     # Setup windows parallel processing
-	fr_setpara()
+	fr_setpara(boot, windows)
     
     samp <- sort(samp)
     dat <- data[samp,]

@@ -1,36 +1,38 @@
 ## frair methods
 
+# Print for objects of class frfit
 print.frfit <- function(x, ...){
-    cat('\nFUNCTIONAL RESPONSE FIT\n')
-    cat(paste('\nResponse:           ', x$response))
-    cat(paste('\nDescription:        ', as.character(fr_responses()[x$response])))
-    cat(paste('\nOptimised variables:', paste(x$optimvars, collapse=', ')))
-    cat(paste('\nFixed variables:    ', ifelse(test=!is.null(x$fixedvars), yes=paste(x$fixedvars, collapse=', '), no='NA')))
+    cat('FUNCTIONAL RESPONSE FIT\n')
+    cat(paste0('\nResponse:            ', x$response))
+    cat(paste0('\nDescription:         ', as.character(fr_responses()[x$response])))
+    cat(paste0('\nOptimised variables: ', paste0(x$optimvars, collapse=', ')))
+    cat(paste0('\nFixed variables:     ', ifelse(test=!is.null(x$fixedvars), yes=paste(x$fixedvars, collapse=', '), no='NA')))
     cat('\n')
-    
     cat('\nCoefficients:\n')
     print(round(x$coefficients, 3))
-    cat('\nNOTE: It is recomended you inspect the raw fit information too (contained in object$fit)')
+    cat('\nNOTE: It is recomended you inspect the raw fit too (see: ?frair_fit)')
 }
 
 print.frboot <- function(x, ...){
-    cat('\nBOOTSTRAPPED FUNCTIONAL RESPONSE FIT\n')
-    cat(paste('\nResponse:           ', x$response))
-    cat(paste('\nDescription:        ', as.character(fr_responses()[x$response])))
-    cat(paste('\nOptimised variables:', paste(x$optimvars, collapse=', ')))
-    cat(paste('\nFixed variables:    ', ifelse(test=!is.null(x$fixedvars), yes=paste(x$fixedvars, collapse=', '), no='NA')))
     nbootdone <- x$n_boot-x$n_failed
     percsuc <- round(nbootdone/x$n_boot*100,2)
-    cat(paste('\nFit success:         ', percsuc, '% (', nbootdone, ' of ', x$n_boot, ')', sep=''))
-    cat(paste('\nDuplicated fits:    ', x$n_duplicated))
+    
+    cat('\nBOOTSTRAPPED FUNCTIONAL RESPONSE FIT\n')
+    cat(paste0('\nResponse:            ', x$response))
+    cat(paste0('\nDescription:         ', as.character(fr_responses()[[x$response]][2])))
+    cat(paste0('\nOptimised variables: ', paste0(x$optimvars, collapse=', ')))
+    cat(paste0('\nFixed variables:     ', ifelse(test=!is.null(x$fixedvars), yes=paste0(x$fixedvars, collapse=', '), no='NA')))
+    cat(paste0('\nBootstrap type:      ', ifelse(test=x$stratified, yes='Stratified', no='Ordinary')))
+    cat(paste0('\nFit success:         ', percsuc, '% (', nbootdone, ' of ', x$n_boot, ')', sep=''))
+    cat(paste0('\nDuplicated fits:     ', x$n_duplicated))
     cat('\n')
     cat('\nCoefficients (original data):\n')
     print(round(x$coefficients,3))
-    
     cat('\n95% bootstrapped confidence intervals (for more info, see ?boot.ci):\n')
-    print(round(confint(x),4))
+    btconf <- confint(x)
     
-    cat(paste('\nNOTE: It is recomended you inspect the raw fit information too (contained in object$fit)', sep=''))
+    print(round(btconf,4))
+    cat('\nNOTE: It is recomended you inspect the raw fit too (see: ?frair_boot)')
 }
 
 plot.frfit <- function(x, xlab=x$xvar, ylab=x$yvar, ...){
@@ -103,7 +105,12 @@ drawpoly.frboot <- function(x, probs=c(0.025, 0.975), ...){
     polygon(x=c(newx, rev(newx), newx[1]), y=c(dd[1,], rev(dd[2,]), dd[1,1]), ...)
 }
 
-confint.frboot <- function(object, parm, level=0.95, ...){
+confint.frboot <- function(object, level=0.95, ...){
+    ### SORT THIS OUT! NEED TO DO SOME TESTING ETC...
+    # Get boot ci output for each optimvar, capturing warnings
+    # Processes each one, as done by print.bootci()
+    # Return a list, with all warnings etc bundled up.
+    # Define a pring object for this item.
     optimnames <- object$optimvars
     frbcis <- matrix(nrow=5, ncol=length(optimnames)*2)
     cinames <- NULL
