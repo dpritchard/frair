@@ -1,7 +1,7 @@
 ## frair_fit
 # Wrapper function to fit functional response curves
 # The one of the core functions of the frair package
-frair_fit <- function(formula, data, response, start=list(), fixed=list()){
+frair_fit <- function(formula, data, response, start=list(), fixed=NULL){
     # Parse call, can check formula...
     call <- match.call()
     mf <- match.call(expand.dots = FALSE)
@@ -33,23 +33,31 @@ frair_fit <- function(formula, data, response, start=list(), fixed=list()){
         stop(paste0(deparse(substitute(response)), ' is not a recognised response. Use fr_responses(show=T) to see what has been implemented.'))
     }
     
-    # Check start
+    # Check start # NB: If these test are modified, update in frair_boot() too
     if(length(start)==0){
         stop("You didn't provide starting values. It's impossible to fit anything without knowing what to optimise!")
     }
+    if(!is.list(start) | is.null(names(start))){
+        stop(paste0(deparse(substitute(start)), " must be a list containing single, named numeric values."))
+    }
     if(any(lapply(start, length)!=1)){
-        stop("The items in 'start' must be named numeric values of length one.")
+        stop(paste0("The items in ", deparse(substitute(start)), " must be single, named numeric values."))
     }
     if(!(all(is.numeric(unlist(start))))){
-        stop("The items in 'start' must be named numeric values.")
+        stop(paste0("The items in ", deparse(substitute(start)), " must be single, named numeric values."))
     }
     
     # Check fixed
-    if(length(fixed)>0 && any(lapply(fixed, length)!=1)){
-        stop("The items in 'fixed' must be named numeric values of length one.")
-    }
-    if(length(fixed)>0 && !(all(is.numeric(unlist(fixed))))){
-        stop("The items in 'fixed' must be named numeric values.")
+    if(!is.null(fixed)){
+        if(!is.list(fixed) | is.null(names(fixed))){
+            stop(paste0(deparse(substitute(fixed)), " must be a list containing single, named numeric values."))
+        }
+        if(length(fixed)>0 && any(lapply(fixed, length)!=1)){
+            stop(paste0("The items in ", deparse(substitute(fixed)), " must be single, named numeric values."))
+        }
+        if(length(fixed)>0 && !(all(is.numeric(unlist(fixed))))){
+            stop(paste0("The items in ", deparse(substitute(fixed)), " must be single, named numeric values."))
+        }
     }
     
     # Check we have everything we need

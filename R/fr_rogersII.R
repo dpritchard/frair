@@ -6,23 +6,22 @@
 # Y = Number of prey eaten / consumed / killed / absorbed
 
 ## Rogers Type II decreasing prey function ##
-# Same as ?lambertW, with the addition of 'P'
+# Same as ?lambertW
 # Everything except 'X' should be provided.
-rogersII <- function(X, a, h, P, T) {
+rogersII <- function(X, a, h, T) {
     if(is.list(a)){
         coefs <- a
         a <- coefs[['a']]
         h <- coefs[['h']]
-        P <- coefs[['P']]
         T <- coefs[['T']]
     }
-	X - lambertW(a * h * X * exp(-a * (P * T - h * X)))/(a * h)
+	X - lambertW(a * h * X * exp(-a * (T - h * X)))/(a * h)
 }
 # rogersII_fit: Does the heavy lifting
 # data = The data from which to subsample. X and Y are drawn from here.
 # samp = Provided by boot() or manually, as required
 # start = List of starting values for items to be optimised.  Usually 'a' and 'h'.
-# fixed = List of 'Fixed data' (not optimised).   Usually 'T' and 'P'
+# fixed = List of 'Fixed data' (not optimised). Sometimes 'T', but I'm not too sure.
 # Note required packages are reloaded here so Windows can do parallel computing!
 # Not also that the statistic now (2013-04-13) now returns the variance 
 rogersII_fit <- function(data, samp, start, fixed, boot=FALSE, windows=FALSE) {
@@ -64,10 +63,10 @@ rogersII_fit <- function(data, samp, start, fixed, boot=FALSE, windows=FALSE) {
 # rogersII_nll
 # Provides negative log-likelihood for estimations via mle2()
 # See Bowkers book for more info
-rogersII_nll <- function(a, h, T, P, X, Y) {
-	if (a < 0 || h < 0) {
+rogersII_nll <- function(a, h, T, X, Y) {
+	if (a < 0 || h < 0 || T < 0) {
 		return(NA)
 		}
-		prop.exp = rogersII(X, a, h, P, T)/X
+		prop.exp = rogersII(X, a, h, T)/X
 		return(-sum(dbinom(Y, prob = prop.exp, size = X, log = TRUE)))
 	}

@@ -3,9 +3,12 @@
 ## resp_known is the master list of usable functions.
 ## each named entry here must have a corresponding function entry (e.g. fr_rogersII.R) and vice versa!
 fr_responses <- function(show=FALSE){
+    # resp_known: NAME = list(FIT_FUN, DESCRIPTION, USES_LAM_W)
     resp_known <- list(
-        "typeI"=list("typeI_fit", "A generic linear type I response"),
-        "rogersII"=list("rogersII_fit", "Roger's type II decreasing prey function"))
+        "typeI"=list("typeI_fit", "A generic linear (type I) response", FALSE),
+        "hollingsII"=list("hollingsII_fit", "Holling's orginal type II function", FALSE),
+        "rogersII"=list("rogersII_fit", "Roger's type II decreasing prey function", TRUE), 
+        "bdII"=list("bdII_fit", "Beddington–DeAngelis type II function", TRUE))
     
     if(show){
         C1 <- c('Response',names(resp_known))

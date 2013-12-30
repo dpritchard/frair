@@ -1,7 +1,7 @@
 ## frair_boot
 # Wrapper function to bootstrap functional response curves
 # One of the core functions of the frair package
-frair_boot <- function(frfit, strata=NULL, nboot=999, para=TRUE, ncores=NaN, WARN.ONLY=FALSE){
+frair_boot <- function(frfit, start=NULL, strata=NULL, nboot=999, para=TRUE, ncores=NaN, WARN.ONLY=FALSE){
     
     if(!inherits(frfit, 'frfit')){
         stop(paste0(deparse(substitute(frfit)), ' is not a friar object. Please fit a suitable response curve to your data with friar_fit() first.'))
@@ -48,7 +48,28 @@ frair_boot <- function(frfit, strata=NULL, nboot=999, para=TRUE, ncores=NaN, WAR
     # Get data out of frfit and setup output
     moddata <- data.frame('Y'=frfit$y, 'X'=frfit$x)
     response <- frfit['response']
-    if(length(frfit$optimvars)==0){start <- NULL} else {start <- as.list(coef(frfit)[frfit$optimvars])}
+    # Check start
+    if(is.null(start)){
+        if(length(frfit$optimvars)==0){start <- NULL} else {start <- as.list(coef(frfit)[frfit$optimvars])}
+    } else {
+        # Check start, needs to be a named list, with the 'optimvars' in it...
+        if(length(start)==0){
+            stop(paste0("You didn't provide starting values and they can't be extracted from ", deparse(substitute(frfit)), "\nThis should be impossible!"))
+        }
+        if(!is.list(start) | is.null(names(start))){
+            stop(paste0(deparse(substitute(start)), " must be a list containing single, named numeric values."))
+        }
+        if(any(lapply(start, length)!=1)){
+            stop(paste0("The items in ", deparse(substitute(start)), " must be single, named numeric values."))
+        }
+        if(!(all(is.numeric(unlist(start))))){
+            stop(paste0("The items in ", deparse(substitute(start)), " must be single, named numeric values."))
+        }
+        if(!all(frfit$optimvars%in%names(start))){
+            stop(paste0("Named items in ", deparse(substitute(start)), " do not match those needed by the response.\n  For reference, you need to provide values for: ", paste(frfit$optimvars, collapse=', ')))
+        }
+    }
+    # Just rip 'fixed' out of frfit
     if(length(frfit$fixedvars)==0){fixed <- NULL} else {fixed <- as.list(coef(frfit)[frfit$fixedvars])}
     # Clear the old fit and sample object...
     frfit[c('sample', 'fit')] <- NULL
@@ -57,8 +78,8 @@ frair_boot <- function(frfit, strata=NULL, nboot=999, para=TRUE, ncores=NaN, WAR
     
     # Print some output to calm people's nerves!
     cat('BOOTSTRAPPING.\n')
-    if(frfit$response%in%c('rogersII')){
-        cat(paste0('NB: This function calls the lambertW function, so this might take a while. Please be patient.'))
+    if(fr_responses()[[frfit$response]][[3]]){
+        cat(paste0('NB: This function calls the lambertW function. Please be patient.'))
     }
     flush.console()
     

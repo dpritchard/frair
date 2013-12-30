@@ -28,7 +28,7 @@ print.frboot <- function(x, ...){
     cat('\n')
     cat('\nCoefficients (original data):\n')
     print(round(x$coefficients,3))
-    cat('\n95% bootstrapped confidence intervals (for more info, see ?boot.ci):\n')
+    cat('\n95% bootstrapped confidence intervals (for more info, see ?confint.frboot):\n')
     btconf <- confint(x)
     
     print(round(btconf,4))
