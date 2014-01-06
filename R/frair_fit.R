@@ -22,30 +22,19 @@ frair_fit <- function(formula, data, response, start=list(), fixed=NULL){
     names(moddata) <- c('Y', 'X')
     
     # Plausibly, 'response' might be the function itself (if the user hasen't provided a quoted string as they should have). Rather than bitch about it, we deal.
-    if(is.function(response)){
+    if(!is.character(response)){
         response <- as.character(mf_list$response)
     }
    
     # Check we can deal with the requested response
-    resp_known <- names(fr_responses())
+    resp_known <- names(frair_responses(show=FALSE))
     resp_check <- match(response, resp_known, 0L)
     if(resp_check==0){
-        stop(paste0(deparse(substitute(response)), ' is not a recognised response. Use fr_responses(show=T) to see what has been implemented.'))
+        stop(paste0(deparse(substitute(response)), ' is not a recognised response. Use frair_responses(show=T) to see what has been implemented.'))
     }
     
-    # Check start # NB: If these test are modified, update in frair_boot() too
-    if(length(start)==0){
-        stop("You didn't provide starting values. It's impossible to fit anything without knowing what to optimise!")
-    }
-    if(!is.list(start) | is.null(names(start))){
-        stop(paste0(deparse(substitute(start)), " must be a list containing single, named numeric values."))
-    }
-    if(any(lapply(start, length)!=1)){
-        stop(paste0("The items in ", deparse(substitute(start)), " must be single, named numeric values."))
-    }
-    if(!(all(is.numeric(unlist(start))))){
-        stop(paste0("The items in ", deparse(substitute(start)), " must be single, named numeric values."))
-    }
+    # Check start
+    fr_checkstart(start, deparse(substitute(start)))
     
     # Check fixed
     if(!is.null(fixed)){
@@ -79,7 +68,7 @@ frair_fit <- function(formula, data, response, start=list(), fixed=NULL){
     # In this instance, the sample is just the data itself...
     samp=c(1:nrow(moddata))
     ## Case specific fitting...
-    frfunc <- get(unlist(fr_responses()[[response]])[1])
+    frfunc <- get(unlist(frair_responses(show=FALSE)[[response]])[1])
     frout <- frfunc(data=moddata, samp=c(1:nrow(moddata)), start=start, fixed=fixed)
     ## End case specific fitting...
     

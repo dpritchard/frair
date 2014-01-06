@@ -18,8 +18,8 @@ plot.frfit <- function(x, xlab=x$xvar, ylab=x$yvar, ...){
 }
 
 lines.frfit <- function(x, ...){
-    newx <- seq(from=0, to=max(x$x), by=1)
+    newx <- seq(from=1, to=max(x$x), by=1)
     fitfun <- get(x$response)
     newy <- fitfun(newx, as.list(x$coefficients))
-    lines(newx, newy, ...)
+    lines(x=newx, y=newy, ...)
 }
