@@ -22,7 +22,7 @@ This function wraps up an otherwise trivial test for type-II \emph{vs.} type-III
 
 The test relies on the established principle that a logistic regression on the \emph{proportion} of prey consumed is a more sensitive test of functional response shape, especially at low prey densities, when a non-linear curve may not be able to distinguish the subtle difference in curve shape. 
 
-The logic follows that on the proportion scale, a type-II response will show an increasing (\emph{i.e.} positive and statistically different from zero) initial slope with respect to density whereas a type-III response will show a negative slope, followed by a positive higher order slope 
+The logic follows that on the proportion scale, a type-II response will show an increasing (\emph{i.e.} positive and statistically different from zero) initial slope with respect to density whereas a type-III response will show a negative slope, followed by a positive higher order slope. 
 
 The test proceeds by fitting two models:
 
@@ -32,7 +32,7 @@ The test proceeds by fitting two models:
 
 where \code{eaten} is the lefthand side of the \code{formula} input, \code{density} is the righthand side and \code{noteaten} is the difference between the two. The output from these models to determine which functional response is preferred using the logic above.
 
-Currently no consideration is given to a type-I (\emph{i.e.} linear) response or any other potentially sensible fit other than a type-II or type-III response. It is up to the user to decide if it is appropriate to continue with fitting a mechanistic model of the functional response (\emph{i.e.} \code{\link{frair_test}}, \code{\link{frair_compare}} and/or \code{\link{frair_boot}}) on the back of the results of this test. 
+Currently no consideration is given to a type-I (\emph{i.e.} linear) response or any other potentially sensible fit other than a type-II or type-III response. It is up to the user to decide if it is appropriate to continue with fitting a mechanistic model of the functional response (\emph{i.e.} \code{\link{frair_fit}}, \code{\link{frair_compare}} and/or \code{\link{frair_boot}}) on the back of the results of this test. 
 }
 
 \value{
