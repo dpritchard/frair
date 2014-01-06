@@ -22,7 +22,7 @@
 
 
 \details{
-This documents modifications to standrd methods used in frair objects of classes \code{frfit}. However, becuase standard naming conventions have been used, utility funcitons might also work (e.g. \code{\link{coefficients}})
+This documents modifications to standard methods used in frair objects of classes \code{frfit}. However, because standard naming conventions have been used, utility functions might also work (e.g. \code{\link{coefficients}})
 
 \code{lines} only adds lines to an existing plot, so an active graphics device needs to be present.
 }

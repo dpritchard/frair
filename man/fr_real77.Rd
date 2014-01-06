@@ -26,7 +26,7 @@
   \item{Y }{The Y variable.  Usually the number of prey consumed.}
 }
 \details{
-This impliments a type-II response with a scaling exponent on \emph{X}, based on the use of Hill's exponents described by Real (1977). When \eqn{q \ge 0} the response becomes progressivly more 'type-III-ish'. Integer values of \emph{q} have useful interpretations based in enzymatic biochemistry but extending to may other fields (\emph{e.g.} Flynn \emph{et. al} 1997, Vucic-Pestic \emph{et. al} 2010). This function does not assume prey are replaced throughout the experiment (\emph{c.f.} \code{\link{real77r}}). 
+This implements a type-II response with a scaling exponent on \emph{X}, based on the use of Hill's exponents described by Real (1977). When \eqn{q \ge 0} the response becomes progressively more 'type-III-ish'. Integer values of \emph{q} have useful interpretations based in enzymatic biochemistry but extending to may other fields (\emph{e.g.} Flynn \emph{et. al} 1997, Vucic-Pestic \emph{et. al} 2010). This function does not assume prey are replaced throughout the experiment (\emph{c.f.} \code{\link{real77r}}). 
 
 The attack rate (\emph{a}) and number of prey eaten (\emph{Ne}) follow the following relationships:
 
@@ -34,7 +34,7 @@ The attack rate (\emph{a}) and number of prey eaten (\emph{Ne}) follow the follo
 
 \deqn{N_e=\frac{a X^(q+1) T}{1+a X^(q+1) h}}{Ne=(a*X^(q+1)*T)/(1+a*X^(q+1)*h)}
 
-Where \emph{b} is a search coefficient and other coefficients are as defined in \code{\link{hollingsII}}. Indeed when \eqn{q = 0} then \eqn{a = b} and the relationship collapses to traditional type-II \link[=hollingsII]{Holling's Disc Equation}. The use of \eqn{q + 1} in the equation for number of prey eaten (\emph{vs.} \eqn{q - 1} in the equation for \emph{a}) exposes a useful test on \eqn{q = 0} in the summary of the fit and follows the appraoch used by other authors (\emph{e.g.} Vucic-Pestic \emph{et. al} 2010)
+Where \emph{b} is a search coefficient and other coefficients are as defined in \code{\link{hollingsII}}. Indeed when \eqn{q = 0} then \eqn{a = b} and the relationship collapses to traditional type-II \link[=hollingsII]{Holling's Disc Equation}. The use of \eqn{q + 1} in the equation for number of prey eaten (\emph{vs.} \eqn{q - 1} in the equation for \emph{a}) exposes a useful test on \eqn{q = 0} in the summary of the fit and follows the approach used by other authors (\emph{e.g.} Vucic-Pestic \emph{et. al} 2010)
 
 None of these functions are designed to be called directly, though they are all exported so that the user can call them directly is desired. The intention is that they are called via \code{\link{frair_fit}}, which calls them in the order they are specified above.
 

@@ -32,7 +32,7 @@ The \code{bdII} function solves the random predator equation using thre LambertW
 
 \code{X - lambertW(a * h * X * exp(-a * (P * T - h * X)))/(a * h)}
 
-Note that generally speaking \emph{P} is determined by the experiemtnal design and is therefore usually provided as a 'fixed' variable. When \eqn{P = 1} the results should be idential to those provided by \code{\link{rogersII}}.  
+Note that generally speaking \emph{P} is determined by the experimental design and is therefore usually provided as a 'fixed' variable. When \eqn{P = 1} the results should be identical to those provided by \code{\link{rogersII}}.  
 
 This is exactly the function in chapter 8 of Bolker (2008), which in turn presents examples from  Vonesh and Bolker (2005). Users are directed there for more information. 
 

@@ -18,8 +18,8 @@
 \alias{real77r_nll_diff}
 
 
-\title{Test of two funcitona}
-\description{Explicity model, and then test, the difference between two functional response fits.}
+\title{Test the difference between two functional response fits}
+\description{Explicitly model, and then test, the difference between two functional response fits.}
 
 \usage{frair_compare(frfit1, frfit2, start = NULL)}
 
@@ -29,7 +29,7 @@
   \item{start }{A named numeric list with starting values for the combined fit. See detials.  }
 }
 \details{
-This funcion provides a sensible test of the optimised coefficients between two functional responses fitted by \code{\link{frair_fit}}. This is achieved by explicitly modelling a 'difference' (delta) parameter for each optimised variable folliwng the advice outlined in Julliano (2001). Breifly, consider the following Hollings type-II model:
+This function provides a sensible test of the optimised coefficients between two functional responses fitted by \code{\link{frair_fit}}. This is achieved by explicitly modelling a 'difference' (delta) parameter for each optimised variable following the advice outlined in Julliano (2001). Briefly, consider the following Hollings type-II model:
 
 \code{a*X*T/(1+a*X*h)}
 
@@ -37,13 +37,13 @@ the model containing delta parameters becomes:
 
 \code{(a-Da*grp)*X*T/(1+(a-Da*grp)*X*(h-Dh*grp))}
 
-where \code{grp} is a dummy coding variable and \code{Da} and \code{Dh} are the delta paramters. Here, the first fuctional repsonse fit (\code{frfit1}) is coded \code{grp=0} and the second fit (\code{frfit2}) is coded \code{grp=1}. Therefore Da and Dh represent the difference between the two modeled coefficients and the standard output from the maximum likelihood fitting explicity tests the null hypothesis of no differecne between the two groups. 
+where \code{grp} is a dummy coding variable and \code{Da} and \code{Dh} are the delta parameters. Here, the first functional response fit (\code{frfit1}) is coded \code{grp=0} and the second fit (\code{frfit2}) is coded \code{grp=1}. Therefore Da and Dh represent the difference between the two modeled coefficients and the standard output from the maximum likelihood fitting explicitly tests the null hypothesis of no difference between the two groups. 
 
 The difference model is re-fit to the combined data in \code{frfit1} and \code{frfit2} using the same maximum likelihood approaches outlined in \code{\link{frair_fit}}. 
 
-This function could be seen as a less compuationally intensive alternative to bootstrapping but relys on \code{\link[bbmle]{mle2}} successfully returing estimates of the standard error. \code{mle2} does this by inverting a Hessian matrix, a procedure which might not always be successfull. 
+This function could be seen as a less computationally intensive alternative to bootstrapping but relies on \code{\link[bbmle]{mle2}} successfully returning estimates of the standard error. \code{mle2} does this by inverting a Hessian matrix, a procedure which might not always be successful. 
 
-Future versions of FRAIR will look to improve the integration between \code{mle2} and allow users access to the various hessian control parameters. In the meantime the following delta functions are exported so that users can 'roll their own' maximum likelihood implimentation using this approach:
+Future versions of FRAIR will look to improve the integration between \code{mle2} and allow users access to the various hessian control parameters. In the meantime the following delta functions are exported so that users can 'roll their own' maximum likelihood implementation using this approach:
 
 \tabular{lll}{
     Original Function        \tab Difference Function    \tab Difference NLL Function\cr
@@ -59,7 +59,7 @@ Future versions of FRAIR will look to improve the integration between \code{mle2
 
 }
 \value{
-Prints the results of the test to screen and invisibly returns on object of class \code{frcompare} inherting from \code{class(list)} containing:
+Prints the results of the test to screen and invisibly returns on object of class \code{frcompare} inheriting from \code{class(list)} containing:
 
 \item{frfit1 }{The first FR fit, as supplied.}
 \item{frfit2 }{The second FR fit, as supplied.}
@@ -68,7 +68,7 @@ Prints the results of the test to screen and invisibly returns on object of clas
 
 }
 \references{
-Juliano SA (2001) Nonlinear curve fitting: Predation and fucntional response curves. In: Scheiner SM, Gurevitch J (eds). Design and analysis of ecological experiments. Oxford University Press, Oxford, United Kingdom. pp 178--196.
+Juliano SA (2001) Nonlinear curve fitting: Predation and functional response curves. In: Scheiner SM, Gurevitch J (eds). Design and analysis of ecological experiments. Oxford University Press, Oxford, United Kingdom. pp 178--196.
 }
 \author{
 Daniel Pritchard

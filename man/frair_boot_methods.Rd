@@ -28,7 +28,7 @@
   \item{all_lines }{A logical. Should the bootstrapped results be plotted?. See Details.}
   \item{xlab }{Label for the x-axis.}
   \item{ylab }{Label for the y-axis.}
-  \item{bootcol }{A valid colour for the bootstraped lines.}
+  \item{bootcol }{A valid colour for the bootstrapped lines.}
   \item{bootalpha }{A transparency for the (inevitably overlapping) lines.}
   \item{probs }{Lower and upper tails for confidence interval polygons. See \code{\link{quantile}}.}
   \item{\ldots }{Other items passed to underlying functions.}
@@ -36,23 +36,23 @@
 
 
 \details{
-This documents modifications to standrd methods used in frair objects of class \code{frboot}. However, becuase standard naming conventions have been used, utility functions might also work (e.g. \code{\link{coefficients}})
+This documents modifications to standard methods used in frair objects of class \code{frboot}. However, because standard naming conventions have been used, utility functions might also work (e.g. \code{\link{coefficients}})
 
-The code underlying \code{confint.frboot} is quite complex and relys heavily on the excellent work done by Brian Ripley in \code{\link[boot]{boot.ci}}. Some of the complexity of \code{boot.ci} is hidden, but, like all FRIAR objects you can access the orginal method by passing the output directly (e.g. \code{boot.ci(object$fit)}). 
+The code underlying \code{confint.frboot} is quite complex and relies heavily on the excellent work done by Brian Ripley in \code{\link[boot]{boot.ci}}. Some of the complexity of \code{boot.ci} is hidden, but, like all FRIAR objects you can access the original method by passing the output directly (e.g. \code{boot.ci(object$fit)}). 
 
-Like \code{\link[boot]{print.bootci}} the \code{print()} method for objects produced by \code{print.frboot} will report potentially unstable intervals. However these are calculated and returned by \code{confint.frboot}, not when \code{print()} is called (see Value, below). When calling \code{confint.frboot} you can request (a combination of) different intervals. The default \code{'all'} is equivilent to \code{c('norm', 'basic', 'stud', 'perc', 'bca')} which are the Normal approximation, Basic, Studenti[sz]ed, Percentile and BCa intervals, repectivly. Each has strengths and weaknesses which the user should be aware of.  
+Like \code{\link[boot]{print.bootci}} the \code{print()} method for objects produced by \code{print.frboot} will report potentially unstable intervals. However these are calculated and returned by \code{confint.frboot}, not when \code{print()} is called (see Value, below). When calling \code{confint.frboot} you can request (a combination of) different intervals. The default \code{'all'} is equivalent to \code{c('norm', 'basic', 'stud', 'perc', 'bca')} which are the Normal approximation, Basic, Studentised, Percentile and BCa intervals, receptively. Each has strengths and weaknesses which the user should be aware of.  
 
 \code{lines} and \code{drawpoly} only add lines or polygons to an existing plot, so an active graphics device needs to be present. By default \code{all} is FALSE.  The simple reason for this is because the code is a little slow (on a mac at least), so currently it is an 'opt-in' option.
 
-\code{drawpoly} draws emperical confidence intervals. The intervals are constructed by evaluting every set of bootstrapped coefficients at:
+\code{drawpoly} draws empirical confidence intervals. The intervals are constructed by evaluating every set of bootstrapped coefficients at:
 
 \code{seq(from=0, to=max(x$x), by=1)} 
 
-and then calculating the emperical confidence limits at each value of \emph{x} by:
+and then calculating the empirical confidence limits at each value of \emph{x} by:
 
 \code{apply(val, 2, quantile, na.rm=T, probs=probs)}
 
-Not that this is a rough approximation of a confidence interval and does not account for some of the intracasies (\emph{e.g.} bootstrap bias) described in \link[boot]{boot.ci}.
+Not that this is a rough approximation of a confidence interval and does not account for some of the intricacies (\emph{e.g.} bootstrap bias) described in \link[boot]{boot.ci}.
 }
 
 \value{
@@ -82,7 +82,7 @@ Daniel Pritchard
 \examples{
 data(gammarus)
 
-# Holling's is the wrong fit for these data based on the expeiremtal design
+# Holling's is the wrong fit for these data based on the experimental design
 outhol <- frair_fit(eaten~density, data=gammarus, response='hollingsII', 
         start=list(a = 1, h = 0.015), fixed=list(T=1))
         

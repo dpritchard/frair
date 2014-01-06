@@ -26,7 +26,7 @@
   \item{Y }{The Y variable.  Usually the number of prey consumed.}
 }
 \details{
-This combines a type-II non-replacement type-II fucntional response (\emph{i.e.} a \link[=rogersII]{Roger's random predator equation}) with a scaling exponent on \emph{X}. This function is generalised from that described in \code{\link{real77}} relaxing the assumption that prey are replaced throughout the experiment. 
+This combines a type-II non-replacement type-II functional response (\emph{i.e.} a \link[=rogersII]{Roger's random predator equation}) with a scaling exponent on \emph{X}. This function is generalised from that described in \code{\link{real77}} relaxing the assumption that prey are replaced throughout the experiment. 
 
 The attack rate (\emph{a}) and number of prey eaten (\emph{Ne}) follow the following relationships:
 
@@ -34,7 +34,7 @@ The attack rate (\emph{a}) and number of prey eaten (\emph{Ne}) follow the follo
 
 \deqn{N_e=N_0^(q+1) (1-e^{(a(N_eh-T))})}{Ne=N0^(q+1)*(1-exp(a*(Ne*h-T)))}
 
-Where \emph{b} is a search coefficient and other coefficients are as defined in \code{\link{rogersII}}. Becuase \emph{Ne} appears on both side of the equation, the solution is found using Lambert's transcendental equation. FRAIR uses the \code{\link[emdbook]{lambertW}} function from the \emph{emdbook} package and the internal function is:
+Where \emph{b} is a search coefficient and other coefficients are as defined in \code{\link{rogersII}}. Because \emph{Ne} appears on both side of the equation, the solution is found using Lambert's transcendental equation. FRAIR uses the \code{\link[emdbook]{lambertW}} function from the \emph{emdbook} package and the internal function is:
 
 \code{Ne <- X^(q+1)-lambertW(a*h*X^(q+1)*exp(-a*(T-h*X^(q+1))))/(a*h)}
 

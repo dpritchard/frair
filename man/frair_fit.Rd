@@ -27,7 +27,7 @@ A less authoritative, but FRAIR-focused introduction can be found in the vignett
 }
 
 \note{
-FRAIR is still under development.  Future versions will allow the user more control over the underlying fitting algorithms. In the meantime FRAIR exports all of it's (useful) functions so that users can fit the curves directly using their prefered method if the defaults are undesirable.  
+FRAIR is still under development.  Future versions will allow the user more control over the underlying fitting algorithms. In the meantime FRAIR exports all of it's (useful) functions so that users can fit the curves directly using their preferred method if the defaults are undesirable.  
 }
 
 \value{
@@ -44,7 +44,7 @@ This function returns a named list of class \code{frfit} with the following name
 \item{sample }{A numeric vector. Always \code{samp=c(1:nrow(data))} (\emph{c.f.} class \code{\link{frair_boot}}).}
 \item{fit }{The raw object returned by \code{\link[bbmle]{mle2}}.}
 
-Objects of class \code{frfit} have print, plot and lines methods defined. See the help \link[=frair_fit_methods]{for those methods} for more infomation.
+Objects of class \code{frfit} have print, plot and lines methods defined. See the help \link[=frair_fit_methods]{for those methods} for more information.
 }
 
 \seealso{

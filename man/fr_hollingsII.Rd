@@ -28,11 +28,11 @@
 \details{
 This implements the Hollings's original Type-II functional response, otherwise known as the 'disc equation'. An important assumption of this equation is that prey density remains constant (\emph{i.e.} a 'replacement' experimental design). In practice this is often not the case and often the Roger's 'random predator' equation might be more appropriate (see \code{\link{rogersII}}).
 
-In Holling's orginal formulation the number of prey eaten (\emph{Ne}) follows the relationship:
+In Holling's original formulation the number of prey eaten (\emph{Ne}) follows the relationship:
 
 \deqn{N_e=\frac{a N0 T}{1+a N0 h})}{Ne=(a*N0*T)/(1+a*N0*h)}
 
-Where \emph{N0} is the initial number of prey and \emph{a}, \emph{h} and \emph{T} are the attack rate, handling time and the total time available, repectivly. It is implimented internally in FRAIR as: 
+Where \emph{N0} is the initial number of prey and \emph{a}, \emph{h} and \emph{T} are the attack rate, handling time and the total time available, receptively. It is implemented internally in FRAIR as: 
 
 \code{Ne <- (a*X*T)/(1+a*X*h)}
 

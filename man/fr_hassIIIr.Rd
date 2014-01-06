@@ -26,7 +26,7 @@
   \item{Y }{The Y variable.  Usually the number of prey consumed.}
 }
 \details{
-This implements Hassel's Type-III extension to the 'random predator' functional response. This does not assume prey are replaced throughout the experiment (\emph{c.f.} \code{\link{hassIII}}). The number of prey eaten (\emph{Ne}) follow the same relationship defined for \link[=rogersII]{the Roger's Type-II reponse}, however the attack rate (\emph{a}) is assumed to vary with prey density in the following hyperbolic relationship:
+This implements Hassel's Type-III extension to the 'random predator' functional response. This does not assume prey are replaced throughout the experiment (\emph{c.f.} \code{\link{hassIII}}). The number of prey eaten (\emph{Ne}) follow the same relationship defined for \link[=rogersII]{the Roger's Type-II response}, however the attack rate (\emph{a}) is assumed to vary with prey density in the following hyperbolic relationship:
 
 \code{a <- (b*X)/(1+c*X)}
 

@@ -34,7 +34,7 @@ Where \emph{N0} is the initial number of prey and \emph{a}, \emph{h} and \emph{T
 
 \code{Ne <- X - lambertW(a * h * X * exp(-a * (T - h * X)))/(a * h)}
 
-where \eqn{X = N0}. For further information users are directed to Chapter 8 (and preceding chapters, if needed) of Bolker (2008) where this approach is discussed in depth. Note that Bolker (2008) uses the more general 'Beddington-DeAngelis' curve, which is implimented in FRAIR as \code{\link{bdII}}.
+where \eqn{X = N0}. For further information users are directed to Chapter 8 (and preceding chapters, if needed) of Bolker (2008) where this approach is discussed in depth. Note that Bolker (2008) uses the more general 'Beddington-DeAngelis' curve, which is implemented in FRAIR as \code{\link{bdII}}.
 
 None of these functions are designed to be called directly, though they are all exported so that the user can call them directly is desired. The intention is that they are called via \code{\link{frair_fit}}, which calls them in the order they are specified above.
 

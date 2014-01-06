@@ -12,7 +12,7 @@
   \item{show }{A logical. If TRUE, information is printed to screen and nothing is returned.}
 }
 \details{
-\code{frair_responses} is both a vector of useful information (via \code{show=TRUE}) and a vechicle to keep track of implimented functional responses.  The later is enforced by matching responses supplied to \code{\link{frair_fit}} to the \code{names} returned by \code{frair_responses(show=FALSE)}.
+\code{frair_responses} is both a vector of useful information (via \code{show=TRUE}) and a vehicle to keep track of implemented functional responses.  The later is enforced by matching responses supplied to \code{\link{frair_fit}} to the \code{names} returned by \code{frair_responses(show=FALSE)}.
 }
 
 \author{

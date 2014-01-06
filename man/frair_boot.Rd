@@ -22,7 +22,7 @@ frair_boot(frfit, start=NULL, strata=NULL, nboot=999,
 \details{
 This function provides a simple, consistent way to generate bootstrapped estimates from a functional response fit. If \code{start} is not provided starting values for the bootstrapping are drawn from the original fit.  This interface is provided so that a single set of starting parameters (e.g. a 'global' estimate) can be used when bootstrapping different functional response fits (e.g. different treatments)
 
-Non-parametric bootstrapping and paralellisation is handled by \code{\link[boot]{boot}} from the boot package.  Currently, if you request bootstrapped fits and \code{para=TRUE} (the default) then the function with attempt to use all except 1 available core. Note that this might affect performance of other tasks while the bootstrap is underway!
+Non-parametric bootstrapping and parallelisation is handled by \code{\link[boot]{boot}} from the boot package.  Currently, if you request bootstrapped fits and \code{para=TRUE} (the default) then the function with attempt to use all except 1 available core. Note that this might affect performance of other tasks while the bootstrap is underway!
 
 If more than 10\% of the bootstrapped fits fail then a warning is generated and if more than 50\% of the fits fail then an error is thrown and nothing is returned.  These are sensible defaults, but if you are very sure that you know what you are doing you can suppress this with \code{WARN.ONLY=TRUE} (a warning is thrown instead).  
 
@@ -47,7 +47,7 @@ This function returns a named list of class \code{frboot} with the following nam
 \item{n_boot }{The number of (requested) bootstrapped fits.}
 \item{stratified }{Was a stratified bootstrap performed?}
 
-Objects of class \code{frboot} have print, confint, plot, lines and drawpoly methods defined. See the help \link[=frair_boot_methods]{for those methods} for more infomation.  
+Objects of class \code{frboot} have print, confint, plot, lines and drawpoly methods defined. See the help \link[=frair_boot_methods]{for those methods} for more information.  
 }
 
 \seealso{

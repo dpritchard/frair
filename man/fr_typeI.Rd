@@ -26,11 +26,11 @@
   \item{Y }{The Y variable.  Usually the number of prey consumed.}
 }
 \details{
-This implements a simple Type-I, or linear functional response. This is helpful when the response is known (or suspected) to be handelling time independant. It is implimented as: 
+This implements a simple Type-I, or linear functional response. This is helpful when the response is known (or suspected) to be handling time independent. It is implemented as: 
 
 \deqn{N_e = a N_0 T}{Ne = a*N0*T}
 
-where \emph{a} is the attack rate, \emph{T} is the total time avilable and \emph{N0} (== X) is the initial prey density. 
+where \emph{a} is the attack rate, \emph{T} is the total time available and \emph{N0} (== X) is the initial prey density. 
 
 None of these functions are designed to be called directly, though they are all exported so that the user can call them directly is desired. The intention is that they are called via \code{\link{frair_fit}}, which calls them in the order they are specified above.
 
