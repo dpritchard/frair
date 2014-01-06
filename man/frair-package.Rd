@@ -10,8 +10,8 @@ The main workhorse is \code{\link{frair_fit}} and this should be the starting po
 \tabular{ll}{
 Package: \tab frair\cr
 Type: \tab Package\cr
-Version: \tab 0.1\cr
-Date: \tab 2013-05-18\cr
+Version: \tab 0.4\cr
+Date: \tab 2014-01-06\cr
 License: \tab GPL-2\cr
 }
 

@@ -1,1 +1,38 @@
-exportPattern("^[[:alpha:]]+")
+export(frair_fit, frair_boot, frair_compare, frair_test, frair_responses, drawpoly, drawpoly.default)
+export(typeI, typeI_fit, typeI_nll, typeI_diff, typeI_nll_diff)
+export(rogersII, rogersII_fit, rogersII_nll, rogersII_diff, rogersII_nll_diff)
+export(hollingsII, hollingsII_fit, hollingsII_nll, hollingsII_diff, hollingsII_nll_diff)
+export(bdII, bdII_fit, bdII_nll, bdII_diff, bdII_nll_diff)
+export(hassIII, hassIII_fit, hassIII_nll, hassIII_diff, hassIII_nll_diff)
+export(hassIIIr, hassIIIr_fit, hassIIIr_nll, hassIIIr_diff, hassIIIr_nll_diff)
+export(real77, real77_fit, real77_nll, real77_diff, real77_nll_diff)
+export(real77r, real77r_fit, real77r_nll, real77r_diff, real77r_nll_diff)
+
+S3method(print, frfit)
+S3method(plot, frfit)
+S3method(lines, frfit)
+
+S3method(print, frboot)
+S3method(plot, frboot)
+S3method(lines, frboot)
+S3method(confint, frboot)
+S3method(drawpoly, frboot)
+
+S3method(print,frconf)
+
+S3method(print,frtest)
+
+
+# Imports
+importFrom(parallel,detectCores)
+importFrom(boot,boot,boot.ci)
+importFrom(emdbook,lambertW)
+
+# Failsafe imports for packages in depends (to be sure)^3
+importFrom(stats4,
+           coef,confint,logLik,summary,vcov,profile,
+           AIC,BIC)
+importFrom(bbmle,mle2, 
+           coef,confint,logLik,summary,vcov,profile,
+           AIC, AICc, qAICc, qAIC,
+           anova,deviance,residuals,simulate,predict,formula)
