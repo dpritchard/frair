@@ -1,5 +1,4 @@
 ## frboot methods
-
 print.frboot <- function(x, ...){
     nbootdone <- x$n_boot-x$n_failed
     percsuc <- round(nbootdone/x$n_boot*100,2)
@@ -27,7 +26,7 @@ plot.frboot <- function(x, xlab=x$xvar, ylab=x$yvar, ...){
 }
 
 lines.frboot <- function(x, all_lines=FALSE, bootcol=1, bootalpha=1/sqrt(x$n_boot), ...){
-    newx <- seq(from=0, to=max(x$x), by=1)
+    newx <- seq(from=1, to=max(x$x), by=1)
     fitfun <- get(x$response)
     if(!all_lines){
         # Plot the mean (original) fit
@@ -65,12 +64,12 @@ drawpoly.default <- function(x, upper, lower, ...){
 }
 
 drawpoly.frboot <- function(x, ..., probs=c(0.025, 0.975)){
-    newx <- seq(from=0, to=max(x$x), by=1)
+    newx <- seq(from=1, to=max(x$x), by=1)
     fitfun <- get(x$response)
     bootcoefs <- na.omit(x$bootcoefs)
     outdd <- matrix(ncol=length(newx), nrow=nrow(bootcoefs))
     
-    cat('\nCalculating polygons. Please be patient...\n\n')
+    cat('\nCalculating polygons.\n\n')
     flush.console()
     for(a in 1:nrow(bootcoefs)){
         outdd[a,] <- fitfun(newx, as.list(as.list(bootcoefs[a,])))

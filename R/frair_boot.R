@@ -24,7 +24,7 @@ frair_boot <- function(frfit, start=NULL, strata=NULL, nboot=999, para=TRUE, nco
     
     # Attempt to hog all except one core if it isn't specified
     if(para && is.nan(ncores)){
-        ncores <- parallel:::detectCores()
+        ncores <- detectCores()
         if(ncores>1){ncores <- ncores-1}
     } else {
         if(ncores<1){stop('You cannot use less than 1 core for parallel processing!')}
@@ -53,20 +53,10 @@ frair_boot <- function(frfit, start=NULL, strata=NULL, nboot=999, para=TRUE, nco
         if(length(frfit$optimvars)==0){start <- NULL} else {start <- as.list(coef(frfit)[frfit$optimvars])}
     } else {
         # Check start, needs to be a named list, with the 'optimvars' in it...
-        if(length(start)==0){
-            stop(paste0("You didn't provide starting values and they can't be extracted from ", deparse(substitute(frfit)), "\nThis should be impossible!"))
-        }
-        if(!is.list(start) | is.null(names(start))){
-            stop(paste0(deparse(substitute(start)), " must be a list containing single, named numeric values."))
-        }
-        if(any(lapply(start, length)!=1)){
-            stop(paste0("The items in ", deparse(substitute(start)), " must be single, named numeric values."))
-        }
-        if(!(all(is.numeric(unlist(start))))){
-            stop(paste0("The items in ", deparse(substitute(start)), " must be single, named numeric values."))
-        }
+        fr_checkstart(start, deparse(substitute(start)))
+        # Additional check for fr_boot:
         if(!all(frfit$optimvars%in%names(start))){
-            stop(paste0("Named items in ", deparse(substitute(start)), " do not match those needed by the response.\n  For reference, you need to provide values for: ", paste(frfit$optimvars, collapse=', ')))
+            stop(paste0("Named items in ", deparse(substitute(start)), " do not match those needed by the response.\n  If you provide anything, you need to provide values for: ", paste(frfit$optimvars, collapse=', ')))
         }
     }
     # Just rip 'fixed' out of frfit
@@ -78,14 +68,14 @@ frair_boot <- function(frfit, start=NULL, strata=NULL, nboot=999, para=TRUE, nco
     
     # Print some output to calm people's nerves!
     cat('BOOTSTRAPPING.\n')
-    if(fr_responses()[[frfit$response]][[3]]){
+    if(frair_responses(show=FALSE)[[frfit$response]][[3]]){
         cat(paste0('NB: This function calls the lambertW function. Please be patient.'))
     }
     flush.console()
     
     ## Go! ##
     # Get the response...
-    frfunc <- get(unlist(fr_responses()[[frfit$response]])[1])
+    frfunc <- get(unlist(frair_responses(show=FALSE)[[frfit$response]])[1])
     # Do it!
     if(stdo){
         frout <- boot(data=moddata, statistic=frfunc, R=nboot, start=start, fixed=fixed, strata=stdat, boot=TRUE, windows=iswindows, parallel=paramode, ncpus=ncores)
