@@ -84,7 +84,7 @@ data(gammarus)
 
 # Holling's is the wrong fit for these data based on the experimental design
 outhol <- frair_fit(eaten~density, data=gammarus, response='hollingsII', 
-        start=list(a = 1, h = 0.015), fixed=list(T=1))
+        start=list(a = 1, h = 0.08), fixed=list(T=1))
         
 # But it bootstrapps more quickly, so is a useful demonstration
 outholb <- frair_boot(outhol)
@@ -92,14 +92,14 @@ outholb <- frair_boot(outhol)
 confint(outholb)
 
 # Illustrate bootlines
-plot(bouthol, xlim=c(0,30), type='n', main='All bootstrapped lines')
-lines(bouthol, all_lines=TRUE)
-points(bouthol, pch=20, col=rgb(0,0,0,0.2))
+plot(outholb, xlim=c(0,30), type='n', main='All bootstrapped lines')
+lines(outholb, all_lines=TRUE)
+points(outholb, pch=20, col=rgb(0,0,0,0.2))
 
 # Illustrate bootpolys
-plot(bouthol, xlim=c(0,30), type='n', main='Empirical 95 percent CI')
-drawpoly(bouthol, col=rgb(0,0.5,0))
-points(bouthol, pch=20, col=rgb(0,0,0,0.2))
+plot(outholb, xlim=c(0,30), type='n', main='Empirical 95 percent CI')
+drawpoly(outholb, col=rgb(0,0.5,0))
+points(outholb, pch=20, col=rgb(0,0,0,0.2))
 }
 
 

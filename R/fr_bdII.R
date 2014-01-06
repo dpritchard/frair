@@ -62,6 +62,7 @@ bdII_fit <- function(data, samp, start, fixed, boot=FALSE, windows=FALSE) {
 bdII_nll <- function(a, h, P, T, X, Y) {
 	if (a < 0 || h < 0){return(NA)}
 	prop.exp = bdII(X, a, h, P, T)/X
+	if(any(is.complex(prop.exp))){return(NA)} # Complex numbers don't help!
 	# The proportion consumed must be between 0 and 1 and not NaN
 	# If not then it must be bad estimate of a and h and should return NA
 	if(any(is.nan(prop.exp)) || any(is.na(prop.exp))){return(NA)} 
@@ -78,6 +79,7 @@ bdII_diff <- function(X, grp, a, h, P, T, Da, Dh) {
 bdII_nll_diff <- function(a, h, T, P, Da, Dh, X, Y, grp) {
     if (a < 0 || h < 0){return(NA)}
     prop.exp = bdII_diff(X, grp, a, h, P, T, Da, Dh)/X
+    if(any(is.complex(prop.exp))){return(NA)} # Complex numbers don't help!
     # The proportion consumed must be between 0 and 1 and not NaN
     # If not then it must be bad estimate of a and h and should return NA
     if(any(is.nan(prop.exp)) || any(is.na(prop.exp))){return(NA)} 

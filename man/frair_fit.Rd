@@ -17,7 +17,7 @@ frair_fit(formula, data, response, start=list(), fixed=NULL)
 }
 
 \details{
-frair_fit is a utility function which helps users fit common non-linear predator-prey curves to data. It uses maximum likelihood estimation, via \code{\link[bbmle]{mle2}} from the \code{bbmle} package. Except for \code{\link{type_I}}, friar_fit uses the 'Nelder-Mead' method of \code{\link[stats]{optim}} with a non-default number of iterations (5000 [frair] vs. 500 [default], see Note).
+frair_fit is a utility function which helps users fit common non-linear predator-prey curves to data. It uses maximum likelihood estimation, via \code{\link[bbmle]{mle2}} from the \code{bbmle} package. Except for \code{\link{typeI}}, friar_fit uses the 'Nelder-Mead' method of \code{\link[stats]{optim}} with a non-default number of iterations (5000 [frair] vs. 500 [default], see Note).
 
 The response requested must be known to frair. To establish what is supported inspect the output from \code{frair_responses()}. All parameters listed by \code{frair_responses()} (except \code{X}) must be provided in either \code{start} or \code{fixed} and some guidance is given on the help pages for each function about what should (and should not) be optimised.
 

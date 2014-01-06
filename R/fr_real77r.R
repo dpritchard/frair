@@ -56,6 +56,7 @@ real77r_nll <- function(b, q, h, T, X, Y) {
     if (b <= 0 || h <= 0) {return(NA)} # Estimates must be > zero
     if (q < 0){return(NA)} # q must be positive
     prop.exp = real77r(X, b, q, h, T)/X
+    if(any(is.complex(prop.exp))){return(NA)} # Complex numbers don't help!
     # The proportion consumed must be between 0 and 1 and not NaN
     # If not then it must be bad estimate of a and h and should return NA
     if(any(is.nan(prop.exp)) || any(is.na(prop.exp))){return(NA)} 
@@ -76,6 +77,7 @@ real77r_nll_diff <- function(b, q, h, T, Db, Dq, Dh, X, Y, grp) {
     if (b <= 0 || h <= 0) {return(NA)} # Estimates must be > zero
     if (q < 0){return(NA)} # q must be positive
     prop.exp = real77r_diff(X, grp, b, q, h, T, Db, Dq, Dh)/X
+    if(any(is.complex(prop.exp))){return(NA)} # Complex numbers don't help!
     # The proportion consumed must be between 0 and 1 and not NaN
     # If not then it must be bad estimate of a and h and should return NA
     if(any(is.nan(prop.exp)) || any(is.na(prop.exp))){return(NA)} 

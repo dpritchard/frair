@@ -69,6 +69,7 @@ rogersII_fit <- function(data, samp, start, fixed, boot=FALSE, windows=FALSE) {
 rogersII_nll <- function(a, h, T, X, Y) {
     if (a <= 0 || h <= 0){return(NA)}
     prop.exp = rogersII(X, a, h, T)/X
+    if(any(is.complex(prop.exp))){return(NA)} # Complex numbers don't help!
     # The proportion consumed must be between 0 and 1 and not NaN or NA
     # If not then it must be bad estimate of a and h and should return NA
     if(any(is.nan(prop.exp)) || any(is.na(prop.exp))){return(NA)} 
@@ -87,6 +88,7 @@ rogersII_diff <- function(X, grp, a, h, T, Da, Dh) {
 rogersII_nll_diff <- function(a, h, T, Da, Dh, X, Y, grp) {
     if (a <= 0 || h <= 0){return(NA)}
     prop.exp = rogersII_diff(X, grp, a, h, T, Da, Dh)/X
+    if(any(is.complex(prop.exp))){return(NA)} # Complex numbers don't help!
     # The proportion consumed must be between 0 and 1 and not NaN or NA
     # If not then it must be bad estimate of a and h and should return NA
     if(any(is.nan(prop.exp)) || any(is.na(prop.exp))){return(NA)} 

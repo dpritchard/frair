@@ -78,5 +78,5 @@ points(hassIIIr_2, col=4)
 lines(hassIIIr_1)
 lines(hassIIIr_2, col=4)
 
-frair_compare(hassIII_1, hassIII_2)
+frair_compare(hassIIIr_1, hassIIIr_2)
 }

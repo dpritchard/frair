@@ -56,6 +56,7 @@ hassIIIr_nll <- function(b, c, h, T, X, Y) {
     if (h <= 0 || b <= 0) {return(NA)} # h and b estimates must be > zero
     if (c < 0) {return(NA)} # c must be positive
     prop.exp = hassIIIr(X, b, c, h, T)/X
+    if(any(is.complex(prop.exp))){return(NA)} # Complex numbers don't help!
     # The proportion consumed must be between 0 and 1 and not NaN
     # If not then it must be bad estimate of a and h and should return NA
     if(any(is.nan(prop.exp)) || any(is.na(prop.exp))){return(NA)} 
@@ -67,10 +68,10 @@ hassIIIr_nll <- function(b, c, h, T, X, Y) {
 # Model the difference between two groups (j) exposing a simple t-test on Da and Dh
 # For further info see Juliano 2001, pg 193, eg. eq. 10.11
 hassIIIr_diff <- function(X, grp, b, c, h, T, Db, Dc, Dh) {
-  # a <- (b*X)/(1+c*X) # From Hassell et al (1977)
+  # a <- ( b        *X)/(1+ c        *X) # From Hassell et al (1977)
     a <- ((b-Db*grp)*X)/(1+(c-Dc*grp)*X)
-  # return(X - lambertW(a *  h         * X * exp(-a * (T -  h         * X)))/(a *  h))
-    return(X - lambertW(a * (h-Dh*grp) * X * exp(-a * (T - (h-Dh*grp) * X)))/(a * (h-Dh*grp))) 
+  # return(X-lambertW(a* h        *X*exp(-a*(T-h         *X)))/(a* h))
+    return(X-lambertW(a*(h-Dh*grp)*X*exp(-a*(T-(h-Dh*grp)*X)))/(a*(h-Dh*grp))) 
 }
 
 # The NLL for the difference model... used by frair_compare()
@@ -78,6 +79,7 @@ hassIIIr_nll_diff <- function(b, c, h, T, Db, Dc, Dh, X, Y, grp) {
     if (h <= 0 || b <= 0) {return(NA)} # h and b estimates must be > zero
     if (c < 0) {return(NA)} # c must be positive
     prop.exp = hassIIIr_diff(X, grp, b, c, h, T, Db, Dc, Dh)/X
+    if(any(is.complex(prop.exp))){return(NA)} # Complex numbers don't help!
     # The proportion consumed must be between 0 and 1 and not NaN
     # If not then it must be bad estimate of a and h and should return NA
     if(any(is.nan(prop.exp)) || any(is.na(prop.exp))){return(NA)} 
