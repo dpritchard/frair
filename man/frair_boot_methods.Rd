@@ -1,4 +1,5 @@
 \name{frair_boot_methods}
+\alias{frair_boot_methods}
 \alias{print.frboot}
 \alias{confint.frboot}
 \alias{plot.frboot}
@@ -37,13 +38,21 @@
 \details{
 This documents modifications to standrd methods used in frair objects of class \code{frboot}. However, becuase standard naming conventions have been used, utility functions might also work (e.g. \code{\link{coefficients}})
 
-
 The code underlying \code{confint.frboot} is quite complex and relys heavily on the excellent work done by Brian Ripley in \code{\link[boot]{boot.ci}}. Some of the complexity of \code{boot.ci} is hidden, but, like all FRIAR objects you can access the orginal method by passing the output directly (e.g. \code{boot.ci(object$fit)}). 
 
 Like \code{\link[boot]{print.bootci}} the \code{print()} method for objects produced by \code{print.frboot} will report potentially unstable intervals. However these are calculated and returned by \code{confint.frboot}, not when \code{print()} is called (see Value, below). When calling \code{confint.frboot} you can request (a combination of) different intervals. The default \code{'all'} is equivilent to \code{c('norm', 'basic', 'stud', 'perc', 'bca')} which are the Normal approximation, Basic, Studenti[sz]ed, Percentile and BCa intervals, repectivly. Each has strengths and weaknesses which the user should be aware of.  
 
-\code{lines} and \code{polygon} only add lines or polygons to an existing plot, so an active graphics device needs to be present. By default \code{all} is FALSE.  The simple reason for this is because the code is a little slow, so currently it is an 'opt-in' option.
+\code{lines} and \code{drawpoly} only add lines or polygons to an existing plot, so an active graphics device needs to be present. By default \code{all} is FALSE.  The simple reason for this is because the code is a little slow (on a mac at least), so currently it is an 'opt-in' option.
 
+\code{drawpoly} draws emperical confidence intervals. The intervals are constructed by evaluting every set of bootstrapped coefficients at:
+
+\code{seq(from=0, to=max(x$x), by=1)} 
+
+and then calculating the emperical confidence limits at each value of \emph{x} by:
+
+\code{apply(val, 2, quantile, na.rm=T, probs=probs)}
+
+Not that this is a rough approximation of a confidence interval and does not account for some of the intracasies (\emph{e.g.} bootstrap bias) described in \link[boot]{boot.ci}.
 }
 
 \value{
@@ -71,7 +80,26 @@ Daniel Pritchard
 }
 
 \examples{
-# TODO
+data(gammarus)
+
+# Holling's is the wrong fit for these data based on the expeiremtal design
+outhol <- frair_fit(eaten~density, data=gammarus, response='hollingsII', 
+        start=list(a = 1, h = 0.015), fixed=list(T=1))
+        
+# But it bootstrapps more quickly, so is a useful demonstration
+outholb <- frair_boot(outhol)
+
+confint(outholb)
+
+# Illustrate bootlines
+plot(bouthol, xlim=c(0,30), type='n', main='All bootstrapped lines')
+lines(bouthol, all_lines=TRUE)
+points(bouthol, pch=20, col=rgb(0,0,0,0.2))
+
+# Illustrate bootpolys
+plot(bouthol, xlim=c(0,30), type='n', main='Empirical 95 percent CI')
+drawpoly(bouthol, col=rgb(0,0.5,0))
+points(bouthol, pch=20, col=rgb(0,0,0,0.2))
 }
 
 

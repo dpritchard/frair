@@ -1,4 +1,5 @@
 \name{frair_fit_methods}
+\alias{frair_fit_methods}
 \alias{print.frfit}
 \alias{plot.frfit}
 \alias{lines.frfit}
@@ -10,7 +11,6 @@
 \method{print}{frfit}(x, \dots)
 \method{plot}{frfit}(x, xlab=x$xvar, ylab=x$yvar, \ldots)
 \method{lines}{frfit}(x, \dots)
-
 }
 
 \arguments{
@@ -24,11 +24,11 @@
 \details{
 This documents modifications to standrd methods used in frair objects of classes \code{frfit}. However, becuase standard naming conventions have been used, utility funcitons might also work (e.g. \code{\link{coefficients}})
 
-\code{lines} and \code{polygon} only adds lines or polygons to an existing plot, so an active graphics device needs to be present.
+\code{lines} only adds lines to an existing plot, so an active graphics device needs to be present.
 }
 
 \seealso{
-\code{\link{frair_fit}}, \code{\link{lines}}, \code{\link{polygon}}.
+\code{\link{frair_fit}}, \code{\link{lines}}.
 }
 
 \author{
@@ -36,7 +36,13 @@ Daniel Pritchard
 }
 
 \examples{
-# TODO
+data(gammarus)
+outII <- frair_fit(eaten~density, data=gammarus, response='rogersII', 
+        start=list(a = 1.2, h = 0.015), fixed=list(T=1))
+
+# Visualise fit
+plot(outII, pch=20, col=rgb(0,0,0,0.2), xlim=c(0,30))
+lines(outII)
 }
 
 
