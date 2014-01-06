@@ -15,7 +15,7 @@ bdII <- function(X, a, h, P, T) {
         P <- coefs[['P']]
         T <- coefs[['T']]
     }
-	X - lambertW(a * h * X * exp(-a * (P * T - h * X)))/(a * h)
+	return(X - lambertW(a * h * X * exp(-a * (P * T - h * X)))/(a * h))
 }
 # bdII_fit: Does the heavy lifting
 bdII_fit <- function(data, samp, start, fixed, boot=FALSE, windows=FALSE) {
@@ -25,7 +25,9 @@ bdII_fit <- function(data, samp, start, fixed, boot=FALSE, windows=FALSE) {
 	dat <- data[samp,]
 	out <- fr_setupout(start, fixed, samp)
 
-    try_bdII <- try(mle2(bdII_nll, start=start, fixed=fixed, data=list('X'=dat$X, 'Y'=dat$Y)), silent=T) # Remove 'silent=T' for more verbose output
+    try_bdII <- try(mle2(bdII_nll, start=start, fixed=fixed, data=list('X'=dat$X, 'Y'=dat$Y), 
+                         optimizer='optim', method="Nelder-Mead", control=list(maxit=5000)), 
+                    silent=T)
 	if (inherits(try_bdII, "try-error")) {
  		# The fit failed...
  		if(boot){
@@ -57,10 +59,31 @@ bdII_fit <- function(data, samp, start, fixed, boot=FALSE, windows=FALSE) {
 # bdII_nll
 # Provides negative log-likelihood for estimations via mle2()
 # See Bowkers book for more info
-bdII_nll <- function(a, h, T, P, X, Y) {
-	if (a < 0 || h < 0 || T < 0 || P < 0) {
-		return(NA)
-		}
-		prop.exp = bdII(X, a, h, P, T)/X
-		return(-sum(dbinom(Y, prob = prop.exp, size = X, log = TRUE)))
-	}
+bdII_nll <- function(a, h, P, T, X, Y) {
+	if (a < 0 || h < 0){return(NA)}
+	prop.exp = bdII(X, a, h, P, T)/X
+	# The proportion consumed must be between 0 and 1 and not NaN
+	# If not then it must be bad estimate of a and h and should return NA
+	if(any(is.nan(prop.exp)) || any(is.na(prop.exp))){return(NA)} 
+	if(any(prop.exp > 1) || any(prop.exp < 0)){return(NA)} 
+	return(-sum(dbinom(Y, prob = prop.exp, size = X, log = TRUE)))
+}
+
+# The difference function
+bdII_diff <- function(X, grp, a, h, P, T, Da, Dh) {
+  # return(X - lambertW(a * h * X * exp(-a * (P * T - h * X)))/(a * h))
+    return(X - lambertW((a-Da*grp) * (h-Dh*grp) * X * exp(-(a-Da*grp) * (P * T - (h-Dh*grp) * X)))/((a-Da*grp) * (h-Dh*grp)))
+}
+# The diff NLL fucntions
+bdII_nll_diff <- function(a, h, T, P, Da, Dh, X, Y, grp) {
+    if (a < 0 || h < 0){return(NA)}
+    prop.exp = bdII_diff(X, grp, a, h, P, T, Da, Dh)/X
+    # The proportion consumed must be between 0 and 1 and not NaN
+    # If not then it must be bad estimate of a and h and should return NA
+    if(any(is.nan(prop.exp)) || any(is.na(prop.exp))){return(NA)} 
+    if(any(prop.exp > 1) || any(prop.exp < 0)){return(NA)} 
+    return(-sum(dbinom(Y, prob = prop.exp, size = X, log = TRUE)))
+}
+
+
+
