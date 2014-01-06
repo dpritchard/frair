@@ -15,7 +15,8 @@ rogersII <- function(X, a, h, T) {
         h <- coefs[['h']]
         T <- coefs[['T']]
     }
-	X - lambertW(a * h * X * exp(-a * (T - h * X)))/(a * h)
+    return(X - lambertW(a * h * X * exp(-a * (T - h * X)))/(a * h))
+
 }
 # rogersII_fit: Does the heavy lifting
 # data = The data from which to subsample. X and Y are drawn from here.
@@ -31,7 +32,9 @@ rogersII_fit <- function(data, samp, start, fixed, boot=FALSE, windows=FALSE) {
 	dat <- data[samp,]
 	out <- fr_setupout(start, fixed, samp)
 
-    try_rogersII <- try(mle2(rogersII_nll, start=start, fixed=fixed, data=list('X'=dat$X, 'Y'=dat$Y)), silent=T) # Remove 'silent=T' for more verbose output
+    try_rogersII <- try(mle2(rogersII_nll, start=start, fixed=fixed, data=list('X'=dat$X, 'Y'=dat$Y), 
+                             optimizer='optim', method="Nelder-Mead", control=list(maxit=5000)), 
+                        silent=T) # Remove 'silent=T' for more verbose output
 	if (inherits(try_rogersII, "try-error")) {
  		# The fit failed...
  		if(boot){
@@ -62,11 +65,31 @@ rogersII_fit <- function(data, samp, start, fixed, boot=FALSE, windows=FALSE) {
 }	
 # rogersII_nll
 # Provides negative log-likelihood for estimations via mle2()
-# See Bowkers book for more info
+# See Ben Bowkers book for more info
 rogersII_nll <- function(a, h, T, X, Y) {
-	if (a < 0 || h < 0 || T < 0) {
-		return(NA)
-		}
-		prop.exp = rogersII(X, a, h, T)/X
-		return(-sum(dbinom(Y, prob = prop.exp, size = X, log = TRUE)))
-	}
+    if (a <= 0 || h <= 0){return(NA)}
+    prop.exp = rogersII(X, a, h, T)/X
+    # The proportion consumed must be between 0 and 1 and not NaN or NA
+    # If not then it must be bad estimate of a and h and should return NA
+    if(any(is.nan(prop.exp)) || any(is.na(prop.exp))){return(NA)} 
+    if(any(prop.exp > 1) || any(prop.exp < 0)){return(NA)}
+    return(-sum(dbinom(Y, prob = prop.exp, size = X, log = TRUE)))
+}
+
+# Rogers II difference function
+# Models the difference between two groups (j) exposing a simple t-test on Da and Dh
+# For further info see Juliano 2001, pg 193, eg. eq. 10.11
+rogersII_diff <- function(X, grp, a, h, T, Da, Dh) {
+  # return(X - lambertW(a * h * X * exp(-a * (T - h * X)))/(a * h))
+    return(X - lambertW((a-Da*grp) * (h-Dh*grp) * X * exp(-(a-Da*grp) * (T - (h-Dh*grp) * X)))/((a-Da*grp) * (h-Dh*grp))) 
+}
+# The NLL for the difference model... used by frair_compare()
+rogersII_nll_diff <- function(a, h, T, Da, Dh, X, Y, grp) {
+    if (a <= 0 || h <= 0){return(NA)}
+    prop.exp = rogersII_diff(X, grp, a, h, T, Da, Dh)/X
+    # The proportion consumed must be between 0 and 1 and not NaN or NA
+    # If not then it must be bad estimate of a and h and should return NA
+    if(any(is.nan(prop.exp)) || any(is.na(prop.exp))){return(NA)} 
+    if(any(prop.exp > 1) || any(prop.exp < 0)){return(NA)}
+    return(-sum(dbinom(Y, prob = prop.exp, size = X, log = TRUE)))
+}
