@@ -178,7 +178,7 @@ print.frconf <- function(x, ...){
         hasnotes <- TRUE
     }
     cinamemap <- c(norm='Normal approx.', basic='Basic', stud='Studentised', perc='Percentile', bca='BCa')
-    cat(format('Coefficient', width=13), format('CI Type', width=15), format('Upper', width=8), format('Lower', width=8), if(hasnotes){format('Notes', width=8)}, '\n', sep='')
+    cat(format('Coefficient', width=13), format('CI Type', width=15), format('Lower', width=8), format('Upper', width=8), if(hasnotes){format('Notes', width=8)}, '\n', sep='')
     for(a in 1:nrow(runlist)){
         dat <- x[[runlist[a,1]]][[runlist[a,2]]]
         info <- c(dat$errors,dat$warnings,dat$notes)
