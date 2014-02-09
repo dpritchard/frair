@@ -18,7 +18,7 @@ print.frboot <- function(x, ...){
     btconf <- confint(x, citypes='bca')
     
     print(btconf)
-    cat('\nNOTE: It is recomended you inspect the raw fit too (see: ?frair_boot)')
+    cat('\nNOTE: It is recomended you inspect the raw fit too (see: ?frair_boot)\n')
 }
 
 plot.frboot <- function(x, xlab=x$xvar, ylab=x$yvar, ...){

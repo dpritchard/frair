@@ -54,7 +54,7 @@ real77_fit <- function(data, samp, start, fixed, boot=FALSE, windows=FALSE) {
 # real77_nll: Provides negative log-likelihood for estimations via mle2()
 real77_nll <- function(b, q, h, T, X, Y) {
     if (b <= 0 || h <= 0) {return(NA)} # Estimates must be > zero
-    if (q < 0){return(NA)} # q must be positive
+    if (q < -1){return(NA)} # q+1 must be positive
     prop.exp = real77(X, b, q, h, T)/X
     # The proportion consumed must be between 0 and 1 and not NaN
     # If not then it must be bad estimate of a and h and should return NA
@@ -74,7 +74,7 @@ real77_diff <- function(X, grp, b, q, h, T, Db, Dq, Dh) {
 # The diff_nll function
 real77_nll_diff <- function(b, q, h, T, Db, Dq, Dh, X, Y, grp) {
     if (b <= 0 || h <= 0) {return(NA)} # Estimates must be > zero
-    if (q < 0){return(NA)} # q must be positive
+    if (q < -1){return(NA)} # q+1 must be positive
     prop.exp = real77_diff(X, grp, b, q, h, T, Db, Dq, Dh)/X
     # The proportion consumed must be between 0 and 1 and not NaN
     # If not then it must be bad estimate of a and h and should return NA

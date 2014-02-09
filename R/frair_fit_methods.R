@@ -10,7 +10,7 @@ print.frfit <- function(x, ...){
     cat('\n')
     cat('\nCoefficients:\n')
     print(round(x$coefficients, 3))
-    cat('\nNOTE: It is recomended you inspect the raw fit too (see: ?frair_fit)')
+    cat('\nNOTE: It is recomended you inspect the raw fit too (see: ?frair_fit)\n')
 }
 
 plot.frfit <- function(x, xlab=x$xvar, ylab=x$yvar, ...){
