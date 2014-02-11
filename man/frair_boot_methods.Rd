@@ -37,11 +37,11 @@
 
 
 \details{
-This documents modifications to standard methods used in frair objects of class \code{frboot}. However, because standard naming conventions have been used, utility functions might also work (e.g. \code{\link{coefficients}})
+This documents standard methods for frair objects of class \code{frboot}. However, because standard naming conventions have been used, some undocumented utility functions might also work (e.g. \code{\link{coefficients}})
 
 The code underlying \code{confint.frboot} is quite complex and relies heavily on the excellent work done by Brian Ripley in \code{\link[boot]{boot.ci}}. Some of the complexity of \code{boot.ci} is hidden, but, like all FRIAR objects you can access the original method by passing the output directly (e.g. \code{boot.ci(object$fit)}). 
 
-Like \code{\link[boot]{print.bootci}} the \code{print()} method for objects produced by \code{print.frboot} will report potentially unstable intervals. However these are calculated and returned by \code{confint.frboot}, not when \code{print()} is called (see Value, below). When calling \code{confint.frboot} you can request (a combination of) different intervals. The default \code{'all'} is equivalent to \code{c('norm', 'basic', 'stud', 'perc', 'bca')} which are the Normal approximation, Basic, Studentised, Percentile and BCa intervals, receptively. Each has strengths and weaknesses which the user should be aware of.  
+Like \code{\link[boot]{print.bootci}} the \code{print()} method for objects produced by \code{print.frboot} will report potentially unstable intervals. However these are calculated and returned by \code{confint.frboot}, not when \code{print()} is called (see Value, below). When calling \code{confint.frboot} you can request (a combination of) different intervals. The default \code{'all'} is equivalent to \code{c('norm', 'basic', 'stud', 'perc', 'bca')} which are the Normal approximation, Basic, Studentised, Percentile and BCa intervals, respectively. Each has strengths and weaknesses which the user should be aware of.  
 
 \code{lines} and \code{drawpoly} only add lines or polygons to an existing plot, so an active graphics device needs to be present. By default \code{all} is FALSE. The simple reason for this is because the code is a little slow (on some devices), so currently it is an 'opt-in' option.
 
@@ -81,7 +81,7 @@ Daniel Pritchard
 }
 
 \examples{
-# This examples is not run to save CRAN build server time...
+# This example is not run to save CRAN build server time...
 \dontrun{
 data(gammarus)
 

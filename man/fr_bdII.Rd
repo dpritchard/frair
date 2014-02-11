@@ -36,7 +36,7 @@ Note that generally speaking \emph{P} is determined by the experimental design a
 
 This is exactly the function in chapter 8 of Bolker (2008), which in turn presents examples from  Vonesh and Bolker (2005). Users are directed there for more information. 
 
-None of these functions are designed to be called directly, though they are all exported so that the user can call them directly is desired. The intention is that they are called via \code{\link{frair_fit}}, which calls them in the order they are specified above.
+None of these functions are designed to be called directly, though they are all exported so that the user can call them directly if desired. The intention is that they are called via \code{\link{frair_fit}}, which calls them in the order they are specified above.
 
 \code{bdII_fit} does the heavy lifting and also pulls double duty as the \code{statistic} function for bootstrapping (\emph{via} \code{boot()} in the boot package).  The \code{windows} argument if required to prevent needless calls to \code{require(frair)} on platforms that can manage sane parallel processing.
 

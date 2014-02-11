@@ -3,7 +3,7 @@
 \alias{print.frtest}
 
 \title{Test for evidence of type-II or type-III functional responses}
-\description{Implements the phenomenological test of type-II vs. type-III functional responses described by Juliano (2001)}
+\description{Implements the phenomenological test of type-II \emph{versus} type-III functional responses described by Juliano (2001)}
 
 \usage{
 frair_test(formula, data)
@@ -18,7 +18,7 @@ frair_test(formula, data)
 }
 
 \details{
-This function wraps up an otherwise trivial test for type-II \emph{vs.} type-III functional responses in a format consistent with the FRAIR syntax. It can be considered 'phenomenological' inasmuch as it tells the user if a type-II or type-III response is preferred, but not what form that curve should take nor if it is sensible to fit such a curve via non-linear regression.  
+This function wraps up an otherwise trivial test for type-II \emph{versus} type-III functional responses in a format consistent with the FRAIR syntax. It can be considered 'phenomenological' inasmuch as it tells the user if a type-II or type-III response is preferred, but not what form that curve should take nor if it is sensible to fit such a curve via non-linear regression.  
 
 The test relies on the established principle that a logistic regression on the \emph{proportion} of prey consumed is a more sensitive test of functional response shape, especially at low prey densities, when a non-linear curve may not be able to distinguish the subtle difference in curve shape. 
 

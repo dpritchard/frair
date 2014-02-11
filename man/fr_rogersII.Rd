@@ -26,7 +26,7 @@
   \item{Y }{The Y variable.  Usually the number of prey consumed.}
 }
 \details{
-This implements the Roger's 'random predator' Type-II functional response. This does not assume prey are replaced throughout the experiment (\emph{c.f.} \code{\link{hollingsII}}). The number of prey eaten (\emph{Ne}) follows the relationship:
+This implements the Roger's 'random predator' Type-II functional response. This does not assume prey are replaced throughout the experiment (\emph{c.f.} \code{\link{hollingsII}}). The number of prey eaten (\eqn{N_e}) follows the relationship:
 
 \deqn{N_e=N_0(1-e^{(a(N_eh-T))})}{Ne=N0*(1-exp(a*(Ne*h-T)))}
 
@@ -34,9 +34,9 @@ Where \emph{N0} is the initial number of prey and \emph{a}, \emph{h} and \emph{T
 
 \code{Ne <- X - lambertW(a * h * X * exp(-a * (T - h * X)))/(a * h)}
 
-where \eqn{X = N0}. For further information users are directed to Chapter 8 (and preceding chapters, if needed) of Bolker (2008) where this approach is discussed in depth. Note that Bolker (2008) uses the more general 'Beddington-DeAngelis' curve, which is implemented in FRAIR as \code{\link{bdII}}.
+where \eqn{X = N_0}. For further information users are directed to Chapter 8 (and preceding chapters, if needed) of Bolker (2008) where this approach is discussed in depth. Note that Bolker (2008) uses the more general 'Beddington-DeAngelis' curve, which is implemented in FRAIR as \code{\link{bdII}}.
 
-None of these functions are designed to be called directly, though they are all exported so that the user can call them directly is desired. The intention is that they are called via \code{\link{frair_fit}}, which calls them in the order they are specified above.
+None of these functions are designed to be called directly, though they are all exported so that the user can call them directly if desired. The intention is that they are called via \code{\link{frair_fit}}, which calls them in the order they are specified above.
 
 \code{hollingsII_fit} does the heavy lifting and also pulls double duty as the \code{statistic} function for bootstrapping (\emph{via} \code{boot()} in the boot package). The \code{windows} argument if required to prevent needless calls to \code{require(frair)} on platforms that can manage sane parallel processing.
 
@@ -54,7 +54,7 @@ Daniel Pritchard
 }
 
 \references{
-## NEED ONE
+Bolker, BM (2008) \emph{Ecological Models and Data in R}. Princeton University Press, Princeton, NJ.
 }
 
 \examples{

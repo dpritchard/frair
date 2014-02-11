@@ -23,11 +23,7 @@ The response requested must be known to frair. To establish what is supported in
 
 Generally speaking fitting non-linear curves to ecological datasets can be challenging. Approaches to fitting predator-prey functional response curves are described in further detail by Juliano (2001) and Bolker (2008). Many of the pitfalls (along with very sound advice) in non-linear curve fitting in general are described by Bolker \emph{et al.} 2013. Users are directed there for more information.  
 
-A less authoritative, but FRAIR-focused introduction can be found in the vignette, see \code{vignette('frair').}
-
-Note that current all fits encoded by FRAIR use the \code{\link[stats]{optim}} optimiser with a non-default number of iterations (5000 [frair] vs. 500 [default], see Note).
-
-\code{mle2} is clever inasmuch as it will return fitted values even if inverting the Hessian matrix at the optimum fails. However, this will result in a warning along the lines of: 
+Note that currently all fits encoded by FRAIR use the \code{\link[stats]{optim}} optimiser with a non-default number of iterations (5000 [frair] vs. 500 [default], see Note). Also note that \code{mle2} is clever inasmuch as it will return fitted values even if inverting the Hessian matrix at the optimum fails. However, this will result in a warning along the lines of: 
 
 \preformatted{Warning message:
 In mle2(fit, start = start, fixed = fixed, data = list(X = dat$X, :
@@ -37,7 +33,7 @@ In mle2(fit, start = start, fixed = fixed, data = list(X = dat$X, :
 If this happens it could mean many things, but generally speaking it is indicative of a poor fit to the data. You might consider:
 
 \itemize{
-\item Checking the data for clear outliers / errors
+\item Checking the data for transcription errors or outliers
 \item Trying different starting values
 \item Trying a different (simpler) curve
 \item Fitting the curve outside of FRAIR using another optimiser or another approach (see the Note, below)

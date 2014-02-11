@@ -20,6 +20,6 @@ Daniel Pritchard
 }
 
 \examples{
-resp_known <- names(frair_responses())
+resp_known <- names(frair_responses(show=FALSE))
 frair_responses(show=TRUE)
 }

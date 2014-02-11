@@ -22,7 +22,7 @@
 
 \emph{i.e.} a line following along the top edge (left-to-right along \code{x}) and back along the bottom edge (right-to-left along \code{x}). 
 
-The specific method implemented here for FRAIR is \code{link{drawpoly.frboot}}.
+The specific method implemented here for FRAIR is \code{\link{drawpoly.frboot}}.
 }
 
 \author{
@@ -30,7 +30,7 @@ Daniel Pritchard
 }
 
 \seealso{
-\code{\link{drawpoly.frboot}}, ~~~
+\code{\link{drawpoly.frboot}}
 }
 
 \examples{

@@ -13,7 +13,7 @@
 	}
 }
 \details{
-This dataset is a stripped-down version of that presented in Paterson \emph{et al.} 2014. It contains only Simulium data and all other treatments (other than predator identity) pooled. The predators are amphipods which are either native (\emph{Gammarus duebeni celticus}) or invasive (\emph{Gammarus pulex}) to waterways in Ireland.  
+This dataset is a stripped-down version of that presented in Paterson \emph{et al.} 2014. It contains only Simulium data with all other treatments (other than predator identity) pooled. The predators are amphipods which are either native (\emph{Gammarus duebeni celticus}) or invasive (\emph{Gammarus pulex}) to waterways in Ireland.  
 }
 \source{Paterson R.A., Dick J.T.A., Pritchard D.W., Ennis M., Hatcher M.J., Dunn A.M. In Review. Predicting invasive species impacts: community module functional response experiments reveal context dependencies. Submitted to Journal of Animal Ecology, December 2013.}
 

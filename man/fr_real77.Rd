@@ -32,11 +32,11 @@ The capture rate (\emph{a}) and number of prey eaten (\emph{Ne}) follow the foll
 
 \deqn{a = b X^q}{a = b*X^q}
 
-\deqn{N_e=\frac{a X^(q+1) T}{1+a X^(q+1) h}}{Ne=(a*X^(q+1)*T)/(1+a*X^(q+1)*h)}
+\deqn{N_e=\frac{a X^{(q+1)} T}{1+a X^{(q+1)} h}}{Ne=(a*X^{(q+1)}*T)/(1+a*X^{(q+1)}*h)}
 
 Where \emph{b} is a search coefficient and other coefficients are as defined in \code{\link{hollingsII}}. Indeed when \eqn{q = 0} then \eqn{a = b} and the relationship collapses to traditional type-II \link[=hollingsII]{Holling's Disc Equation}. The use of \eqn{q + 1} in the equation for number of prey eaten (\emph{vs.} \eqn{q - 1} in the equation for \emph{a}) exposes a useful test on \eqn{q = 0} in the summary of the fit and follows the approach used by other authors (\emph{e.g.} Vucic-Pestic \emph{et. al} 2010)
 
-None of these functions are designed to be called directly, though they are all exported so that the user can call them directly is desired. The intention is that they are called via \code{\link{frair_fit}}, which calls them in the order they are specified above.
+None of these functions are designed to be called directly, though they are all exported so that the user can call them directly if desired. The intention is that they are called via \code{\link{frair_fit}}, which calls them in the order they are specified above.
 
 \code{real77_fit} does the heavy lifting and also pulls double duty as the \code{statistic} function for bootstrapping (\emph{via} \code{boot()} in the boot package). The \code{windows} argument if required to prevent needless calls to \code{require(frair)} on platforms that can manage sane parallel processing.
 
@@ -50,15 +50,19 @@ Daniel Pritchard
 }
 
 \seealso{
-\code{\link{frair_fit}}.
+\code{\link{frair_fit}}, \code{\link{real77r}}.
 }
 
 \references{
 Flynn KJ, Fasham MJR, Hipkin CR (1997) Modelling the interactions between ammonium and nitrate uptake in marine phytoplankton. Philosophical Transactions of the Royal Society B: Biological Sciences 352: 1625--1645.
 
+Real LA (1977) The Kinetics of Functional Response. The American Naturalist, 111: 289--300.
+
 Vucic-Pestic O, Rall BC, Kalinkat G, Brose U (2010) Allometric functional response model: body masses constrain interaction strengths. Journal of Animal Ecology 79: 249--256. doi:10.1111/j.1365-2656.2009.01622.x.
 }
 
 \examples{
-# TODO
+# TODO: For v.0.5 
+# Find / generate example data that doesn't have Hessian problems!
+# See examples at help(real77r)
 }

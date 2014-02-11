@@ -23,9 +23,13 @@
 
 
 \details{
-This documents modifications to standard methods used in frair objects of classes \code{frfit}. However, because standard naming conventions have been used, utility functions might also work (e.g. \code{\link{coefficients}})
+This documents standard methods for frair objects of class \code{frfit}. However, because standard naming conventions have been used, some undocumented utility functions might also work (e.g. \code{\link{coefficients}})
 
-\code{lines} only adds lines to an existing plot, so an active graphics device needs to be present. \code{lines} draws the curve for the fitted response at values \code{seq(from=1, to=max(x$x), by=1)} or \code{seq(from=0, to=max(x$x), by=1)} if \code{tozero} is TRUE.  
+\code{lines} only adds lines to an existing plot, so an active graphics device needs to be present. \code{lines} draws the curve for the fitted response at values:
+
+\code{seq(from=1, to=max(x$x), by=1)} or 
+
+\code{seq(from=0, to=max(x$x), by=1)} if \code{tozero} is TRUE.  
 }
 
 \seealso{

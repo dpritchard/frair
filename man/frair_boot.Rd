@@ -20,7 +20,9 @@ frair_boot(frfit, start=NULL, strata=NULL, nboot=999,
 }
 
 \details{
-This function provides a simple, consistent way to generate bootstrapped estimates from a functional response fit. If \code{start} is not provided starting values for the bootstrapping are drawn from the original fit.  This interface is provided so that a single set of starting parameters (e.g. a 'global' estimate) can be used when bootstrapping different functional response fits (e.g. different treatments)
+This function provides a simple, consistent way to generate bootstrapped estimates from a functional response fit. 
+
+If \code{start} is not provided starting values for the bootstrapping are drawn from the original fit.  This interface is provided so that a single set of starting parameters (e.g. a 'global' estimate) can be used when bootstrapping different functional response fits (e.g. different treatments)
 
 Non-parametric bootstrapping and parallelisation is handled by \code{\link[boot]{boot}} from the boot package.  Currently, if you request bootstrapped fits and \code{para=TRUE} (the default) then the function with attempt to use all except 1 available core. Note that this might affect performance of other tasks while the bootstrap is underway!
 

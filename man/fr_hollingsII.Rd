@@ -30,15 +30,15 @@ This implements the Hollings original Type-II functional response, otherwise kno
 
 In Holling's original formulation the number of prey eaten (\emph{Ne}) follows the relationship:
 
-\deqn{N_e=\frac{a N0 T}{1+a N0 h})}{Ne=(a*N0*T)/(1+a*N0*h)}
+\deqn{N_e=\frac{a N_0 T}{1+a N_0 h}}{Ne=(a*N0*T)/(1+a*N0*h)}
 
-Where \emph{N0} is the initial number of prey and \emph{a}, \emph{h} and \emph{T} are the capture rate, handling time and the total time available, receptively. It is implemented internally in FRAIR as: 
+Where \eqn{N_0} is the initial number of prey and \emph{a}, \emph{h} and \emph{T} are the capture rate, handling time and the total time available, receptively. It is implemented internally in FRAIR as: 
 
 \code{Ne <- (a*X*T)/(1+a*X*h)}
 
-where X == N0. 
+where \eqn{X = N_0}. 
 
-None of these functions are designed to be called directly, though they are all exported so that the user can call them directly is desired. The intention is that they are called via \code{\link{frair_fit}}, which calls them in the order they are specified above.
+None of these functions are designed to be called directly, though they are all exported so that the user can call them directly if desired. The intention is that they are called via \code{\link{frair_fit}}, which calls them in the order they are specified above.
 
 \code{rogersII_fit} does the heavy lifting and also pulls double duty as the \code{statistic} function for bootstrapping (\emph{via} \code{boot()} in the boot package).  The \code{windows} argument if required to prevent needless calls to \code{require(frair)} on platforms that can manage sane parallel processing.
 

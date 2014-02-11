@@ -9,10 +9,10 @@ frair_responses <- function(show=TRUE){
         "hollingsII"=list("hollingsII_fit", "Holling's orginal type II function", FALSE, c('a','h')),
         "rogersII"=list("rogersII_fit", "Roger's type II decreasing prey function", TRUE, c('a','h')), 
         "bdII"=list("bdII_fit", "Beddington-DeAngelis type II function", TRUE, c('a','h')),
-        "hassIII"=list("hassIII_fit", "Hassell's original type III function", FALSE, c('b','c','h')),
-        "hassIIIr"=list("hassIIIr_fit", "Hassell's type III function, with replacement", TRUE, c('b','c','h')),
-        "real77"=list("real77_fit", "Real (1977) non-replacement curve", FALSE, c('b','q','h')),
-        "real77r"=list("real77r_fit", "Real (1977) replacement curve", TRUE, c('b','q','h'))
+        "hassIII"=list("hassIII_fit", "Hassell's original type III function (assuming replacement)", FALSE, c('b','c','h')),
+        "hassIIIr"=list("hassIIIr_fit", "Hassell's type III function (not assuming replacement)", TRUE, c('b','c','h')),
+        "real77"=list("real77_fit", "Real (1977) replacement curve", FALSE, c('b','q','h')),
+        "real77r"=list("real77r_fit", "Real (1977) non-replacement curve", TRUE, c('b','q','h'))
     )
     
     if(show){

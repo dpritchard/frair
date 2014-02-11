@@ -32,7 +32,7 @@ The capture rate (\emph{a}) and number of prey eaten (\emph{Ne}) follow the foll
 
 \deqn{a = b X^q}{a = b*X^q}
 
-\deqn{N_e=N_0^(q+1) (1-e^{(a(N_eh-T))})}{Ne=N0^(q+1)*(1-exp(a*(Ne*h-T)))}
+\deqn{N_e=N_0^{(q+1)} (1-e^{(a(N_eh-T))})}{Ne=N0^{(q+1)}*(1-exp(a*(Ne*h-T)))}
 
 Where \emph{b} is a search coefficient and other coefficients are as defined in \code{\link{rogersII}}. Because \emph{Ne} appears on both side of the equation, the solution is found using Lambert's transcendental equation. FRAIR uses the \code{\link[emdbook]{lambertW}} function from the \emph{emdbook} package and the internal function is:
 
@@ -40,7 +40,7 @@ Where \emph{b} is a search coefficient and other coefficients are as defined in 
 
 where \eqn{X = N0}. When \eqn{q = 0} then \eqn{a = b} and the relationship collapses to traditional type-II Roger's random predator equation. The use of \eqn{q + 1} in the equation for number of prey eaten (\emph{vs.} \eqn{q - 1} in the equation for \emph{a}) exposes a useful test on \eqn{q = 0} in the summary of the fit. 
 
-None of these functions are designed to be called directly, though they are all exported so that the user can call them directly is desired. The intention is that they are called via \code{\link{frair_fit}}, which calls them in the order they are specified above.
+None of these functions are designed to be called directly, though they are all exported so that the user can call them directly if desired. The intention is that they are called via \code{\link{frair_fit}}, which calls them in the order they are specified above.
 
 \code{real77r_fit} does the heavy lifting and also pulls double duty as the \code{statistic} function for bootstrapping (\emph{via} \code{boot()} in the boot package). The \code{windows} argument if required to prevent needless calls to \code{require(frair)} on platforms that can manage sane parallel processing.
 
@@ -54,9 +54,30 @@ Daniel Pritchard
 }
 
 \seealso{
-\code{\link{frair_fit}}.
+\code{\link{frair_fit}}, \code{\link{real77}}.
+}
+
+\references{
+Real LA (1977) The Kinetics of Functional Response. The American Naturalist, 111: 289--300.
 }
 
 \examples{
-# TODO
+data(gammarus)
+
+pulex <- gammarus[gammarus$spp=='G.pulex',]
+
+rogfit <- frair_fit(eaten~density, data=pulex, 
+                response='rogersII', start=list(a = 1.2, h = 0.015), 
+                fixed=list(T=1))
+expofit <- frair_fit(eaten~density, data=pulex, 
+                response='real77r', start=list(b = 1.2, q = 0, h = 0.015), 
+                fixed=list(T=1))
+# Plot
+plot(rogfit)
+lines(rogfit)
+lines(expofit, col=2)
+
+summary(rogfit$fit)
+summary(expofit$fit)
+# No evidence that q is different from zero...
 }
