@@ -14,7 +14,7 @@
 \method{print}{frboot}(x, \dots)
 \method{confint}{frboot}(object, parm='all', level=0.95, \ldots, citypes='all')
 \method{plot}{frboot}(x, xlab=x$xvar, ylab=x$yvar, \ldots)
-\method{lines}{frboot}(x, all_lines=FALSE, bootcol=1, bootalpha=1/sqrt(x$n_boot), \ldots)
+\method{lines}{frboot}(x, all_lines=FALSE, tozero=FALSE, bootcol=1, bootalpha=1/sqrt(x$n_boot), \ldots)
 \method{drawpoly}{frboot}(x, \ldots, probs=c(0.025, 0.975))
 
 \method{print}{frconf}(x, \dots)
@@ -26,10 +26,11 @@
   \item{level }{A numeric. The confidence limit for CIs.}
   \item{citypes }{A character vector. What kind of CI? See Details.}
   \item{all_lines }{A logical. Should the bootstrapped results be plotted?. See Details.}
+  \item{tozero }{A logical. Should the line be drawn to the origin?. See Details.}
   \item{xlab }{Label for the x-axis.}
   \item{ylab }{Label for the y-axis.}
   \item{bootcol }{A valid colour for the bootstrapped lines.}
-  \item{bootalpha }{A transparency for the (inevitably overlapping) lines.}
+  \item{bootalpha }{A numeric (0-1). A transparency for the (inevitably overlapping) lines.}
   \item{probs }{Lower and upper tails for confidence interval polygons. See \code{\link{quantile}}.}
   \item{\ldots }{Other items passed to underlying functions.}
 }
@@ -42,17 +43,17 @@ The code underlying \code{confint.frboot} is quite complex and relies heavily on
 
 Like \code{\link[boot]{print.bootci}} the \code{print()} method for objects produced by \code{print.frboot} will report potentially unstable intervals. However these are calculated and returned by \code{confint.frboot}, not when \code{print()} is called (see Value, below). When calling \code{confint.frboot} you can request (a combination of) different intervals. The default \code{'all'} is equivalent to \code{c('norm', 'basic', 'stud', 'perc', 'bca')} which are the Normal approximation, Basic, Studentised, Percentile and BCa intervals, receptively. Each has strengths and weaknesses which the user should be aware of.  
 
-\code{lines} and \code{drawpoly} only add lines or polygons to an existing plot, so an active graphics device needs to be present. By default \code{all} is FALSE.  The simple reason for this is because the code is a little slow (on a mac at least), so currently it is an 'opt-in' option.
+\code{lines} and \code{drawpoly} only add lines or polygons to an existing plot, so an active graphics device needs to be present. By default \code{all} is FALSE. The simple reason for this is because the code is a little slow (on some devices), so currently it is an 'opt-in' option.
 
 \code{drawpoly} draws empirical confidence intervals. The intervals are constructed by evaluating every set of bootstrapped coefficients at:
 
-\code{seq(from=0, to=max(x$x), by=1)} 
+\code{seq(from=1, to=max(x$x), by=1)} or \code{seq(from=0, to=max(x$x), by=1)} if \code{tozero} is TRUE.  
 
 and then calculating the empirical confidence limits at each value of \emph{x} by:
 
 \code{apply(val, 2, quantile, na.rm=T, probs=probs)}
 
-Not that this is a rough approximation of a confidence interval and does not account for some of the intricacies (\emph{e.g.} bootstrap bias) described in \link[boot]{boot.ci}.
+Not that this is a rough approximation of a bootstrapped confidence interval and does not account for some of the intricacies (\emph{e.g.} bootstrap bias) described in \link[boot]{boot.ci}.
 }
 
 \value{
@@ -101,6 +102,3 @@ plot(outholb, xlim=c(0,30), type='n', main='Empirical 95 percent CI')
 drawpoly(outholb, col=rgb(0,0.5,0))
 points(outholb, pch=20, col=rgb(0,0,0,0.2))
 }
-
-
-
