@@ -17,17 +17,38 @@ frair_fit(formula, data, response, start=list(), fixed=NULL)
 }
 
 \details{
-frair_fit is a utility function which helps users fit common non-linear predator-prey curves to data. It uses maximum likelihood estimation, via \code{\link[bbmle]{mle2}} from the \code{bbmle} package. Except for \code{\link{typeI}}, friar_fit uses the 'Nelder-Mead' method of \code{\link[stats]{optim}} with a non-default number of iterations (5000 [frair] vs. 500 [default], see Note).
+frair_fit is a utility function which helps users fit common non-linear predator-prey curves to integer data. It uses maximum likelihood estimation, via \code{\link[bbmle]{mle2}} from the \code{bbmle} package.  
 
 The response requested must be known to frair. To establish what is supported inspect the output from \code{frair_responses()}. All parameters listed by \code{frair_responses()} (except \code{X}) must be provided in either \code{start} or \code{fixed} and some guidance is given on the help pages for each function about what should (and should not) be optimised.
 
 Generally speaking fitting non-linear curves to ecological datasets can be challenging. Approaches to fitting predator-prey functional response curves are described in further detail by Juliano (2001) and Bolker (2008). Many of the pitfalls (along with very sound advice) in non-linear curve fitting in general are described by Bolker \emph{et al.} 2013. Users are directed there for more information.  
 
 A less authoritative, but FRAIR-focused introduction can be found in the vignette, see \code{vignette('frair').}
+
+Note that current all fits encoded by FRAIR use the \code{\link[stats]{optim}} optimiser with a non-default number of iterations (5000 [frair] vs. 500 [default], see Note).
+
+\code{mle2} is clever inasmuch as it will return fitted values even if inverting the Hessian matrix at the optimum fails. However, this will result in a warning along the lines of: 
+
+\preformatted{Warning message:
+In mle2(fit, start = start, fixed = fixed, data = list(X = dat$X, :
+  couldn't invert Hessian
+}
+
+If this happens it could mean many things, but generally speaking it is indicative of a poor fit to the data. You might consider:
+
+\itemize{
+\item Checking the data for clear outliers / errors
+\item Trying different starting values
+\item Trying a different (simpler) curve
+\item Fitting the curve outside of FRAIR using another optimiser or another approach (see the Note, below)
+\item Collecting more data
+}
+
+If convergence (\emph{i.e.} fitting) fails for other reasons, see the manual page of \code{\link[stats]{optim}}. 
 }
 
 \note{
-FRAIR is still under development.  Future versions will allow the user more control over the underlying fitting algorithms. In the meantime FRAIR exports all of it's (useful) functions so that users can fit the curves directly using their preferred method if the defaults are undesirable.  
+FRAIR is still under development.  Future versions will allow the user more control over the underlying fitting algorithms. In the meantime FRAIR exports all of it's (useful) functions so that users can fit the curves directly using their preferred method if the defaults are undesirable. See the Examples for an illustration of this approach.  
 }
 
 \value{
@@ -85,5 +106,13 @@ summary(outII$fit)
 summary(outI$fit)
 # Compare models using AIC
 AIC(outI$fit,outII$fit)
+
+## Fitting curves outside of FRAIR (to diagnose problems)
+# Using mle2 or mle manually:
+manual_fit <- mle2(rogersII_nll, start=list(a = 1.2, h = 0.015), 
+        fixed=list(T=1), method='SANN', 
+        data=list('X'=gammarus$density, 'Y'=gammarus$eaten))
+# Note that the SANN method is *not* a general-purpose algorithum, 
+#   but it will return *something*
 
 }

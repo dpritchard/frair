@@ -33,7 +33,7 @@ rogersII_fit <- function(data, samp, start, fixed, boot=FALSE, windows=FALSE) {
 	out <- fr_setupout(start, fixed, samp)
 
     try_rogersII <- try(mle2(rogersII_nll, start=start, fixed=fixed, data=list('X'=dat$X, 'Y'=dat$Y), 
-                             optimizer='optim', method="Nelder-Mead", control=list(maxit=5000)), 
+                             optimizer='optim', control=list(maxit=5000)), 
                         silent=T) # Remove 'silent=T' for more verbose output
 	if (inherits(try_rogersII, "try-error")) {
  		# The fit failed...
