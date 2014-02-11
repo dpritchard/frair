@@ -54,8 +54,19 @@ frair_compare <- function(frfit1, frfit2, start=NULL){
     Yin <- c(frfit1$y,frfit2$y)
     grp <- c(rep(0,times=length(frfit1$x)), rep(1,times=length(frfit2$x)))
     
-    # <- try(mle2(rogersII_nll_diff, start=start, fixed=fixed, data=list('X'=Xin, 'Y'=Yin, grp=grp)), silent=T)
-    try_test <- try(mle2(minuslogl=fr_nll_difffunc, start=start, fixed=fixed, data=list('X'=Xin, 'Y'=Yin, grp=grp)), silent=TRUE)
+    # TODO: v0.5 - This is probably bad practice - deal with the method issue properly!
+    if(length(unlist(start))>1){
+        try_test <- try(mle2(minuslogl=fr_nll_difffunc, start=start, fixed=fixed, 
+                             data=list('X'=Xin, 'Y'=Yin, grp=grp), optimizer='optim', 
+                             method='Nelder-Mead', control=list(maxit=5000)), 
+                        silent=TRUE)
+    } else {
+        try_test <- try(mle2(minuslogl=fr_nll_difffunc, start=start, fixed=fixed, 
+                             data=list('X'=Xin, 'Y'=Yin, grp=grp), optimizer='optim', 
+                             control=list(maxit=5000)), 
+                        silent=TRUE)
+    }
+    
     if(inherits(try_test, 'try-error')){
         stop(paste0('Refitting the model for the test failed with the error: \n', try_test[1], '\nNo fallback exists, please contact the package author.'))
     }

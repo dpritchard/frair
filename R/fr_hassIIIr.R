@@ -21,7 +21,7 @@ hassIIIr_fit <- function(data, samp, start, fixed, boot=FALSE, windows=FALSE) {
 	out <- fr_setupout(start, fixed, samp)
 
 	try_hassIIIr <- try(mle2(hassIIIr_nll, start=start, fixed=fixed, data=list('X'=dat$X, 'Y'=dat$Y), 
-	                        optimizer='optim', control=list(maxit=5000)), 
+	                         optimizer='optim', method='Nelder-Mead', control=list(maxit=5000)), 
 	                   silent=T)
 	if (inherits(try_hassIIIr, "try-error")) {
  		# The fit failed...

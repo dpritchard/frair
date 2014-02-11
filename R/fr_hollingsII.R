@@ -18,7 +18,7 @@ hollingsII_fit <- function(data, samp, start, fixed, boot=FALSE, windows=FALSE) 
 	out <- fr_setupout(start, fixed, samp)
 
     try_hollingsII <- try(mle2(hollingsII_nll, start=start, fixed=fixed, data=list('X'=dat$X, 'Y'=dat$Y), 
-                               optimizer='optim', control=list(maxit=5000)), 
+                               optimizer='optim', method='Nelder-Mead', control=list(maxit=5000)), 
                           silent=T)
 	if (inherits(try_hollingsII, "try-error")) {
  		# The fit failed...

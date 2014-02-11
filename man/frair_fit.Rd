@@ -23,7 +23,9 @@ The response requested must be known to frair. To establish what is supported in
 
 Generally speaking fitting non-linear curves to ecological datasets can be challenging. Approaches to fitting predator-prey functional response curves are described in further detail by Juliano (2001) and Bolker (2008). Many of the pitfalls (along with very sound advice) in non-linear curve fitting in general are described by Bolker \emph{et al.} 2013. Users are directed there for more information.  
 
-Note that currently all fits encoded by FRAIR use the \code{\link[stats]{optim}} optimiser with a non-default number of iterations (5000 [frair] vs. 500 [default], see Note). Also note that \code{mle2} is clever inasmuch as it will return fitted values even if inverting the Hessian matrix at the optimum fails. However, this will result in a warning along the lines of: 
+Note that currently all fits encoded by FRAIR use the \code{\link[stats]{optim}} optimiser with a non-default number of iterations (5000 [frair] vs. 500 [default]) and that all fits except \code{typeI} use the 'Nelder-Mead' method (see Note). This is different from the mle2 default, which currently (bbmle v. 1.0.15) uses the 'BFGS' method. 
+
+\code{mle2} is clever inasmuch as it will return fitted values even if inverting the Hessian matrix at the optimum fails. However, this will result in a warning along the lines of: 
 
 \preformatted{Warning message:
 In mle2(fit, start = start, fixed = fixed, data = list(X = dat$X, :
@@ -39,6 +41,8 @@ If this happens it could mean many things, but generally speaking it is indicati
 \item Fitting the curve outside of FRAIR using another optimiser or another approach (see the Note, below)
 \item Collecting more data
 }
+
+Note that the advice given in \link[bbmle]{mle2} to use the 'Nelder-Mead' method, is largely redundant because this is already the default in FRAIR (though you could try the 'BFGS' method quite safely...)
 
 If convergence (\emph{i.e.} fitting) fails for other reasons, see the manual page of \code{\link[stats]{optim}}. 
 }
