@@ -28,7 +28,7 @@
 \details{
 This implements the original Hassel's Type-III functional response, assuming prey density is kept constant (\emph{i.e.} a 'replacement' experimental design). In practice, constant prey density might be an unrealistic assumption, in which case users should consider the \code{\link{hassIIIr}} function instead. 
 
-In Hassel \emph{et al.}'s original formulation, the attack rate \emph{a} is assumed to vary with the prey density in the following hyperbolic relationship:
+In Hassel \emph{et al.}'s original formulation, the capture rate \emph{a} is assumed to vary with the prey density in the following hyperbolic relationship:
 
 \code{a <- (b*X)/(1+c*X)}
 

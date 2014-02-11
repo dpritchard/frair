@@ -20,7 +20,7 @@
   \item{fixed }{A names list. 'Fixed data' (not optimised). Usually 'P' and 'T'.}
   \item{boot }{A logical. Is the function being called for use by the boot function?}
   \item{windows }{A logical. Is the operating system Microsoft Windows?}
-  \item{a, h }{Attack rate and handling time. Usually items to be optimised.}
+  \item{a, h }{Capture rate and handling time. Usually items to be optimised.}
   \item{P, T }{P: Number of predators. T: Total time available}
   \item{X }{The X variable. Usually prey density.}
   \item{Y }{The Y variable.  Usually the number of prey consumed.}

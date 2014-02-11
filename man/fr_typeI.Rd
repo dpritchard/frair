@@ -20,7 +20,7 @@
   \item{fixed }{A names list. 'Fixed data' (not optimised). Usually 'T'.}
   \item{boot }{A logical. Is the function being called for use by the boot function?}
   \item{windows }{A logical. Is the operating system Microsoft Windows?}
-  \item{a }{The attack rate}
+  \item{a }{The capture rate}
   \item{T }{T: Total time available}
   \item{X }{The X variable. Usually prey density.}
   \item{Y }{The Y variable.  Usually the number of prey consumed.}
@@ -30,7 +30,7 @@ This implements a simple Type-I, or linear functional response. This is helpful 
 
 \deqn{N_e = a N_0 T}{Ne = a*N0*T}
 
-where \emph{a} is the attack rate, \emph{T} is the total time available and \emph{N0} (== X) is the initial prey density. 
+where \emph{a} is the capture rate, \emph{T} is the total time available and \emph{N0} (== X) is the initial prey density. 
 
 None of these functions are designed to be called directly, though they are all exported so that the user can call them directly is desired. The intention is that they are called via \code{\link{frair_fit}}, which calls them in the order they are specified above.
 

@@ -20,7 +20,7 @@
   \item{fixed }{A names list. 'Fixed data' (not optimised). Usually 'T'.}
   \item{boot }{A logical. Is the function being called for use by the boot function?}
   \item{windows }{A logical. Is the operating system Microsoft Windows?}
-  \item{a, h }{Attack rate and handling time. Usually items to be optimised.}
+  \item{a, h }{Capture rate and handling time. Usually items to be optimised.}
   \item{T }{T: Total time available}
   \item{X }{The X variable. Usually prey density.}
   \item{Y }{The Y variable.  Usually the number of prey consumed.}
@@ -32,7 +32,7 @@ In Holling's original formulation the number of prey eaten (\emph{Ne}) follows t
 
 \deqn{N_e=\frac{a N0 T}{1+a N0 h})}{Ne=(a*N0*T)/(1+a*N0*h)}
 
-Where \emph{N0} is the initial number of prey and \emph{a}, \emph{h} and \emph{T} are the attack rate, handling time and the total time available, receptively. It is implemented internally in FRAIR as: 
+Where \emph{N0} is the initial number of prey and \emph{a}, \emph{h} and \emph{T} are the capture rate, handling time and the total time available, receptively. It is implemented internally in FRAIR as: 
 
 \code{Ne <- (a*X*T)/(1+a*X*h)}
 

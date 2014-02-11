@@ -20,7 +20,7 @@
   \item{fixed }{A names list. 'Fixed data' (not optimised). Usually 'T'.}
   \item{boot }{A logical. Is the function being called for use by the boot function?}
   \item{windows }{A logical. Is the operating system Microsoft Windows?}
-  \item{a, h }{Attack rate and handling time. Usually items to be optimised.}
+  \item{a, h }{Capture rate and handling time. Usually items to be optimised.}
   \item{T }{T: Total time available}
   \item{X }{The X variable. Usually prey density.}
   \item{Y }{The Y variable.  Usually the number of prey consumed.}
@@ -30,7 +30,7 @@ This implements the Roger's 'random predator' Type-II functional response. This 
 
 \deqn{N_e=N_0(1-e^{(a(N_eh-T))})}{Ne=N0*(1-exp(a*(Ne*h-T)))}
 
-Where \emph{N0} is the initial number of prey and \emph{a}, \emph{h} and \emph{T} are the attack rate, handling time and the total time available, repectivly. The fact that \emph{Ne} appears on both side of the equation, poses some problems, but can be efficiently dealt with using Lambert's transcendental equation (Bolker, 2008). FRAIR uses the \code{\link[emdbook]{lambertW}} function from the \emph{emdbook} package and uses this function internally as:
+Where \emph{N0} is the initial number of prey and \emph{a}, \emph{h} and \emph{T} are the capture rate, handling time and the total time available, repectivly. The fact that \emph{Ne} appears on both side of the equation, poses some problems, but can be efficiently dealt with using Lambert's transcendental equation (Bolker, 2008). FRAIR uses the \code{\link[emdbook]{lambertW}} function from the \emph{emdbook} package and uses this function internally as:
 
 \code{Ne <- X - lambertW(a * h * X * exp(-a * (T - h * X)))/(a * h)}
 
