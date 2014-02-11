@@ -6,41 +6,35 @@
 # Y = Number of prey eaten / consumed / killed / absorbed
 
 ## Rogers Type II decreasing prey function ##
-# Same as ?lambertW, with the addition of 'P'
+# Same as ?lambertW
 # Everything except 'X' should be provided.
-rogersII <- function(X, a, h, P, T) {
+rogersII <- function(X, a, h, T) {
     if(is.list(a)){
         coefs <- a
         a <- coefs[['a']]
         h <- coefs[['h']]
-        P <- coefs[['P']]
         T <- coefs[['T']]
     }
-	X - lambertW(a * h * X * exp(-a * (P * T - h * X)))/(a * h)
+    return(X - lambertW(a * h * X * exp(-a * (T - h * X)))/(a * h))
+
 }
 # rogersII_fit: Does the heavy lifting
 # data = The data from which to subsample. X and Y are drawn from here.
 # samp = Provided by boot() or manually, as required
 # start = List of starting values for items to be optimised.  Usually 'a' and 'h'.
-# fixed = List of 'Fixed data' (not optimised).   Usually 'T' and 'P'
+# fixed = List of 'Fixed data' (not optimised). Sometimes 'T', but I'm not too sure.
 # Note required packages are reloaded here so Windows can do parallel computing!
 # Not also that the statistic now (2013-04-13) now returns the variance 
 rogersII_fit <- function(data, samp, start, fixed, boot=FALSE, windows=FALSE) {
-	if(windows && boot){
-		emdbook_load <- require(emdbook, warn.conflicts=FALSE, quietly=TRUE)
-		bbmle_load <- require(bbmle, warn.conflicts=FALSE, quietly=TRUE)
-		if(any(c(emdbook_load, bbmle_load)==FALSE)){
-			stop('Error establishing workspace for parallel computing in Windows.')
-		}
-	}
+	# Setup windows parallel processing
+	fr_setpara(boot, windows)
 	samp <- sort(samp)
 	dat <- data[samp,]
 	out <- fr_setupout(start, fixed, samp)
 
-    try_rogersII <- try(mle2(rogersII_nll, start=start, data=c(fixed, list('X'=dat$X, 'Y'=dat$Y))), silent=T) 
-	## Remove 'silent=T' for more verbose output
-	# Hard coded upper limits: TODO: Fix this, allow variable data
-	# if (inherits(try_rogersII, "try-error") || as.numeric(coef(try_rogersII)['a']) > 10 || as.numeric(coef(try_rogersII)['h']) > 1){
+    try_rogersII <- try(mle2(rogersII_nll, start=start, fixed=fixed, data=list('X'=dat$X, 'Y'=dat$Y), 
+                             optimizer='optim', method="Nelder-Mead", control=list(maxit=5000)), 
+                        silent=T) # Remove 'silent=T' for more verbose output
 	if (inherits(try_rogersII, "try-error")) {
  		# The fit failed...
  		if(boot){
@@ -71,11 +65,33 @@ rogersII_fit <- function(data, samp, start, fixed, boot=FALSE, windows=FALSE) {
 }	
 # rogersII_nll
 # Provides negative log-likelihood for estimations via mle2()
-# See Bowkers book for more info
-rogersII_nll <- function(a, h, T, P, X, Y) {
-	if (a < 0 || h < 0) {
-		return(NA)
-		}
-		prop.exp = rogersII(X, a, h, P, T)/X
-		return(-sum(dbinom(Y, prob = prop.exp, size = X, log = TRUE)))
-	}
+# See Ben Bowkers book for more info
+rogersII_nll <- function(a, h, T, X, Y) {
+    if (a <= 0 || h <= 0){return(NA)}
+    prop.exp = rogersII(X, a, h, T)/X
+    if(any(is.complex(prop.exp))){return(NA)} # Complex numbers don't help!
+    # The proportion consumed must be between 0 and 1 and not NaN or NA
+    # If not then it must be bad estimate of a and h and should return NA
+    if(any(is.nan(prop.exp)) || any(is.na(prop.exp))){return(NA)} 
+    if(any(prop.exp > 1) || any(prop.exp < 0)){return(NA)}
+    return(-sum(dbinom(Y, prob = prop.exp, size = X, log = TRUE)))
+}
+
+# Rogers II difference function
+# Models the difference between two groups (j) exposing a simple t-test on Da and Dh
+# For further info see Juliano 2001, pg 193, eg. eq. 10.11
+rogersII_diff <- function(X, grp, a, h, T, Da, Dh) {
+  # return(X - lambertW(a * h * X * exp(-a * (T - h * X)))/(a * h))
+    return(X - lambertW((a-Da*grp) * (h-Dh*grp) * X * exp(-(a-Da*grp) * (T - (h-Dh*grp) * X)))/((a-Da*grp) * (h-Dh*grp))) 
+}
+# The NLL for the difference model... used by frair_compare()
+rogersII_nll_diff <- function(a, h, T, Da, Dh, X, Y, grp) {
+    if (a <= 0 || h <= 0){return(NA)}
+    prop.exp = rogersII_diff(X, grp, a, h, T, Da, Dh)/X
+    if(any(is.complex(prop.exp))){return(NA)} # Complex numbers don't help!
+    # The proportion consumed must be between 0 and 1 and not NaN or NA
+    # If not then it must be bad estimate of a and h and should return NA
+    if(any(is.nan(prop.exp)) || any(is.na(prop.exp))){return(NA)} 
+    if(any(prop.exp > 1) || any(prop.exp < 0)){return(NA)}
+    return(-sum(dbinom(Y, prob = prop.exp, size = X, log = TRUE)))
+}
