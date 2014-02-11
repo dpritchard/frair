@@ -3,6 +3,8 @@
 .RData
 .Rbuildignore
 
+*.Rproj
+
 # OS generated files #
 ##################
 .DS_Store
