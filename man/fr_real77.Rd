@@ -26,7 +26,7 @@
   \item{Y }{The Y variable.  Usually the number of prey consumed.}
 }
 \details{
-This implements a type-II response with a scaling exponent on \emph{X}, based on the use of Hill's exponents described by Real (1977). When \eqn{q \ge 0} the response becomes progressively more 'type-III-ish'. Integer values of \emph{q} have useful interpretations based in enzymatic biochemistry but extending to may other fields (\emph{e.g.} Flynn \emph{et. al} 1997, Vucic-Pestic \emph{et. al} 2010). This function does not assume prey are replaced throughout the experiment (\emph{c.f.} \code{\link{real77r}}). 
+This implements a type-II response with a scaling exponent on \emph{X}, based on the use of Hill's exponents described by Real (1977). When \eqn{q \ge 0} the response becomes progressively more 'type-III-ish'. Integer values of \emph{q} have useful interpretations based in enzymatic biochemistry but extending to may other fields (\emph{e.g.} Flynn \emph{et. al} 1997, Vucic-Pestic \emph{et. al} 2010). Importantly, this function assumes that prey are replaced throughout the experiment (\emph{c.f.} \code{\link{real77r}}). 
 
 The attack rate (\emph{a}) and number of prey eaten (\emph{Ne}) follow the following relationships:
 

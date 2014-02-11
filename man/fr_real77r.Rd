@@ -26,7 +26,7 @@
   \item{Y }{The Y variable.  Usually the number of prey consumed.}
 }
 \details{
-This combines a type-II non-replacement type-II functional response (\emph{i.e.} a \link[=rogersII]{Roger's random predator equation}) with a scaling exponent on \emph{X}. This function is generalised from that described in \code{\link{real77}} relaxing the assumption that prey are replaced throughout the experiment. 
+This combines a type-II non-replacement functional response (\emph{i.e.} a \link[=rogersII]{Roger's random predator equation}) with a scaling exponent on \emph{X}. This function is generalised from that described in \code{\link{real77}} relaxing the assumption that prey are replaced throughout the experiment. 
 
 The attack rate (\emph{a}) and number of prey eaten (\emph{Ne}) follow the following relationships:
 
