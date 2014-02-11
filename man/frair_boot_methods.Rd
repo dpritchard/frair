@@ -81,13 +81,14 @@ Daniel Pritchard
 }
 
 \examples{
+# This examples is not run to save CRAN build server time...
+\dontrun{
 data(gammarus)
 
 # Holling's is the wrong fit for these data based on the experimental design
+# But it bootstrapps more quickly, so is a useful demonstration
 outhol <- frair_fit(eaten~density, data=gammarus, response='hollingsII', 
         start=list(a = 1, h = 0.08), fixed=list(T=1))
-        
-# But it bootstrapps more quickly, so is a useful demonstration
 outholb <- frair_boot(outhol)
 
 confint(outholb)
@@ -101,4 +102,5 @@ points(outholb, pch=20, col=rgb(0,0,0,0.2))
 plot(outholb, xlim=c(0,30), type='n', main='Empirical 95 percent CI')
 drawpoly(outholb, col=rgb(0,0.5,0))
 points(outholb, pch=20, col=rgb(0,0,0,0.2))
+}
 }

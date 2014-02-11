@@ -107,6 +107,7 @@ summary(outI$fit)
 # Compare models using AIC
 AIC(outI$fit,outII$fit)
 
+\dontrun{
 ## Fitting curves outside of FRAIR (to diagnose problems)
 # Using mle2 or mle manually:
 manual_fit <- mle2(rogersII_nll, start=list(a = 1.2, h = 0.015), 
@@ -114,5 +115,5 @@ manual_fit <- mle2(rogersII_nll, start=list(a = 1.2, h = 0.015),
         data=list('X'=gammarus$density, 'Y'=gammarus$eaten))
 # Note that the SANN method is *not* a general-purpose algorithm, 
 #   but it will return *something*
-
+}
 }
