@@ -59,7 +59,4 @@ Daniel Pritchard
 \examples{
 data(gammarus)
 frair_test(eaten~density, data=gammarus)
-
-data(bythotrephes)
-frair_test(eaten~density, data=bythotrephes)
 }
