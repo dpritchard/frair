@@ -3,7 +3,7 @@
 \alias{drawpoly.default}
 
 \title{Draw polygons}
-\description{Draws polygons around to denote}
+\description{Draw a closed polygon delineated by an 'upper' and 'lower' y limit.}
 \usage{
     drawpoly(x, upper, lower, ...)
 }
