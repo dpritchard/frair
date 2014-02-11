@@ -17,6 +17,7 @@
   \item{x }{Output from a call to \code{frair_fit}.}
   \item{xlab }{Label for the x-axis.}
   \item{ylab }{Label for the y-axis.}
+  \item{tozero }{A logical. Should the line be drawn to the origin?. See Details.}
   \item{\ldots }{Other items passed to underlying functions.}
 }
 

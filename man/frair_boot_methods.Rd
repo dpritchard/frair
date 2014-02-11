@@ -15,7 +15,7 @@
 \method{confint}{frboot}(object, parm='all', level=0.95, \ldots, citypes='all')
 \method{plot}{frboot}(x, xlab=x$xvar, ylab=x$yvar, \ldots)
 \method{lines}{frboot}(x, all_lines=FALSE, tozero=FALSE, bootcol=1, bootalpha=1/sqrt(x$n_boot), \ldots)
-\method{drawpoly}{frboot}(x, \ldots, probs=c(0.025, 0.975))
+\method{drawpoly}{frboot}(x, \ldots, probs=c(0.025, 0.975), tozero=FALSE)
 
 \method{print}{frconf}(x, \dots)
 }
