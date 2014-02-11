@@ -3,8 +3,6 @@
 .RData
 .Rbuildignore
 
-*.Rproj
-
 # OS generated files #
 ##################
 .DS_Store
@@ -19,3 +17,5 @@ Thumbs.db
 *.history
 /dev_data/*
 *.Rproj
+
+friar.Rproj
