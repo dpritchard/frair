@@ -26,7 +26,7 @@
   \item{Y }{The Y variable.  Usually the number of prey consumed.}
 }
 \details{
-This implements the Hollings's original Type-II functional response, otherwise known as the 'disc equation'. An important assumption of this equation is that prey density remains constant (\emph{i.e.} a 'replacement' experimental design). In practice this is often not the case and often the Roger's 'random predator' equation might be more appropriate (see \code{\link{rogersII}}).
+This implements the Hollings original Type-II functional response, otherwise known as the 'disc equation'. An important assumption of this equation is that prey density remains constant (\emph{i.e.} a 'replacement' experimental design). In practice this is often not the case and often the Roger's 'random predator' equation might be more appropriate (see \code{\link{rogersII}}).
 
 In Holling's original formulation the number of prey eaten (\emph{Ne}) follows the relationship:
 

@@ -101,7 +101,7 @@ plot(outII, pch=20, col=rgb(0,0,0,0.2), xlim=c(0,30))
 lines(outII)
 lines(outI, lty=3)
 
-# Have a look at orginal fits returned by mle2 (*highly* recommended)
+# Have a look at original fits returned by mle2 (*highly* recommended)
 summary(outII$fit)
 summary(outI$fit)
 # Compare models using AIC
@@ -112,7 +112,7 @@ AIC(outI$fit,outII$fit)
 manual_fit <- mle2(rogersII_nll, start=list(a = 1.2, h = 0.015), 
         fixed=list(T=1), method='SANN', 
         data=list('X'=gammarus$density, 'Y'=gammarus$eaten))
-# Note that the SANN method is *not* a general-purpose algorithum, 
+# Note that the SANN method is *not* a general-purpose algorithm, 
 #   but it will return *something*
 
 }

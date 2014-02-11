@@ -26,7 +26,7 @@
 \arguments{
   \item{frfit1 }{An object of class \code{frfit}}
   \item{frfit2 }{An object of class \code{frfit}}
-  \item{start }{A named numeric list with starting values for the combined fit. See detials.  }
+  \item{start }{A named numeric list with starting values for the combined fit. See Details.  }
 }
 \details{
 This function provides a sensible test of the optimised coefficients between two functional responses fitted by \code{\link{frair_fit}}. This is achieved by explicitly modelling a 'difference' (delta) parameter for each optimised variable following the advice outlined in Julliano (2001). Briefly, consider the following Hollings type-II model:

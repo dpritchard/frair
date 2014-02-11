@@ -5,7 +5,7 @@
 \alias{typeI_nll}
 
 \title{Type I Response}
-\description{A genertic type I (linear) response.}
+\description{A generic type I (linear) response.}
 
 \usage{
     typeI_fit(data, samp, start, fixed, boot=FALSE, windows=FALSE)

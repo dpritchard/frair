@@ -28,7 +28,7 @@
 \details{
 This implements the Beddington-DeAngelis Type-II functional response which is an extension of the Roger's random predator equation to allow for multiple predators. With the exception of \emph{P} these functions are identical to those used in \code{\link{rogersII}}. 
 
-The \code{bdII} function solves the random predator equation using thre LambertW equation (using the \code{\link[emdbook]{lambertW}} function from the emdbook package), giving:
+The \code{bdII} function solves the random predator equation using the LambertW equation (using the \code{\link[emdbook]{lambertW}} function from the emdbook package), giving:
 
 \code{X - lambertW(a * h * X * exp(-a * (P * T - h * X)))/(a * h)}
 
