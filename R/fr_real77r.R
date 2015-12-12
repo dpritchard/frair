@@ -9,7 +9,7 @@ real77r <- function(X, b, q, h, T) {
         T <- coefs[['T']]
     }
     a <- (b*X^q)
-    return(X^(q+1)-lambertW(a*h*X^(q+1)*exp(-a*(T-h*X^(q+1))))/(a*h))
+    return(X^(q+1)-lamW::lambertW0(a*h*X^(q+1)*exp(-a*(T-h*X^(q+1))))/(a*h))
 }
 
 # real77r_fit: Does the heavy lifting
@@ -68,8 +68,8 @@ real77r_nll <- function(b, q, h, T, X, Y) {
 real77r_diff <- function(X, grp, b, q, h, T, Db, Dq, Dh) {
   # a <- ( b        *X^ q        )
     a <- ((b-Db*grp)*X^(q-Dq*grp))
-  # return(X^( q        +1)-lambertW(a* h        *X^( q        +1)*exp(-a*(T- h        *X^( q        +1))))/(a* h        ))
-    return(X^((q-Dq*grp)+1)-lambertW(a*(h-Dh*grp)*X^((q-Dq*grp)+1)*exp(-a*(T-(h-Dh*grp)*X^((q-Dq*grp)+1))))/(a*(h-Dh*grp)))
+  # return(X^( q        +1)-lamW::lambertW0(a* h        *X^( q        +1)*exp(-a*(T- h        *X^( q        +1))))/(a* h        ))
+    return(X^((q-Dq*grp)+1)-lamW::lambertW0(a*(h-Dh*grp)*X^((q-Dq*grp)+1)*exp(-a*(T-(h-Dh*grp)*X^((q-Dq*grp)+1))))/(a*(h-Dh*grp)))
 }
 
 # The diff_nll function

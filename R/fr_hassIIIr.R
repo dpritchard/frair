@@ -9,7 +9,7 @@ hassIIIr <- function(X, b, c, h, T) {
         T <- coefs[['T']]
     }
     a <- (b*X)/(1+c*X) # From Hassell et al (1977)
-    return(X - lambertW(a * h * X * exp(-a * (T - h * X)))/(a * h)) # Direct from rogersII
+    return(X - lamW::lambertW0(a * h * X * exp(-a * (T - h * X)))/(a * h)) # Direct from rogersII
 
 }
 # hassIIIr_fit: Does the heavy lifting
@@ -70,8 +70,8 @@ hassIIIr_nll <- function(b, c, h, T, X, Y) {
 hassIIIr_diff <- function(X, grp, b, c, h, T, Db, Dc, Dh) {
   # a <- ( b        *X)/(1+ c        *X) # From Hassell et al (1977)
     a <- ((b-Db*grp)*X)/(1+(c-Dc*grp)*X)
-  # return(X-lambertW(a* h        *X*exp(-a*(T-h         *X)))/(a* h))
-    return(X-lambertW(a*(h-Dh*grp)*X*exp(-a*(T-(h-Dh*grp)*X)))/(a*(h-Dh*grp))) 
+  # return(X-lamW::lambertW0(a* h        *X*exp(-a*(T-h         *X)))/(a* h))
+    return(X-lamW::lambertW0(a*(h-Dh*grp)*X*exp(-a*(T-(h-Dh*grp)*X)))/(a*(h-Dh*grp))) 
 }
 
 # The NLL for the difference model... used by frair_compare()

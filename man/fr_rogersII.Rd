@@ -30,9 +30,9 @@ This implements the Roger's 'random predator' Type-II functional response. This 
 
 \deqn{N_e=N_0(1-e^{(a(N_eh-T))})}{Ne=N0*(1-exp(a*(Ne*h-T)))}
 
-Where \emph{N0} is the initial number of prey and \emph{a}, \emph{h} and \emph{T} are the capture rate, handling time and the total time available, respectively. The fact that \emph{Ne} appears on both side of the equation, poses some problems, but can be efficiently dealt with using Lambert's transcendental equation (Bolker, 2008). FRAIR uses the \code{\link[emdbook]{lambertW}} function from the \emph{emdbook} package and uses this function internally as:
+Where \emph{N0} is the initial number of prey and \emph{a}, \emph{h} and \emph{T} are the capture rate, handling time and the total time available, respectively. The fact that \emph{Ne} appears on both side of the equation, poses some problems, but can be efficiently dealt with using Lambert's transcendental equation (Bolker, 2008). FRAIR uses the \code{\link[lamW]{lambertW0}} function from the \emph{lamW} package and uses this function internally as:
 
-\code{Ne <- X - lambertW(a * h * X * exp(-a * (T - h * X)))/(a * h)}
+\code{Ne <- X - lambertW0(a * h * X * exp(-a * (T - h * X)))/(a * h)}
 
 where \eqn{X = N_0}. For further information users are directed to Chapter 8 (and preceding chapters, if needed) of Bolker (2008) where this approach is discussed in depth. Note that Bolker (2008) uses the more general 'Beddington-DeAngelis' curve, which is implemented in FRAIR as \code{\link{bdII}}.
 

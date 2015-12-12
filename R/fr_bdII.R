@@ -1,11 +1,11 @@
-## Beddington–DeAngelis Type-II curve
+## Beddington-DeAngelis Type-II curve
 # Reduces to rogers_II when P == 1
 # N0 replaced with 'X' for simplicity and consistency.
 # X = Number of 'prey' (prey density / concentration)
 # Y = Number of prey eaten / consumed / killed / absorbed
 
-## Beddington–DeAngelis Type-II function ##
-# Same as ?lambertW, with the addition of 'P'
+## Beddington-DeAngelis Type-II function ##
+# Same as ?emdbook::lambertW, with the addition of 'P'
 # Everything except 'X' should be provided.
 bdII <- function(X, a, h, P, T) {
     if(is.list(a)){
@@ -15,7 +15,7 @@ bdII <- function(X, a, h, P, T) {
         P <- coefs[['P']]
         T <- coefs[['T']]
     }
-	return(X - lambertW(a * h * X * exp(-a * (P * T - h * X)))/(a * h))
+	return(X - lamW::lambertW0(a * h * X * exp(-a * (P * T - h * X)))/(a * h))
 }
 # bdII_fit: Does the heavy lifting
 bdII_fit <- function(data, samp, start, fixed, boot=FALSE, windows=FALSE) {
@@ -72,8 +72,8 @@ bdII_nll <- function(a, h, P, T, X, Y) {
 
 # The difference function
 bdII_diff <- function(X, grp, a, h, P, T, Da, Dh) {
-  # return(X - lambertW(a * h * X * exp(-a * (P * T - h * X)))/(a * h))
-    return(X - lambertW((a-Da*grp) * (h-Dh*grp) * X * exp(-(a-Da*grp) * (P * T - (h-Dh*grp) * X)))/((a-Da*grp) * (h-Dh*grp)))
+  # return(X - lamW::lambertW0(a * h * X * exp(-a * (P * T - h * X)))/(a * h))
+    return(X - lamW::lambertW0((a-Da*grp) * (h-Dh*grp) * X * exp(-(a-Da*grp) * (P * T - (h-Dh*grp) * X)))/((a-Da*grp) * (h-Dh*grp)))
 }
 # The diff NLL fucntions
 bdII_nll_diff <- function(a, h, T, P, Da, Dh, X, Y, grp) {

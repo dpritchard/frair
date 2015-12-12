@@ -6,7 +6,7 @@
 # Y = Number of prey eaten / consumed / killed / absorbed
 
 ## Rogers Type II decreasing prey function ##
-# Same as ?lambertW
+# Same as ?emdbook::lambertW
 # Everything except 'X' should be provided.
 rogersII <- function(X, a, h, T) {
     if(is.list(a)){
@@ -15,7 +15,7 @@ rogersII <- function(X, a, h, T) {
         h <- coefs[['h']]
         T <- coefs[['T']]
     }
-    return(X - lambertW(a * h * X * exp(-a * (T - h * X)))/(a * h))
+    return(X - lamW::lambertW0(a * h * X * exp(-a * (T - h * X)))/(a * h))
 
 }
 # rogersII_fit: Does the heavy lifting
@@ -81,8 +81,8 @@ rogersII_nll <- function(a, h, T, X, Y) {
 # Models the difference between two groups (j) exposing a simple t-test on Da and Dh
 # For further info see Juliano 2001, pg 193, eg. eq. 10.11
 rogersII_diff <- function(X, grp, a, h, T, Da, Dh) {
-  # return(X - lambertW(a * h * X * exp(-a * (T - h * X)))/(a * h))
-    return(X - lambertW((a-Da*grp) * (h-Dh*grp) * X * exp(-(a-Da*grp) * (T - (h-Dh*grp) * X)))/((a-Da*grp) * (h-Dh*grp))) 
+  # return(X - lamW::lambertW0(a * h * X * exp(-a * (T - h * X)))/(a * h))
+    return(X - lamW::lambertW0((a-Da*grp) * (h-Dh*grp) * X * exp(-(a-Da*grp) * (T - (h-Dh*grp) * X)))/((a-Da*grp) * (h-Dh*grp))) 
 }
 # The NLL for the difference model... used by frair_compare()
 rogersII_nll_diff <- function(a, h, T, Da, Dh, X, Y, grp) {

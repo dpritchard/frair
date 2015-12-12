@@ -34,9 +34,9 @@ The capture rate (\emph{a}) and number of prey eaten (\emph{Ne}) follow the foll
 
 \deqn{N_e=N_0^{(q+1)} (1-e^{(a(N_eh-T))})}{Ne=N0^{(q+1)}*(1-exp(a*(Ne*h-T)))}
 
-Where \emph{b} is a search coefficient and other coefficients are as defined in \code{\link{rogersII}}. Because \emph{Ne} appears on both side of the equation, the solution is found using Lambert's transcendental equation. FRAIR uses the \code{\link[emdbook]{lambertW}} function from the \emph{emdbook} package and the internal function is:
+Where \emph{b} is a search coefficient and other coefficients are as defined in \code{\link{rogersII}}. Because \emph{Ne} appears on both side of the equation, the solution is found using Lambert's transcendental equation. FRAIR uses the \code{\link[lamW]{lambertW0}} function from the \emph{lamW} package and the internal function is:
 
-\code{Ne <- X^(q+1)-lambertW(a*h*X^(q+1)*exp(-a*(T-h*X^(q+1))))/(a*h)}
+\code{Ne <- X^(q+1)-lambertW0(a*h*X^(q+1)*exp(-a*(T-h*X^(q+1))))/(a*h)}
 
 where \eqn{X = N0}. When \eqn{q = 0} then \eqn{a = b} and the relationship collapses to traditional type-II Roger's random predator equation. The use of \eqn{q + 1} in the equation for number of prey eaten (\emph{vs.} \eqn{q - 1} in the equation for \emph{a}) exposes a useful test on \eqn{q = 0} in the summary of the fit. 
 
