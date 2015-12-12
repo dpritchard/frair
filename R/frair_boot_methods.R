@@ -119,7 +119,7 @@ confint.frboot <- function(object, parm='all', level=0.95, ..., citypes='all'){
         locvar <- which(names(object$fit$t0)==paste0(coefname, 'var'))
         type <- runlist[a,2]
         outcis[[coefname]][[type]] <- list()
-        bootciout <- fr_catchlist(boot.ci(object$fit, index=c(loc, locvar), conf=level, type=type))
+        bootciout <- fr_catchlist(boot::boot.ci(object$fit, index=c(loc, locvar), conf=level, type=type))
         # A warning or an error
         if(!is.null(bootciout$error)){
             outcis[[coefname]][[type]][['lower']] <- NA

@@ -24,7 +24,7 @@ frair_boot <- function(frfit, start=NULL, strata=NULL, nboot=999, para=TRUE, nco
     
     # Attempt to hog all except one core if it isn't specified
     if(para && is.nan(ncores)){
-        ncores <- detectCores()
+        ncores <- parallel::detectCores()
         if(ncores>1){ncores <- ncores-1}
     } else {
         if(ncores<1){stop('You cannot use less than 1 core for parallel processing!')}
@@ -78,9 +78,9 @@ frair_boot <- function(frfit, start=NULL, strata=NULL, nboot=999, para=TRUE, nco
     frfunc <- get(unlist(frair_responses(show=FALSE)[[frfit$response]])[1])
     # Do it!
     if(stdo){
-        frout <- boot(data=moddata, statistic=frfunc, R=nboot, start=start, fixed=fixed, strata=stdat, boot=TRUE, windows=iswindows, parallel=paramode, ncpus=ncores)
+        frout <- boot::boot(data=moddata, statistic=frfunc, R=nboot, start=start, fixed=fixed, strata=stdat, boot=TRUE, windows=iswindows, parallel=paramode, ncpus=ncores)
     } else {
-        frout <- boot(data=moddata, statistic=frfunc, R=nboot, start=start, fixed=fixed, boot=TRUE, windows=iswindows, parallel=paramode, ncpus=ncores)
+        frout <- boot::boot(data=moddata, statistic=frfunc, R=nboot, start=start, fixed=fixed, boot=TRUE, windows=iswindows, parallel=paramode, ncpus=ncores)
     }
     ## NB: Slightly different calls, depending on if stratified bootstrapping is requested. This prevents print.boot form thinking it is a stratified bootstrap, even if it isn't (evidently is uses the call to determine this, so gets confused, even if you pass a vector of 1's!)
     
