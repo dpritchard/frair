@@ -16,6 +16,7 @@ S3method(print, frboot)
 S3method(plot, frboot)
 S3method(lines, frboot)
 S3method(confint, frboot)
+S3method(drawpoly, default)
 S3method(drawpoly, frboot)
 
 S3method(print,frconf)
@@ -24,15 +25,15 @@ S3method(print,frtest)
 
 
 # Imports
-importFrom(parallel,detectCores)
-importFrom(boot,boot,boot.ci)
-importFrom(emdbook,lambertW)
+importFrom(parallel, detectCores)
+importFrom(boot, boot, boot.ci)
+importFrom(lamW, lambertW0)
 
 # Failsafe imports for packages in depends (to be sure)^3
 importFrom(stats4,
-           coef,confint,logLik,summary,vcov,profile,
-           AIC,BIC)
-importFrom(bbmle,mle2, 
-           coef,confint,logLik,summary,vcov,profile,
+           coef, confint, logLik, summary, vcov, profile,
+           AIC, BIC)
+importFrom(bbmle, 
+           mle2, coef, confint, logLik, summary, vcov, profile,
            AIC, AICc, qAICc, qAIC,
-           anova,deviance,residuals,simulate,predict,formula)
+           anova, deviance, residuals, simulate, predict, formula)
