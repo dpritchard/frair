@@ -3,7 +3,7 @@
 ## Major changes
 - Moved to the 'lamW' package for lambertW estimation. 
 	- This should improve performance markedly.  
-	- This drops the dependancy on 'emdbook', which in turn drops the dependancy on 'rgl' which requires X11 on MacOS.  
+	- This drops the dependancy on 'emdbook', which in turn drops the dependancy on 'rgl' which requires X11 on MacOS (ugly).  
 
 - Changes to the Beddington-DeAngelis Type-II Model 
 	- What had been advertised as the Beddington-DeAngelis Type-II in FRAIR (`bdII`, `bdII_fit`, `bdII_nll`, etc) in versions prior to 0.4.1 was not correctly specified. 

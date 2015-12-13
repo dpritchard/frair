@@ -6,8 +6,6 @@
 \alias{rogersII_nll_diff}
 \alias{hollingsII_diff}
 \alias{hollingsII_nll_diff}
-\alias{bdII_diff}
-\alias{bdII_nll_diff}
 \alias{hassIII_diff}
 \alias{hassIII_nll_diff}
 \alias{hassIIIr_diff}

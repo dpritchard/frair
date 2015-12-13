@@ -25,7 +25,7 @@
 
 \details{
 
-\code{bdII}, \code{bdII_fit} and \code{bdII_nll} were deprecated in verison 0.4.1. Although internally consistent, this code did not actually model the Beddington-DeAngelis Type-II curve, as advertised. This code used in these functions was renamed \link{emdII}. A correct implimentation of the Beddington-DeAngelis Type-II curve (assuming replacement) was added as \link{bdaII}.  
+\code{bdII}, \code{bdII_fit} and \code{bdII_nll} were deprecated in verison 0.4.1. Although internally consistent, this code did not actually model the Beddington-DeAngelis Type-II curve, as advertised. This code used in these functions was renamed \link{emdII}. A correct implimentation of the Beddington-DeAngelis Type-II curve (assuming replacement) will be added at some point in the future.  
 
 }
 
