@@ -6,6 +6,6 @@ Date: 2015-12-12
 Author: Daniel Pritchard
 Maintainer: Daniel Pritchard <daniel@pritchard.co>
 Description: Tools to support sensible statistics for functional response analysis.   
-Depends: R (>= 3.0.0)
-Imports: stats4, bbmle, lamW, boot, parallel
+Depends: R (>= 3.0.0), stats4, bbmle
+Imports: lamW, boot, parallel
 License: GPL-2
