@@ -1,16 +1,16 @@
-\name{fr_bdII}
-\alias{fr_bdII}
-\alias{bdII}
-\alias{bdII_fit}
-\alias{bdII_nll}
+\name{fr_emdII}
+\alias{fr_emdII}
+\alias{emdII}
+\alias{emdII_fit}
+\alias{emdII_nll}
 
-\title{Beddington-DeAngelis Type II Response}
-\description{Beddington-DeAngelis Type II decreasing prey function.}
+\title{EMD Type II Response}
+\description{The 'Ecological Models and Data in R' Type II decreasing prey function.}
 
 \usage{
-    bdII_fit(data, samp, start, fixed, boot=FALSE, windows=FALSE)
-    bdII_nll(a, h, P, T, X, Y)
-    bdII(X, a, h, P, T)
+    emdII_fit(data, samp, start, fixed, boot=FALSE, windows=FALSE)
+    emdII_nll(a, h, P, T, X, Y)
+    emdII(X, a, h, P, T)
     }
 
 \arguments{
@@ -26,9 +26,9 @@
   \item{Y }{The Y variable.  Usually the number of prey consumed.}
 }
 \details{
-This implements the Beddington-DeAngelis Type-II functional response which is an extension of the Roger's random predator equation to allow for multiple predators. With the exception of \emph{P} these functions are identical to those used in \code{\link{rogersII}}. 
+This implements the Type-II functional response model described in detail in Bolker (2008). With the exception of \emph{P} these functions are identical to those used in \code{\link{rogersII}}. 
 
-The \code{bdII} function solves the random predator equation using the LambertW equation (using the \code{\link[lamW]{lambertW0}} function from the \emph{lamW} package), giving:
+The \code{emdII} function solves the random predator equation using the LambertW equation (using the \code{\link[lamW]{lambertW0}} function from the \emph{lamW} package), giving:
 
 \code{X - lambertW0(a * h * X * exp(-a * (P * T - h * X)))/(a * h)}
 
@@ -38,9 +38,9 @@ This is exactly the function in chapter 8 of Bolker (2008), which in turn presen
 
 None of these functions are designed to be called directly, though they are all exported so that the user can call them directly if desired. The intention is that they are called via \code{\link{frair_fit}}, which calls them in the order they are specified above.
 
-\code{bdII_fit} does the heavy lifting and also pulls double duty as the \code{statistic} function for bootstrapping (\emph{via} \code{boot()} in the boot package).  The \code{windows} argument if required to prevent needless calls to \code{require(frair)} on platforms that can manage sane parallel processing.
+\code{emdII_fit} does the heavy lifting and also pulls double duty as the \code{statistic} function for bootstrapping (\emph{via} \code{boot()} in the boot package).  The \code{windows} argument if required to prevent needless calls to \code{require(frair)} on platforms that can manage sane parallel processing.
 
-The core fitting is done by \code{\link{mle2}} from the \code{bbmle} package and users are directed there for more information. \code{mle2} uses the \code{bdII_nll} function to optimise \code{bdII}.
+The core fitting is done by \code{\link{mle2}} from the \code{bbmle} package and users are directed there for more information. \code{mle2} uses the \code{emdII_nll} function to optimise \code{emdII}.
 
 Further references and recommended reading can be found on the the help page for \link{frair_fit}.
 }
@@ -62,10 +62,10 @@ Bolker, BM (2008) \emph{Ecological Models and Data in R}. Princeton University P
 \examples{
 data(gammarus)
 fitP1 <- frair_fit(eaten~density, data=gammarus, 
-                response='bdII', start=list(a = 1.2, h = 0.015), 
+                response='emdII', start=list(a = 1.2, h = 0.015), 
                 fixed=list(T=1, P=1))
 fitP2 <- frair_fit(eaten~density, data=gammarus, 
-                response='bdII', start=list(a = 1.2, h = 0.015), 
+                response='emdII', start=list(a = 1.2, h = 0.015), 
                 fixed=list(T=1, P=2))
 # Note that the coefficients are scaled to per per prey item
 coef(fitP1)

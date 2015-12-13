@@ -1,4 +1,4 @@
-## Hassell's Type III pred-prey function assuming replacement.
+## Hassell's Type III pred-prey function not assuming replacement.
 # hassIIIr: The guiding function...
 hassIIIr <- function(X, b, c, h, T) {
     if(is.list(b)){

@@ -1,28 +1,28 @@
 ## Functional Response Functions 
-# Each function specification needs to be listed in 'resp_known' with a description.
-## resp_known is the master list of usable functions.
-## each named entry here must have a corresponding function entry (e.g. fr_rogersII.R) and vice veras
+# Each function specification needs to be listed in 'fr_resp_known' with a description.
+## fr_resp_known is the master list of usable functions.
+## each named entry here must have a corresponding function entry (e.g. fr_rogersII.R) and vice versa.
+
 frair_responses <- function(show=TRUE){
-    # resp_known: NAME = list(FIT_FUN, DESCRIPTION, USES_LAM_W, OPTIM_VARS)
-    resp_known <- list(
+    fr_resp_known <- list(
         "typeI"=list("typeI_fit", "A generic linear (type I) response", FALSE, 'a'),
         "hollingsII"=list("hollingsII_fit", "Holling's orginal type II function", FALSE, c('a','h')),
         "rogersII"=list("rogersII_fit", "Roger's type II decreasing prey function", TRUE, c('a','h')), 
-        "bdII"=list("bdII_fit", "Beddington-DeAngelis type II function", TRUE, c('a','h')),
+        "emdII"=list("emdII_fit", "Ecological Models and Data in R type II function", TRUE, c('a','h')),
         "hassIII"=list("hassIII_fit", "Hassell's original type III function (assuming replacement)", FALSE, c('b','c','h')),
         "hassIIIr"=list("hassIIIr_fit", "Hassell's type III function (not assuming replacement)", TRUE, c('b','c','h')),
-        "real77"=list("real77_fit", "Real (1977) replacement curve", FALSE, c('b','q','h')),
-        "real77r"=list("real77r_fit", "Real (1977) non-replacement curve", TRUE, c('b','q','h'))
+        "real77"=list("real77_fit", "Real (1977) curve (assuming replacement)", FALSE, c('b','q','h')),
+        "real77r"=list("real77r_fit", "Real (1977) curve (not assuming replacement)", TRUE, c('b','q','h'))
     )
-    
+    # "bdII"=list("bdII_fit", "Beddington-DeAngelis type II function", TRUE, c('a','h')),
     if(show){
-        C1 <- c('Response',names(resp_known))
+        C1 <- c('Response',names(fr_resp_known))
         C2 <- 'Parameters'
         C3 <- 'Description'
         
-        for (a in 1:length(resp_known)) { 
-            C2 <- c(C2, paste(names(formals(fun=get(names(resp_known)[a]))), collapse=','))
-            C3 <- c(C3, unlist(resp_known[[a]][2]))
+        for (a in 1:length(fr_resp_known)) { 
+            C2 <- c(C2, paste(names(formals(fun=get(names(fr_resp_known)[a]))), collapse=','))
+            C3 <- c(C3, unlist(fr_resp_known[[a]][2]))
         }
         pad <- 2
         C1n <- max(sapply(C1,nchar))+pad
@@ -41,6 +41,5 @@ frair_responses <- function(show=TRUE){
         }
         cat('\n')
     } 
-    
-    invisible(resp_known)
+    invisible(fr_resp_known)
 }
