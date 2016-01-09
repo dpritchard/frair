@@ -1,20 +1,20 @@
 \name{frair_compare}
 \alias{frair_compare}
+
 \alias{typeI_diff}
 \alias{typeI_nll_diff}
+
 \alias{rogersII_diff}
 \alias{rogersII_nll_diff}
+
 \alias{hollingsII_diff}
 \alias{hollingsII_nll_diff}
+
 \alias{hassIII_diff}
 \alias{hassIII_nll_diff}
+
 \alias{hassIIIr_diff}
 \alias{hassIIIr_nll_diff}
-\alias{real77_diff}
-\alias{real77_nll_diff}
-\alias{real77r_diff}
-\alias{real77r_nll_diff}
-
 
 \title{Test the difference between two functional response fits}
 \description{Explicitly model, and then test, the difference between two functional response fits.}
