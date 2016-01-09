@@ -1,5 +1,5 @@
 ## The "incorrect" implimentation of the Beddington-DeAngelis Type-II curve
-# Now deprecated 
+# Now fully deprecated 
 
 bdII <- function(...) {
     msg <- paste0("The bdII model was deprecated in version 0.4.1.\n",

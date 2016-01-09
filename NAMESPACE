@@ -4,11 +4,15 @@ export(rogersII, rogersII_fit, rogersII_nll, rogersII_diff, rogersII_nll_diff)
 export(hollingsII, hollingsII_fit, hollingsII_nll, hollingsII_diff, hollingsII_nll_diff)
 export(hassIII, hassIII_fit, hassIII_nll, hassIII_diff, hassIII_nll_diff)
 export(hassIIIr, hassIIIr_fit, hassIIIr_nll, hassIIIr_diff, hassIIIr_nll_diff)
-export(real77, real77_fit, real77_nll, real77_diff, real77_nll_diff)
-export(real77r, real77r_fit, real77r_nll, real77r_diff, real77r_nll_diff)
+export(emdII, emdII_fit, emdII_nll, emdII_diff, emdII_nll_diff)
+export(flexp, flexp_fit, flexp_nll, flexp_diff, flexp_nll_diff)
+export(flexpnr, flexpnr_fit, flexpnr_nll, flexpnr_diff, flexpnr_nll_diff)
 
 # Deprecated exports
 export(bdII, bdII_fit, bdII_nll, bdII_diff, bdII_nll_diff)
+export(real77, real77_fit, real77_nll, real77_diff, real77_nll_diff)
+export(real77r, real77r_fit, real77r_nll, real77r_diff, real77r_nll_diff)
+
 
 S3method(print, frfit)
 S3method(plot, frfit)
