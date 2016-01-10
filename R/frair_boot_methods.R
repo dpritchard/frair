@@ -26,28 +26,28 @@ plot.frboot <- function(x, xlab=x$xvar, ylab=x$yvar, ...){
 }
 
 lines.frboot <- function(x, all_lines=FALSE, tozero=FALSE, bootcol=1, bootalpha=1/sqrt(x$n_boot), ...){
-    if(tozero){
-        newx <- seq(from=0, to=max(x$x), by=1)
-    } else {
-        newx <- seq(from=1, to=max(x$x), by=1)
-    }
     fitfun <- get(x$response)
+    if(tozero){
+        zero_answer <- fitfun(0, as.list(x$coefficients))
+        if(is.na(zero_answer)){
+            warning(c("The supplied function is undefined at zero.\n",
+                      "   Plotting to a minimum of 1e-04 instead."))
+            lowval <- 1e-04
+        } else {
+            lowval <- 0
+        }
+        newx <- seq(from=lowval, to=max(x$x), length.out = 50)
+    } else {
+        newx <- seq(from=min(x$x), to=max(x$x), length.out = 50)
+    }
+    
     if(!all_lines){
         # Plot the mean (original) fit
         newy <- fitfun(newx, as.list(x$coefficients))
         lines(newx, newy, ...)
     } else {
         # Plotting bootlines
-        # Sort out colour
-        if(is.vector(bootcol) && match(length(bootcol),c(3,4),nomatch=0)){
-            # Assumed to be RGB
-            bootcol[4] <- bootalpha
-        } else {
-            # Assumed to be another colour spec.
-            bootcol <- col2rgb(bootcol, alpha=T)[,1]/255
-            bootcol[4] <- bootalpha
-        }
-        
+        bootcol <- adjustcolor(bootcol, alpha.f = bootalpha) # Sort out colour
         bootcoefs <- na.omit(x$bootcoefs)
         outdd <- matrix(ncol=length(newx), nrow=nrow(bootcoefs))
         # Draw the lines
@@ -55,7 +55,7 @@ lines.frboot <- function(x, all_lines=FALSE, tozero=FALSE, bootcol=1, bootalpha=
             outdd[a,] <- fitfun(newx, as.list(as.list(bootcoefs[a,])))
         }
         for(a in 1:nrow(outdd)){
-            lines(x=newx, y=outdd[a,], col=rgb(bootcol['red'], bootcol['green'], bootcol['blue'], bootcol['alpha']), ...)
+            lines(x=newx, y=outdd[a,], col=bootcol, ...)
         }
     }
 }
@@ -68,12 +68,20 @@ drawpoly.default <- function(x, upper, lower, ...){
 }
 
 drawpoly.frboot <- function(x, ..., probs=c(0.025, 0.975), tozero=FALSE){
-    if(tozero){
-        newx <- seq(from=0, to=max(x$x), by=1)
-    } else {
-        newx <- seq(from=1, to=max(x$x), by=1)
-    }
     fitfun <- get(x$response)
+    if(tozero){
+        zero_answer <- fitfun(0, as.list(x$coefficients))
+        if(is.na(zero_answer)){
+            warning(c("The supplied function is undefined at zero.\n",
+                      "   Plotting to a minimum of 1e-04 instead."))
+            lowval <- 1e-04
+        } else {
+            lowval <- 0
+        }
+        newx <- seq(from=lowval, to=max(x$x), length.out = 50)
+    } else {
+        newx <- seq(from=min(x$x), to=max(x$x), length.out = 50)
+    }
     bootcoefs <- na.omit(x$bootcoefs)
     outdd <- matrix(ncol=length(newx), nrow=nrow(bootcoefs))
     

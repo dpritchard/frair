@@ -47,13 +47,19 @@ Like \code{\link[boot]{print.bootci}} the \code{print()} method for objects prod
 
 \code{drawpoly} draws empirical confidence intervals. The intervals are constructed by evaluating every set of bootstrapped coefficients at:
 
-\code{seq(from=1, to=max(x$x), by=1)} or \code{seq(from=0, to=max(x$x), by=1)} if \code{tozero} is TRUE.  
+\code{seq(from=min(x$x), to=max(x$x), length.out = 50)}.  
 
 and then calculating the empirical confidence limits at each value of \emph{x} by:
 
 \code{apply(val, 2, quantile, na.rm=T, probs=probs)}
 
-Not that this is a rough approximation of a bootstrapped confidence interval and does not account for some of the intricacies (\emph{e.g.} bootstrap bias) described in \link[boot]{boot.ci}.
+Note that this is a rough approximation of a bootstrapped confidence interval and does not account for some of the intricacies (\emph{e.g.} bootstrap bias) described in \link[boot]{boot.ci}.
+
+Note also, that if \code{tozero} is TRUE, then both \code{lines} and \code{drawpoly} try to draw to zero by evaluating every set of bootstrapped coefficients at:
+
+\code{seq(from=0, to=max(x$x), length.out = 50)} 
+
+If the coefficients provided by a fit to the orginal data produce a value that is undefined at zero, then these functions will \emph{attempt} to plot lines to a small, non-zero number (1e-04) and supply a warning instead. However, this does not gaurentee that all of the values produced by the bootstrapped coefficents will produce sensible values. Clearly the intention here is to provide a \emph{nice-looking} representation of the fitted curve and it is up to the user to determine \emph{why} their desired curve is undefined at zero.
 }
 
 \value{

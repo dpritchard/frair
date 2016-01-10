@@ -18,12 +18,20 @@ plot.frfit <- function(x, xlab=x$xvar, ylab=x$yvar, ...){
 }
 
 lines.frfit <- function(x, tozero=FALSE, ...){
-    if(tozero){
-        newx <- seq(from=0, to=max(x$x), by=1)
-    } else {
-        newx <- seq(from=1, to=max(x$x), by=1)
-    }
     fitfun <- get(x$response)
+    if(tozero){
+        zero_answer <- fitfun(0, as.list(x$coefficients))
+        if(is.na(zero_answer)){
+            warning(c("The supplied function is undefined at zero.\n",
+                      "   Plotting to a minimum of 1e-04 instead."))
+            lowval <- 1e-04
+        } else {
+            lowval <- 0
+        }
+        newx <- seq(from=lowval, to=max(x$x), length.out = 50)
+    } else {
+        newx <- seq(from=min(x$x), to=max(x$x), length.out = 50)
+    }
     newy <- fitfun(newx, as.list(x$coefficients))
     lines(x=newx, y=newy, ...)
 }
