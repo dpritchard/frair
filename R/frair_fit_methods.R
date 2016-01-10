@@ -18,7 +18,7 @@ plot.frfit <- function(x, xlab=x$xvar, ylab=x$yvar, ...){
 }
 
 lines.frfit <- function(x, tozero=FALSE, ...){
-    fitfun <- get(x$response)
+    fitfun <- get(x$response, pos = "package:frair")
     if(tozero){
         zero_answer <- fitfun(0, as.list(x$coefficients))
         if(is.na(zero_answer)){

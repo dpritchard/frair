@@ -26,7 +26,7 @@ plot.frboot <- function(x, xlab=x$xvar, ylab=x$yvar, ...){
 }
 
 lines.frboot <- function(x, all_lines=FALSE, tozero=FALSE, bootcol=1, bootalpha=1/sqrt(x$n_boot), ...){
-    fitfun <- get(x$response)
+    fitfun <- get(x$response, pos = "package:frair")
     if(tozero){
         zero_answer <- fitfun(0, as.list(x$coefficients))
         if(is.na(zero_answer)){
@@ -68,7 +68,7 @@ drawpoly.default <- function(x, upper, lower, ...){
 }
 
 drawpoly.frboot <- function(x, ..., probs=c(0.025, 0.975), tozero=FALSE){
-    fitfun <- get(x$response)
+    fitfun <- get(x$response, pos = "package:frair")
     if(tozero){
         zero_answer <- fitfun(0, as.list(x$coefficients))
         if(is.na(zero_answer)){

@@ -26,7 +26,7 @@ frair_responses <- function(show=TRUE){
         
         for (a in 1:length(fr_resp_known)) { 
             C2 <- c(C2, ifelse(unlist(lapply(fr_resp_known, '[[', 3)), "No", "Yes"))
-            C3 <- c(C3, paste(names(formals(fun=get(names(fr_resp_known)[a]))), collapse=','))
+            C3 <- c(C3, paste(names(formals(fun=get(names(fr_resp_known)[a], pos = "package:frair"))), collapse=','))
             C4 <- c(C4, unlist(fr_resp_known[[a]][2]))
         }
         pad <- 2
