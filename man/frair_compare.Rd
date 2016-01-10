@@ -13,9 +13,6 @@
 \alias{hassIII_diff}
 \alias{hassIII_nll_diff}
 
-\alias{hassIIIr_diff}
-\alias{hassIIIr_nll_diff}
-
 \title{Test the difference between two functional response fits}
 \description{Explicitly model, and then test, the difference between two functional response fits.}
 

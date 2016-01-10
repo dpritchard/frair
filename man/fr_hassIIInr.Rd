@@ -1,16 +1,16 @@
-\name{fr_hassIIIr}
-\alias{fr_hassIIIr}
-\alias{hassIIIr}
-\alias{hassIIIr_fit}
-\alias{hassIIIr_nll}
+\name{fr_hassIIInr}
+\alias{fr_hassIIInr}
+\alias{hassIIInr}
+\alias{hassIIInr_fit}
+\alias{hassIIInr_nll}
 
 \title{Hassell's Type III Response, without replacement}
 \description{Hassell's type III response (not assuming replacement)}
 
 \usage{
-    hassIIIr_fit(data, samp, start, fixed, boot=FALSE, windows=FALSE)
-    hassIIIr_nll(b, c, h, T, X, Y)
-    hassIIIr(X, b, c, h, T)
+    hassIIInr_fit(data, samp, start, fixed, boot=FALSE, windows=FALSE)
+    hassIIInr_nll(b, c, h, T, X, Y)
+    hassIIInr(X, b, c, h, T)
     }
 
 \arguments{
@@ -34,9 +34,9 @@ where \code{b} and \code{c} are coefficients to be fitted and \emph{X} is the in
 
 None of these functions are designed to be called directly, though they are all exported so that the user can do so if desired. The intention is that they are called via \code{\link{frair_fit}}, which calls them in the order they are specified above.
 
-\code{hassIIIr_fit} does the heavy lifting and also pulls double duty as the \code{statistic} function for bootstrapping (\emph{via} \code{boot()} in the boot package). The \code{windows} argument if required to prevent needless calls to \code{require(frair)} on platforms that can manage sane parallel processing.
+\code{hassIIInr_fit} does the heavy lifting and also pulls double duty as the \code{statistic} function for bootstrapping (\emph{via} \code{boot()} in the boot package). The \code{windows} argument if required to prevent needless calls to \code{require(frair)} on platforms that can manage sane parallel processing.
 
-The core fitting is done by \code{\link{mle2}} from the \code{bbmle} package and users are directed there for more information. \code{mle2} uses the \code{hassIIIr_nll} function to optimise \code{hassIIIr}.
+The core fitting is done by \code{\link{mle2}} from the \code{bbmle} package and users are directed there for more information. \code{mle2} uses the \code{hassIIInr_nll} function to optimise \code{hassIIInr}.
 
 Further references and recommended reading can be found on the the help page for \link{frair_fit}.
 }
@@ -55,28 +55,28 @@ Hassell M, Lawton J, Beddington J (1977) Sigmoid functional responses by inverte
 
 \examples{
 datx <- rep(c(1,2,3,4,6,12,24,50,100), times=10)
-daty1 <- round(hassIIIr(X=datx, 
+daty1 <- round(hassIIInr(X=datx, 
             b=0.08*rnorm(length(datx), mean=1, sd=0.1), 
             c=0.1*rnorm(length(datx), mean=1, sd=0.1), 
             h=0.08*rnorm(length(datx), mean=1, sd=0.1), 
             T=1),0)
-daty2 <- round(hassIIIr(X=datx, 
+daty2 <- round(hassIIInr(X=datx, 
             b=0.05*rnorm(length(datx), mean=1, sd=0.1), 
             c=0.08*rnorm(length(datx), mean=1, sd=0.1), 
             h=0.1*rnorm(length(datx), mean=1, sd=0.1), 
             T=1),0)
 dat <- data.frame(datx,daty1,daty2)
 
-hassIIIr_1 <- frair_fit(daty1~datx, data=dat, response='hassIIIr', 
+hassIIInr_1 <- frair_fit(daty1~datx, data=dat, response='hassIIInr', 
         start=list(b=0.05, c=0.1, h=0.1), fixed=list(T=1))
-hassIIIr_2 <- frair_fit(daty2~datx, data=dat, response='hassIIIr', 
+hassIIInr_2 <- frair_fit(daty2~datx, data=dat, response='hassIIInr', 
         start=list(b=0.05, c=0.1, h=0.1), fixed=list(T=1))
 
 plot(c(0,100), c(0,15), type='n', xlab='Density', ylab='No. Eaten')
-points(hassIIIr_1)
-points(hassIIIr_2, col=4)
-lines(hassIIIr_1)
-lines(hassIIIr_2, col=4)
+points(hassIIInr_1)
+points(hassIIInr_2, col=4)
+lines(hassIIInr_1)
+lines(hassIIInr_2, col=4)
 
-frair_compare(hassIIIr_1, hassIIIr_2)
+frair_compare(hassIIInr_1, hassIIInr_2)
 }

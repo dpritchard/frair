@@ -22,6 +22,13 @@
 \alias{real77_diff}
 \alias{real77_nll_diff}
 
+\alias{fr_hassIIIr}
+\alias{hassIIIr}
+\alias{hassIIIr_fit}
+\alias{hassIIIr_nll}
+\alias{hassIIIr_diff}
+\alias{hassIIIr_nll_diff}
+
 \title{Deprecated Functional Response Models}
 
 \description{A list of deprecated (i.e. no longer in use) functions / models.}
@@ -42,6 +49,11 @@
     real77_nll(...)
     real77_diff(...)
     real77_nll_diff(...)
+    hassIIIr(...)
+    hassIIIr_fit(...)
+    hassIIIr_nll(...)
+    hassIIIr_diff(...)
+    hassIIIr_nll_diff(...)
 }
 
 \arguments{
@@ -53,6 +65,8 @@
 \code{bdII}, \code{bdII_fit} and \code{bdII_nll} were deprecated and removed from FRAIR in verison 0.4.1. Although internally consistent, this code did not actually model the Beddington-DeAngelis Type-II curve, as advertised. This code used in these functions was renamed \link{emdII}. A correct implimentation of the Beddington-DeAngelis Type-II curve (assuming replacement) will be added at some point in the future.  
 
 The \code{real77*} family were deprecated and removed from FRAIR in verison 0.4.1. These functions were poorly specificed, with unhelpful (that is to say: incorrect) definitions of the exponent term (\code{q}). More sensible flexible exponent model specifications (\code{\link{flexp}} and \code{\link{flexpnr}}) have been added as a replacement.  
+
+The \code{hassIIIr} model was renamed to \code{\link{hassIIInr}} in verison 0.4.1. The previous name was confusing. The new name better reflects that it is a '\strong{n}on-\strong{r}eplacement' model.  
 }
 
 \author{
