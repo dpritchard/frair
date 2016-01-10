@@ -25,7 +25,6 @@
 \alias{flexpnr_diff}
 \alias{flexpnr_nll_diff}
 
-
 \title{Test the difference between two functional response fits}
 \description{Explicitly model, and then test, the difference between two functional response fits.}
 
