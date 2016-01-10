@@ -53,7 +53,8 @@ flexp_fit <- function(data, samp, start, fixed, boot=FALSE, windows=FALSE) {
             return(list(out=out, fit=try_flexp))
         }
     }
-}	
+}
+
 # flexp_nll: Provides negative log-likelihood for estimations via mle2()
 flexp_nll <- function(b, q, h, T, X, Y) {
     if (b <= 0 || h <= 0) {return(NA)} # Estimates must be > zero
@@ -70,8 +71,8 @@ flexp_nll <- function(b, q, h, T, X, Y) {
 flexp_diff <- function(X, grp, b, q, h, T, Db, Dq, Dh) {
   # a <- ( b        *X^ q        )
     a <- ((b-Db*grp)*X^(q-Dq*grp))
-  # return((a*X^( q        +1)*T)/(1+a*X^( q        +1)* h        ))
-    return((a*X^((q-Dq*grp)+1)*T)/(1+a*X^((q-Dq*grp)+1)*(h-Dh*grp)))
+  # return((a*X*T)/(1+a*X* h        ))
+    return((a*X*T)/(1+a*X*(h-Dh*grp)))
 }
 
 # The diff_nll function

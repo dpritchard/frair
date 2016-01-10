@@ -54,6 +54,7 @@ flexpnr_fit <- function(data, samp, start, fixed, boot=FALSE, windows=FALSE) {
         }
     }
 }	
+
 # flexpnr_nll: Provides negative log-likelihood for estimations via mle2()
 flexpnr_nll <- function(b, q, h, T, X, Y) {
     if (b <= 0 || h <= 0) {return(NA)} # Estimates must be > zero
@@ -71,8 +72,8 @@ flexpnr_nll <- function(b, q, h, T, X, Y) {
 flexpnr_diff <- function(X, grp, b, q, h, T, Db, Dq, Dh) {
   # a <- ( b        *X^ q        )
     a <- ((b-Db*grp)*X^(q-Dq*grp))
-  # return(X^( q        +1)-lamW::lambertW0(a* h        *X^( q        +1)*exp(-a*(T- h        *X^( q        +1))))/(a* h        ))
-    return(X^((q-Dq*grp)+1)-lamW::lambertW0(a*(h-Dh*grp)*X^((q-Dq*grp)+1)*exp(-a*(T-(h-Dh*grp)*X^((q-Dq*grp)+1))))/(a*(h-Dh*grp)))
+  # return(X-lamW::lambertW0(a* h        *X*exp(-a*(T- h        *X)))/(a* h        ))
+    return(X-lamW::lambertW0(a*(h-Dh*grp)*X*exp(-a*(T-(h-Dh*grp)*X)))/(a*(h-Dh*grp)))
 }
 
 # The diff_nll function

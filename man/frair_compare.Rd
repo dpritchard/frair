@@ -13,6 +13,19 @@
 \alias{hassIII_diff}
 \alias{hassIII_nll_diff}
 
+\alias{hassIIInr_diff}
+\alias{hassIIInr_nll_diff}
+
+\alias{emdII_diff}
+\alias{emdII_nll_diff}
+
+\alias{flexp_diff}
+\alias{flexp_nll_diff}
+
+\alias{flexpnr_diff}
+\alias{flexpnr_nll_diff}
+
+
 \title{Test the difference between two functional response fits}
 \description{Explicitly model, and then test, the difference between two functional response fits.}
 
@@ -45,11 +58,12 @@ Future versions of FRAIR will look to improve the integration between \code{mle2
     \code{\link{typeI}}      \tab \code{typeI_diff}      \tab \code{typeI_nll_diff}\cr
     \code{\link{hollingsII}} \tab \code{hollingsII_diff} \tab \code{hollingsII_nll_diff}\cr
     \code{\link{rogersII}}   \tab \code{rogersII_diff}   \tab \code{rogersII_nll_diff}\cr
-    \code{\link{bdII}}       \tab \code{bdII_diff}       \tab \code{bd_nll_diff}\cr
     \code{\link{hassIII}}    \tab \code{hassIII_diff}    \tab \code{hassIII_nll_diff}\cr
-    \code{\link{hassIIIr}}   \tab \code{hassIIIr_diff}   \tab \code{hassIII_nllr_diff}\cr
-    \code{\link{real77}}     \tab \code{real77_diff}     \tab \code{real77_nll_diff}\cr
-    \code{\link{real77r}}     \tab \code{real77r_diff}     \tab \code{real77r_nll_diff}
+    \code{\link{hassIIInr}}  \tab \code{hassIIInr_diff}  \tab \code{hassIIInr_nll_diff}\cr
+    
+    \code{\link{emdII}}      \tab \code{emdII_diff}      \tab \code{emd_nll_diff}\cr
+    \code{\link{flexp}}      \tab \code{flexp_diff}      \tab \code{flexp_nll_diff}\cr
+    \code{\link{flexpnr}}    \tab \code{flexpnr_diff}    \tab \code{flexpnr_nll_diff}
   }
 
 }
