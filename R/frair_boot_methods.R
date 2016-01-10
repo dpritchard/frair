@@ -3,7 +3,7 @@ print.frboot <- function(x, ...){
     nbootdone <- x$n_boot-x$n_failed
     percsuc <- round(nbootdone/x$n_boot*100,2)
     
-    cat('\nBOOTSTRAPPED FUNCTIONAL RESPONSE FIT\n')
+    cat('BOOTSTRAPPED FUNCTIONAL RESPONSE FIT\n')
     cat(paste0('\nResponse:            ', x$response))
     cat(paste0('\nDescription:         ', as.character(frair_responses(show=FALSE)[[x$response]][2])))
     cat(paste0('\nOptimised variables: ', paste0(x$optimvars, collapse=', ')))

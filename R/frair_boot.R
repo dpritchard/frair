@@ -77,10 +77,16 @@ frair_boot <- function(frfit, start=NULL, strata=NULL, nboot=999, para=TRUE, nco
     # Get the response...
     frfunc <- get(unlist(frair_responses(show=FALSE)[[frfit$response]])[1], pos = "package:frair")
     # Do it!
+    ## NB: we are not using the "boot::boot" syntax here becuase it confuses boot:::print.boot, which relies on the exact phrase "boot" not "boot::boot"
+    ## TODO: contact package author of boot and discuss.  
     if(stdo){
-        frout <- boot::boot(data=moddata, statistic=frfunc, R=nboot, start=start, fixed=fixed, strata=stdat, boot=TRUE, windows=iswindows, parallel=paramode, ncpus=ncores)
+        frout <- boot(data=moddata, statistic=frfunc, R=nboot, sim = "ordinary", stype = "i", strata=stdat, 
+                      start=start, fixed=fixed, boot=TRUE, windows=iswindows, 
+                      parallel=paramode, ncpus=ncores)
     } else {
-        frout <- boot::boot(data=moddata, statistic=frfunc, R=nboot, start=start, fixed=fixed, boot=TRUE, windows=iswindows, parallel=paramode, ncpus=ncores)
+        frout <- boot(data=moddata, statistic=frfunc, R=nboot, sim = "ordinary", stype = "i", 
+                      start=start, fixed=fixed, boot=TRUE, windows=iswindows, 
+                      parallel=paramode, ncpus=ncores)
     }
     ## NB: Slightly different calls, depending on if stratified bootstrapping is requested. This prevents print.boot form thinking it is a stratified bootstrap, even if it isn't (evidently is uses the call to determine this, so gets confused, even if you pass a vector of 1's!)
     
