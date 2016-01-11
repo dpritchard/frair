@@ -17,7 +17,7 @@
     - More sensible "flexible exponent" model specifications (`flexp` and `flexpnr`) have been added as a replacement. 
 
 - Changes to the hassIIIr model
-    - Nothing substantive has changed internally, however this model is now called `hassIIInr`, which better reflects that it is a '**n**on-**r**eplacement' model.  
+    - Nothing substantive has changed internally, however this model is now called `hassIIInr`, which better reflects that it is a **N**on-**R**eplacement model.  
     - Attempting to use a `hassIIIr*` function directly will pass through gracefully to `hassIIInr`, with a warning.
     - That said, `hassIIIr` is no longer recognised by `frair_responses()` so attempting to fit this model within the FRAIR framework will throw an error.  
 	
