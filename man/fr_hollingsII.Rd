@@ -15,18 +15,18 @@
 
 \arguments{
   \item{data }{A dataframe containing X and Y.}
-  \item{samp }{A vector specifying the rows of data to use in the fit. Provided by \code{boot()} or manually, as required}
+  \item{samp }{A vector specifying the rows of data to use in the fit. Provided by \code{boot()} or manually, as required.}
   \item{start }{A named list. Starting values for items to be optimised.  Usually 'a' and 'h'.}
   \item{fixed }{A names list. 'Fixed data' (not optimised). Usually 'T'.}
-  \item{boot }{A logical. Is the function being called for use by the boot function?}
+  \item{boot }{A logical. Is the function being called for use by \code{boot()}?}
   \item{windows }{A logical. Is the operating system Microsoft Windows?}
   \item{a, h }{Capture rate and handling time. Usually items to be optimised.}
-  \item{T }{T: Total time available}
+  \item{T }{\emph{T}, the total time available.}
   \item{X }{The X variable. Usually prey density.}
   \item{Y }{The Y variable.  Usually the number of prey consumed.}
 }
 \details{
-This implements the Hollings original Type-II functional response, otherwise known as the 'disc equation'. An important assumption of this equation is that prey density remains constant (\emph{i.e.} a 'replacement' experimental design). In practice this is often not the case and often the Roger's 'random predator' equation might be more appropriate (see \code{\link{rogersII}}).
+This implements the Hollings original type-II functional response, otherwise known as the 'disc equation'. An important assumption of this equation is that prey density remains constant (\emph{i.e.} a 'replacement' experimental design). In practice this is often not the case and often the Roger's 'random predator' equation may be more appropriate (see \code{\link{rogersII}}).
 
 In Holling's original formulation the number of prey eaten (\emph{Ne}) follows the relationship:
 
@@ -44,7 +44,7 @@ None of these functions are designed to be called directly, though they are all 
 
 The core fitting is done by \code{\link{mle2}} from the \code{bbmle} package and users are directed there for more information. \code{mle2} uses the \code{rogersII_nll} function to optimise \code{rogersII}.
 
-Further references and recommended reading can be found on the the help page for \link{frair_fit}.
+Further references and recommended reading can be found on the help page for \link{frair_fit}.
 }
 
 \author{
@@ -56,7 +56,7 @@ Daniel Pritchard
 }
 
 \references{
-Bolker, BM (2008) \emph{Ecological Models and Data in R}. Princeton University Press, Princeton, NJ.
+Bolker BM (2008) \emph{Ecological Models and Data in R}. Princeton University Press, Princeton, NJ.
 }
 
 \examples{

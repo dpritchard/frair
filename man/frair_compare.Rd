@@ -36,7 +36,7 @@
   \item{start }{A named numeric list with starting values for the combined fit. See Details.  }
 }
 \details{
-This function provides a sensible test of the optimised coefficients between two functional responses fitted by \code{\link{frair_fit}}. This is achieved by explicitly modelling a 'difference' (delta) parameter for each optimised variable following the advice outlined in Julliano (2001). Briefly, consider the following Hollings type-II model:
+This function provides a sensible test of the optimised coefficients between two functional responses fitted by \code{\link{frair_fit}}. This is achieved by explicitly modelling a 'difference' (delta) parameter for each optimised variable following the advice outlined in Juliano (2001). Briefly, consider the following Hollings type-II model:
 
 \code{a*X*T/(1+a*X*h)}
 
@@ -44,13 +44,13 @@ the model containing delta parameters becomes:
 
 \code{(a-Da*grp)*X*T/(1+(a-Da*grp)*X*(h-Dh*grp))}
 
-where \code{grp} is a dummy coding variable and \code{Da} and \code{Dh} are the delta parameters. Here, the first functional response fit (\code{frfit1}) is coded \code{grp=0} and the second fit (\code{frfit2}) is coded \code{grp=1}. Therefore Da and Dh represent the difference between the two modeled coefficients and the standard output from the maximum likelihood fitting explicitly tests the null hypothesis of no difference between the two groups. 
+where \code{grp} is a dummy coding variable and \code{Da} and \code{Dh} are the delta parameters. Here, the first functional response fit (\code{frfit1}) is coded \code{grp=0} and the second fit (\code{frfit2}) is coded \code{grp=1}. Therefore\code{Da} and \code{Dh} represent the difference between the two modelled coefficients and the standard output from the maximum likelihood fitting explicitly tests the null hypothesis of no difference between the two groups. 
 
 The difference model is re-fit to the combined data in \code{frfit1} and \code{frfit2} using the same maximum likelihood approaches outlined in \code{\link{frair_fit}}. 
 
 This function could be seen as a less computationally intensive alternative to bootstrapping but relies on \code{\link[bbmle]{mle2}} successfully returning estimates of the standard error. \code{mle2} does this by inverting a Hessian matrix, a procedure which might not always be successful. 
 
-Future versions of FRAIR will look to improve the integration between \code{mle2} and allow users access to the various hessian control parameters. In the meantime the following delta functions are exported so that users can 'roll their own' maximum likelihood implementation using this approach:
+Future versions of FRAIR will look to improve the integration between \code{mle2} and allow users access to the various Hessian control parameters. In the meantime, the following delta functions are exported so users can 'roll their own' maximum likelihood implementation using this approach:
 
 \tabular{lll}{
     Original Function        \tab Difference Function    \tab Difference NLL Function\cr

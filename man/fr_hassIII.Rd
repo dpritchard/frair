@@ -5,7 +5,7 @@
 \alias{hassIII_nll}
 
 \title{Hassell's Type III Response}
-\description{Hassell's original type III response (assuming replacement)}
+\description{Hassell's original type-III response (assuming replacement)}
 
 \usage{
     hassIII_fit(data, samp, start, fixed, boot=FALSE, windows=FALSE)
@@ -18,7 +18,7 @@
   \item{samp }{A vector specifying the rows of data to use in the fit. Provided by \code{boot()} or manually, as required.}
   \item{start }{A named list. Starting values for items to be optimised.  Usually \emph{b}, \emph{c} and \emph{h}.}
   \item{fixed }{A names list. 'Fixed data' (not optimised). Usually \emph{T}.}
-  \item{boot }{A logical. Is the function being called for use by the boot function?}
+  \item{boot }{A logical. Is the function being called for use by \code{boot()}?}
   \item{windows }{A logical. Is the operating system Microsoft Windows?}
   \item{b,c,h }{Hassel's \emph{b} and \emph{c}, plus \emph{h}, the handling time. Usually items to be optimised.}
   \item{T }{\emph{T}, the total time available.}
@@ -26,13 +26,13 @@
   \item{Y }{The Y variable.  Usually the number of prey consumed.}
 }
 \details{
-This implements the original Hassel's Type-III functional response, assuming prey density is kept constant (\emph{i.e.} a 'replacement' experimental design). In practice, constant prey density might be an unrealistic assumption, in which case users should consider the \code{\link{hassIIIr}} function instead. 
+This implements the original Hassel's type-III functional response, assuming prey density is kept constant (i.e. a 'replacement' experimental design). In practice, constant prey density might be an unrealistic assumption, in which case users should consider the \code{\link{hassIIIr}} function instead. 
 
-In Hassel \emph{et al.}'s original formulation, the capture rate \emph{a} is assumed to vary with the prey density in the following hyperbolic relationship:
+In Hassel et al.'s original formulation, the capture rate \emph{a} is assumed to vary with the prey density in the following hyperbolic relationship:
 
 \code{a <- (b*X)/(1+c*X)}
 
-where \code{b} and \code{c} are coefficients to be fitted and \emph{X} is the initial prey density. This is the initial formulation of Hassell \emph{et al.} (1977) and uses their naming conventions. The value for \emph{a} is then used within a traditional Holling's disc equation (see \code{\link{hollingsII}}). 
+where \code{b} and \code{c} are coefficients to be fitted and \emph{X} is the initial prey density. This is the initial formulation of Hassell et al. (1977) and uses their naming conventions. The value for \emph{a} is then used within a traditional Holling's disc equation (see \code{\link{hollingsII}}). 
 
 None of these functions are designed to be called directly, though they are all exported so that the user can do so if desired. The intention is that they are called via \code{\link{frair_fit}}, which calls them in the order they are specified above.
 
@@ -40,7 +40,7 @@ None of these functions are designed to be called directly, though they are all 
 
 The core fitting is done by \code{\link{mle2}} from the \code{bbmle} package and users are directed there for more information. \code{mle2} uses the \code{hassIII_nll} function to optimise \code{hassIII}.
 
-Further references and recommended reading can be found on the the help page for \link{frair_fit}.
+Further references and recommended reading can be found on the help page for \link{frair_fit}.
 }
 
 \author{
@@ -52,7 +52,7 @@ Daniel Pritchard
 }
 
 \references{
-Hassell M, Lawton J, Beddington J (1977) Sigmoid functional responses by invertebrate predators and parasitoids. The Journal of Animal Ecology 46: 249--262.
+Hassell M, Lawton J, Beddington J (1977) Sigmoid functional responses by invertebrate predators and parasitoids. \emph{Journal of Animal Ecology} 46: 249--262.
 }
 
 \examples{

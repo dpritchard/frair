@@ -5,7 +5,7 @@
 \alias{typeI_nll}
 
 \title{Type I Response}
-\description{A generic type I (linear) response.}
+\description{A generic type-I (linear) response.}
 
 \usage{
     typeI_fit(data, samp, start, fixed, boot=FALSE, windows=FALSE)
@@ -15,10 +15,10 @@
 
 \arguments{
   \item{data }{A dataframe containing X and Y.}
-  \item{samp }{A vector specifying the rows of data to use in the fit. Provided by \code{boot()} or manually, as required}
+  \item{samp }{A vector specifying the rows of data to use in the fit. Provided by \code{boot()} or manually, as required.}
   \item{start }{A named list. Starting values for items to be optimised.  Usually 'a'.}
   \item{fixed }{A names list. 'Fixed data' (not optimised). Usually 'T'.}
-  \item{boot }{A logical. Is the function being called for use by the boot function?}
+  \item{boot }{A logical. Is the function being called for use by \code{boot()}?}
   \item{windows }{A logical. Is the operating system Microsoft Windows?}
   \item{a }{The capture rate}
   \item{T }{T: Total time available}
@@ -26,11 +26,11 @@
   \item{Y }{The Y variable.  Usually the number of prey consumed.}
 }
 \details{
-This implements a simple Type-I, or linear functional response. This is helpful when the response is known (or suspected) to be handling time independent. It is implemented as: 
+This implements a simple type-I, or linear functional response. This is helpful when the response is known (or suspected) to be handling time independent. It is implemented as: 
 
 \deqn{N_e = a N_0 T}{Ne = a*N0*T}
 
-where \emph{a} is the capture rate, \emph{T} is the total time available and \emph{N0} (== X) is the initial prey density. 
+where \emph{a} is the capture rate, \emph{T} is the total time available and \eqn{N_0} (== X) is the initial prey density. 
 
 None of these functions are designed to be called directly, though they are all exported so that the user can call them directly if desired. The intention is that they are called via \code{\link{frair_fit}}, which calls them in the order they are specified above.
 
@@ -38,7 +38,7 @@ None of these functions are designed to be called directly, though they are all 
 
 The core fitting is done by \code{\link{mle2}} from the \code{bbmle} package and users are directed there for more information. \code{mle2} uses the \code{typeI_nll} function to optimise \code{typeI}.
 
-Further references and recommended reading can be found on the the help page for \link{frair_fit}.
+Further references and recommended reading can be found on the help page for \link{frair_fit}.
 }
 
 \author{

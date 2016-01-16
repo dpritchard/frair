@@ -22,7 +22,7 @@ This function wraps up an otherwise trivial test for type-II \emph{versus} type-
 
 The test relies on the established principle that a logistic regression on the \emph{proportion} of prey consumed is a more sensitive test of functional response shape, especially at low prey densities, when a non-linear curve may not be able to distinguish the subtle difference in curve shape. 
 
-The logic follows that on the proportion scale, a type-II response will show an increasing (\emph{i.e.} positive and statistically different from zero) initial slope with respect to density whereas a type-III response will show a negative slope, followed by a positive higher order slope. 
+The logic follows that on the proportion scale, a type-II response will show an increasing (i.e. positive and statistically different from zero) initial slope with respect to density whereas a type-III response will show a negative slope, followed by a positive higher order slope. 
 
 The test proceeds by fitting two models:
 
@@ -30,7 +30,7 @@ The test proceeds by fitting two models:
 
 \code{glm(cbind(eaten,noteaten)~density+density^2, family='binomial')}
 
-where \code{eaten} is the lefthand side of the \code{formula} input, \code{density} is the righthand side and \code{noteaten} is the difference between the two. The output from these models to determine which functional response is preferred using the logic above.
+where \code{eaten} is the left hand side of the \code{formula} input, \code{density} is the right hand side and \code{noteaten} is the difference between the two. The output from these models to determine which functional response is preferred using the logic above.
 
 Currently no consideration is given to a type-I (\emph{i.e.} linear) response or any other potentially sensible fit other than a type-II or type-III response. It is up to the user to decide if it is appropriate to continue with fitting a mechanistic model of the functional response (\emph{i.e.} \code{\link{frair_fit}}, \code{\link{frair_compare}} and/or \code{\link{frair_boot}}) on the back of the results of this test. 
 }
@@ -47,7 +47,7 @@ Currently no consideration is given to a type-I (\emph{i.e.} linear) response or
 
 }
 \references{
-Juliano SA (2001) Nonlinear curve fitting: Predation and functional response curves. In: Scheiner SM, Gurevitch J (eds). Design and analysis of ecological experiments. Oxford University Press, Oxford, United Kingdom. pp 178--196.
+Juliano SA (2001) \emph{Nonlinear curve fitting: Predation and functional response curves}. In: Scheiner SM, Gurevitch J (eds). \emph{Design and analysis of ecological experiments}. Oxford University Press, Oxford, United Kingdom. pp 178--196.
 }
 \author{
 Daniel Pritchard

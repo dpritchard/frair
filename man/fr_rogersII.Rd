@@ -15,26 +15,26 @@
 
 \arguments{
   \item{data }{A dataframe containing X and Y.}
-  \item{samp }{A vector specifying the rows of data to use in the fit. Provided by \code{boot()} or manually, as required}
+  \item{samp }{A vector specifying the rows of data to use in the fit. Provided by \code{boot()} or manually, as required.}
   \item{start }{A named list. Starting values for items to be optimised.  Usually 'a' and 'h'.}
   \item{fixed }{A names list. 'Fixed data' (not optimised). Usually 'T'.}
-  \item{boot }{A logical. Is the function being called for use by the boot function?}
+  \item{boot }{A logical. Is the function being called for use by \code{boot()}?}
   \item{windows }{A logical. Is the operating system Microsoft Windows?}
   \item{a, h }{Capture rate and handling time. Usually items to be optimised.}
-  \item{T }{T: Total time available}
+  \item{T }{\emph{T}, the total time available.}
   \item{X }{The X variable. Usually prey density.}
   \item{Y }{The Y variable.  Usually the number of prey consumed.}
 }
 \details{
-This implements the Rogers' 'random predator' Type-II functional response. This does not assume prey are replaced throughout the experiment (\emph{c.f.} \code{\link{hollingsII}}). The number of prey eaten (\eqn{N_e}) follows the relationship:
+This implements the Rogers' 'random predator' type-II functional response. This does not assume prey are replaced throughout the experiment (c.f. \code{\link{hollingsII}}). The number of prey eaten (\eqn{N_e}) follows the relationship:
 
 \deqn{N_e=N_0(1-e^{(a(N_eh-T))})}{Ne=N0*(1-exp(a*(Ne*h-T)))}
 
-Where \emph{N0} is the initial number of prey and \emph{a}, \emph{h} and \emph{T} are the capture rate, handling time and the total time available, respectively. The fact that \emph{Ne} appears on both side of the equation, poses some problems, but can be efficiently dealt with using Lambert's transcendental equation (Bolker, 2008). FRAIR uses the \code{\link[lamW]{lambertW0}} function from the \emph{lamW} package and uses this function internally as:
+Where \eqn{N_0} is the initial number of prey and \emph{a}, \emph{h} and \emph{T} are the capture rate, handling time and the total time available, respectively. The fact that \eqn{N_e} appears on both side of the equation, poses some problems, but can be efficiently dealt with using Lambert's transcendental equation (Bolker, 2008). FRAIR uses the \code{\link[lamW]{lambertW0}} function from the \emph{lamW} package and uses this function internally as:
 
 \code{Ne <- X - lambertW0(a * h * X * exp(-a * (T - h * X)))/(a * h)}
 
-where \eqn{X = N_0}. For further information users are directed to Chapter 8 (and preceding chapters, if needed) of Bolker (2008) where this approach is discussed in depth. Note that Bolker (2008) uses an implimentation that 'partitions' the \emph{a} and \emph{h} coefficients between multiple prey items. This code is implemented in FRAIR as \code{\link{emdII}}.
+where \eqn{X = N_0}. For further information users are directed to Chapter 8 (and preceding chapters, if needed) of Bolker (2008) where this approach is discussed in depth. Note that Bolker (2008) uses an implementation that 'partitions' the \emph{a} and \emph{h} coefficients between multiple prey items. This code is implemented in FRAIR as \code{\link{emdII}}.
 
 None of these functions are designed to be called directly, though they are all exported so that the user can call them directly if desired. The intention is that they are called via \code{\link{frair_fit}}, which calls them in the order they are specified above.
 
@@ -42,7 +42,7 @@ None of these functions are designed to be called directly, though they are all 
 
 The core fitting is done by \code{\link{mle2}} from the \code{bbmle} package and users are directed there for more information. \code{mle2} uses the \code{rogersII_nll} function to optimise \code{rogersII}.
 
-Further references and recommended reading can be found on the the help page for \link{frair_fit}.
+Further references and recommended reading can be found on the help page for \link{frair_fit}.
 }
 
 \author{
@@ -54,7 +54,7 @@ Daniel Pritchard
 }
 
 \references{
-Bolker, BM (2008) \emph{Ecological Models and Data in R}. Princeton University Press, Princeton, NJ.
+Bolker BM (2008) \emph{Ecological Models and Data in R}. Princeton University Press, Princeton, NJ.
 }
 
 \examples{

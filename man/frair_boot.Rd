@@ -12,21 +12,21 @@ frair_boot(frfit, start=NULL, strata=NULL, nboot=999,
 \arguments{
   \item{frfit }{An object returned by \code{\link{frair_fit}}}
   \item{start }{An optional named list. See Details.}
-  \item{strata }{A character string. Specifies a column in the data original data.}
+  \item{strata }{A character string. Specifies a column in the original data.}
   \item{nboot }{An integer. How many bootstraps to perform?}
   \item{para }{A logical. Should the bootstrapping be performed in parallel?}
-  \item{ncores }{An integer. The number of cores to use for parallelisation. See Details}
+  \item{ncores }{An integer. The number of cores to use for parallelisation. See Details.}
   \item{WARN.ONLY}{A logical. If true some errors are suppressed. See Details.}
 }
 
 \details{
 This function provides a simple, consistent way to generate bootstrapped estimates from a functional response fit. 
 
-If \code{start} is not provided starting values for the bootstrapping are drawn from the original fit.  This interface is provided so that a single set of starting parameters (e.g. a 'global' estimate) can be used when bootstrapping different functional response fits (e.g. different treatments)
+If \code{start} is not provided, starting values for the bootstrapping are drawn from the original fit.  This interface is provided so that a single set of starting parameters (e.g. a 'global' estimate) can be used when bootstrapping different functional response fits (e.g. different treatments).
 
-Non-parametric bootstrapping and parallelisation is handled by \code{\link[boot]{boot}} from the boot package.  Currently, if you request bootstrapped fits and \code{para=TRUE} (the default) then the function with attempt to use all except 1 available core. Note that this might affect performance of other tasks while the bootstrap is underway!
+Non-parametric bootstrapping and parallelisation is handled by \code{\link[boot]{boot}} from the boot package.  Currently, if you request bootstrapped fits and \code{para=TRUE} (the default), then the function will attempt to use all except one available core. Note this may affect performance of other tasks while the bootstrap is underway!
 
-If more than 10\% of the bootstrapped fits fail then a warning is generated and if more than 50\% of the fits fail then an error is thrown and nothing is returned.  These are sensible defaults, but if you are very sure that you know what you are doing you can suppress this with \code{WARN.ONLY=TRUE} (a warning is thrown instead).  
+If more than 10\% of the bootstrapped fits fail, a warning is generated, and if more than 50\% of the fits fail, an error is thrown and nothing is returned.  These are sensible defaults, but if you are very sure that you know what you are doing, you can suppress this with \code{WARN.ONLY=TRUE} (a warning is thrown instead).  
 
 }
 
@@ -36,8 +36,8 @@ This function returns a named list of class \code{frboot} with the following nam
 \item{x }{The original x data supplied to \code{frair_fit}.}
 \item{y }{The original y data supplied to \code{frair_fit}.}
 \item{response }{A string. The fitted response.}
-\item{xvar }{A string. The righthand side of \code{formula}.}
-\item{yvar }{A string. The lefthand side of \code{formula}.}
+\item{xvar }{A string. The right hand side of \code{formula}.}
+\item{yvar }{A string. The left hand side of \code{formula}.}
 \item{optimvars }{A character vector. The optimised values (passed to \code{start}).}
 \item{fixedvars }{A character vector. The fixed values (passed to \code{fixed}).}
 \item{coefficients }{A named numeric. All coefficients needed to draw the optimised curve.}

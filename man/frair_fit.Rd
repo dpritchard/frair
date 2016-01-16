@@ -17,9 +17,9 @@ frair_fit(formula, data, response, start=list(), fixed=NULL)
 }
 
 \details{
-frair_fit is a utility function which helps users fit common non-linear predator-prey curves to integer data. It uses maximum likelihood estimation, via \code{\link[bbmle]{mle2}} from the \code{bbmle} package.  
+\code{frair_fit} is a utility function which helps users fit common non-linear predator-prey curves to integer data. It uses maximum likelihood estimation, via \code{\link[bbmle]{mle2}} from the \code{bbmle} package.  
 
-The response requested must be known to frair. To establish what is supported inspect the output from \code{frair_responses()}. All parameters listed by \code{frair_responses()} (except \code{X}) must be provided in either \code{start} or \code{fixed} and some guidance is given on the help pages for each function about what should (and should not) be optimised.
+The response requested must be known to FRAIR. To establish what is supported, inspect the output from \code{frair_responses()}. All parameters listed by \code{frair_responses()} (except \code{X}) must be provided in either \code{start} or \code{fixed} and some guidance is given on the help pages for each function about what should (and should not) be optimised.
 
 Generally speaking fitting non-linear curves to ecological datasets can be challenging. Approaches to fitting predator-prey functional response curves are described in further detail by Juliano (2001) and Bolker (2008). Many of the pitfalls (along with very sound advice) in non-linear curve fitting in general are described by Bolker \emph{et al.} 2013. Users are directed there for more information.  
 
@@ -44,11 +44,11 @@ If this happens it could mean many things, but generally speaking it is indicati
 
 Note that the advice given in \link[bbmle]{mle2} to use the 'Nelder-Mead' method, is largely redundant because this is already the default in FRAIR (though you could try the 'BFGS' method quite safely...)
 
-If convergence (\emph{i.e.} fitting) fails for other reasons, see the manual page of \code{\link[stats]{optim}}. 
+If convergence (i.e. fitting) fails for other reasons, see the manual page of \code{\link[stats]{optim}}. 
 }
 
 \note{
-FRAIR is still under development.  Future versions will allow the user more control over the underlying fitting algorithms. In the meantime FRAIR exports all of it's (useful) functions so that users can fit the curves directly using their preferred method if the defaults are undesirable. See the Examples for an illustration of this approach.  
+Future versions will allow the user more control over the underlying fitting algorithms. In the meantime FRAIR exports all of its (useful) functions so that users can fit the curves directly using their preferred method if the defaults are undesirable. See the Examples for an illustration of this approach.  
 }
 
 \value{
@@ -57,8 +57,8 @@ This function returns a named list of class \code{frfit} with the following name
 \item{x }{The original x data supplied to \code{frair_fit}.}
 \item{y }{The original y data supplied to \code{frair_fit}.}
 \item{response }{A string. The fitted response.}
-\item{xvar }{A string. The righthand side of \code{formula}.}
-\item{yvar }{A string. The lefthand side of \code{formula}.}
+\item{xvar }{A string. The right hand side of \code{formula}.}
+\item{yvar }{A string. The left hand side of \code{formula}.}
 \item{optimvars }{A character vector. The optimised values (passed to \code{start}).}
 \item{fixedvars }{A character vector. The fixed values (passed to \code{fixed}).}
 \item{coefficients }{A named numeric. All coefficients needed to draw the optimised curve.}
@@ -75,7 +75,7 @@ Objects of class \code{frfit} have print, plot and lines methods defined. See th
 \references{
 Juliano SA (2001) \emph{Nonlinear curve fitting: Predation and functional response curves}. In: Scheiner SM, Gurevitch J (eds). \emph{Design and analysis of ecological experiments}. Oxford University Press, Oxford, United Kingdom. pp 178--196.
 
-Bolker, BM (2008) \emph{Ecological Models and Data in R}. Princeton University Press, Princeton, NJ.
+Bolker BM (2008) \emph{Ecological Models and Data in R}. Princeton University Press, Princeton, NJ.
 
 Bolker BM and others (2013) \emph{Strategies for fitting nonlinear ecological models in R, AD Model Builder, and BUGS}. Methods in Ecology and Evolution 4: 501--512. doi:10.1111/2041-210X.12044.
 }

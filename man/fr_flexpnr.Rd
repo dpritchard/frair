@@ -15,10 +15,10 @@
 
 \arguments{
   \item{data }{A dataframe containing X and Y.}
-  \item{samp }{A vector specifying the rows of data to use in the fit. Provided by \code{boot()} or manually, as required}
+  \item{samp }{A vector specifying the rows of data to use in the fit. Provided by \code{boot()} or manually, as required.}
   \item{start }{A named list. Starting values for items to be optimised.  Usually 'a' and 'h'.}
   \item{fixed }{A names list. 'Fixed data' (not optimised). Usually 'T'.}
-  \item{boot }{A logical. Is the function being called for use by the boot function?}
+  \item{boot }{A logical. Is the function being called for use by \code{boot()}?}
   \item{windows }{A logical. Is the operating system Microsoft Windows?}
   \item{b, q, h }{The search coefficient (\emph{b}), scaling exponent (\emph{q}) and the handling time (\emph{h}). Usually items to be optimised.}
   \item{T }{\emph{T}, the total time available.}
@@ -36,11 +36,11 @@ and then (\emph{a}) is used to calculate the number of prey eaten (\emph{Ne}) fo
 
 \deqn{N_e=N_0(1-e^{(a(N_eh-T))})}{Ne=N0*(1-exp(a*(Ne*h-T)))}
 
-Where \emph{b} is a search coefficient and other coefficients are as defined in \code{\link{rogersII}}. Because \emph{Ne} appears on both side of the equation, the solution is found using Lambert's transcendental equation. FRAIR uses the \code{\link[lamW]{lambertW0}} function from the \emph{lamW} package and the internal function is:
+where \emph{b} is a search coefficient and other coefficients are as defined in \code{\link{rogersII}}. Because \emph{Ne} appears on both side of the equation, the solution is found using Lambert's transcendental equation. FRAIR uses the \code{\link[lamW]{lambertW0}} function from the \emph{lamW} package and the internal function is:
 
 \code{Ne <- X - lambertW0(a * h * X * exp(-a * (T - h * X)))/(a * h)}
 
-where \eqn{X = N0}. When \eqn{q = 0} then \eqn{a = b} and the relationship collapses to traditional type-II Rogers' random predator equation. There is, therefore, a useful test on \eqn{q = 0} in the summary of the fit. 
+where \eqn{X = N0}. When \eqn{q = 0}, then \eqn{a = b} and the relationship collapses to traditional type-II Rogers' random predator equation. There is, therefore, a useful test on \eqn{q = 0} in the summary of the fit. 
 
 None of these functions are designed to be called directly, though they are all exported so that the user can call them directly if desired. The intention is that they are called via \code{\link{frair_fit}}, which calls them in the order they are specified above.
 
@@ -48,7 +48,7 @@ None of these functions are designed to be called directly, though they are all 
 
 The core fitting is done by \code{\link{mle2}} from the \code{bbmle} package and users are directed there for more information. \code{mle2} uses the \code{flexpnr_nll} function to optimise \code{flexpnr}.
 
-Further references and recommended reading can be found on the the help page for \link{frair_fit}.
+Further references and recommended reading can be found on the help page for \link{frair_fit}.
 }
 
 \author{
@@ -60,7 +60,7 @@ Daniel Pritchard
 }
 
 \references{
-Real LA (1977) The Kinetics of Functional Response. The American Naturalist, 111: 289--300.
+Real LA (1977) The Kinetics of Functional Response. \emph{The American Naturalist} 111: 289--300.
 }
 
 \examples{
