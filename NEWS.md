@@ -29,6 +29,7 @@
 - When the `tozero` argument of `lines.frfit`, `lines.frboot` and `drawpoly.frboot` are TRUE, these functions try to plot to zero. If that results in an undefined value for the fitted response, then it draws to 1e-04 instead and a warning is thrown. Note this does not guarantee all bootstrapped fits will be defined at this value either. 
 - All of the internal `get` calls are scoped to 'package:frair'. This means it's no longer possible (whether accidentally or deliberately) to 'overwrite' FRAIR functions with those in the global namespace. This functionality might return in the future alongside some formal documentation for extending FRAIR. 
 - Minor changes to `print.frboot` removing an unnecessary extra line break. Yep. Big stuff! 
+- Tests! Finally.  
 
 ## Temporary changes
 - The call to `boot` **does not** use `::`.  The reason is that in the (fairly likely) scenario that users go digging into the structure of the frboot objects and call `obj$fit` directly, the `boot::boot` in the call confuses `print.boot` and it reports some pretty crazy stuff! 
