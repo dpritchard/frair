@@ -4,7 +4,8 @@
 # Provides packageswide checking of start values
 fr_checkstart <- function(start, start_name){
     if(length(start)==0){
-        stop("You didn't provide starting values. It's impossible to fit anything without knowing what to optimise!")
+        stop(paste0("You didn't provide starting values.\n",
+                    "   It's impossible to fit anything without knowing what to optimise!"))
     }
     if(!is.list(start) | is.null(names(start))){
         stop(paste0(start_name, " must be a list containing single, named numeric values."))

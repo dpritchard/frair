@@ -11,7 +11,7 @@ frair_fit <- function(formula, data, response, start=list(), fixed=NULL){
     leftside <- all.vars(expandform[[2]])
     rightside <- all.vars(expandform[[3]])
     if(length(leftside)!=1 || length(rightside)!=1) {
-        stop('Currently only formulae with one dependent and one independent variable (e.g. y ~ x) are supported.')
+        stop('Only simple formulae (e.g. y ~ x) are supported.')
     }
     m <- match(c("formula", "data"), names(mf), 0L)
     mf <- mf[c(1L, m)]
@@ -30,7 +30,7 @@ frair_fit <- function(formula, data, response, start=list(), fixed=NULL){
     resp_known <- names(frair_responses(show=FALSE))
     resp_check <- match(response, resp_known, 0L)
     if(resp_check==0){
-        stop(paste0(deparse(substitute(response)), ' is not a recognised response. Use frair_responses(show=T) to see what has been implemented.'))
+        stop(paste0(deparse(substitute(response)), ' is not a recognised response.\n   Use frair_responses(show=T) to see what has been implemented.'))
     }
     
     # Check start
@@ -56,11 +56,30 @@ frair_fit <- function(formula, data, response, start=list(), fixed=NULL){
     if(any(is.na(input_matches))){
         missing_input <- req_input[is.na(input_matches)]
         if(length(missing_input)>1){
-            stop(paste("Your requested response function requires input: ", paste(req_input, collapse=', '), ".\n  The following items are missing: ", paste(missing_input, collapse=', '), ".\n  Please provide them via 'start' or 'fixed', as appropriate.", sep=''))
+            stop(paste("Your requested response function requires input: ", paste(req_input, collapse=', '), ".\n",
+                       "   The following items are missing: ", paste(missing_input, collapse=', '), ".\n",
+                       "   Please provide them via 'start' or 'fixed', as appropriate.", sep=''))
         } else {
-            stop(paste("Your requested response function requires input: ", paste(req_input, collapse=', '), ".\n  The following item is missing: ", paste(missing_input, collapse=', '), ".\n  Please provide it via 'start' or 'fixed', as appropriate.", sep=''))
+            stop(paste("Your requested response function requires input: ", paste(req_input, collapse=', '), ".\n",
+                       "   The following item is missing: ", missing_input, ".\n",
+                       "   Please provide them via 'start' or 'fixed', as appropriate.", sep=''))
         }
     }
+    # Check we don't have superfluious input (MLE2 will bitch it's arse off otherwise [and rightly too!])
+    input_matches <- match(c(names(start), names(fixed)), req_input, NA) # Inverse of above matching
+    if(any(is.na(input_matches))){
+        missing_input <- c(names(start), names(fixed))[is.na(input_matches)]
+        if(length(missing_input)>1){
+            stop(paste("Your requested response function requires input: ", paste(req_input, collapse=', '), ".\n",
+                       "   The following items are not needed: ", paste(missing_input, collapse=', '), ".\n",
+                       "   Please remove them from 'start' or 'fixed'.", sep=''))
+        } else {
+            stop(paste("Your requested response function requires input: ", paste(req_input, collapse=', '), ".\n",
+                       "   The following item is not needed: ", missing_input, ".\n",
+                       "   Please remove it from 'start' or 'fixed'.", sep=''))
+        }
+    }
+    
     ## Go time!
     # Setup output
     out <- list('call' = call, 'x' = moddata$X, 'y'=moddata$Y, 'response'=response, 'xvar' = rightside, 'yvar' = leftside, optimvars=names(start), fixedvars=names(fixed))
