@@ -1,9 +1,17 @@
 # frair
 
-A spinoff from [dgmisc][dgmisc] to focus specifically on functional response anlaysis.  This code is developed by members of the Functional Response Anlaysis group at [Queen's Univeirsty Belfast][qub] and matinained by [Daniel Pritchard][dp]
+A package for functional response analysis.  
+
+This code is developed by former members of the Functional Response Analysis group at [Queen's University Belfast][qub] and maintained by [Daniel Pritchard][dp]
 
 ## Installation
-This package is under heavy development, but users who are keen to have a crack can install it from here on GitHub using Hadley Wickham's `devtools` package.  Users on Windows will also need the [R Build Tools][rtools] corresponding to their version of R.
+The "stable" version of FRAIR can be installed from CRAN. 
+
+````
+install.packages('frair')
+````
+
+The version on Github is under development, but users who are keen to have a crack can install it from here using Hadley Wickham's `devtools` package.
 
 ````  
 install.packages('devtools')

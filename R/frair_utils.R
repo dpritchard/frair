@@ -71,6 +71,6 @@ fr_catchlist <- function(expr) {
 }
 
 ## The startup method
-.onAttach <- function(lib, pkg)  {
-    packageStartupMessage('This is the release version of frair (v. ', utils::packageDescription("frair", field="Version"), ')', appendLF = TRUE)
-}
+# .onAttach <- function(lib, pkg)  {
+#     packageStartupMessage('This is FRAIR (v. ', utils::packageDescription("frair", field="Version"), ')', appendLF = TRUE)
+# }

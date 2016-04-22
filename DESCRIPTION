@@ -1,11 +1,19 @@
 Package: frair
 Type: Package
-Title: Functional Response Analysis in R
+Title: Tools for Functional Response Analysis
 Version: 0.4.1
-Date: 2015-12-12
-Author: Daniel Pritchard
-Maintainer: Daniel Pritchard <daniel@pritchard.co>
-Description: Tools to support sensible statistics for functional response analysis.   
+Date: 2016-04-23
+Authors@R: c(
+    person("Daniel", "Pritchard", email = "daniel@pritchard.co", role = c("aut", "cre")),
+    person("Daniel", "Barrios-O'Neill", email = "danny_of_neill@yahoo.co.uk", role = "ctb"),
+    person("Helene", "Bovy", email = "helene.bovy@gmail.com", role = "ctb"),
+    person("Rachel", "Paterson", email = "rachelpatersonnz@gmail.com", role = "ctb")
+    )
+Description: Tools to support sensible statistics for functional response analysis.
 Depends: R (>= 3.0.0), stats4, bbmle
-Imports: lamW, boot, parallel
+Imports: lamW (>= 1.0), boot, parallel
 License: GPL-2
+Suggests: testthat
+LazyData: TRUE
+URL: https://github.com/dpritchard/frair
+BugReports: https://github.com/dpritchard/frair/issues
