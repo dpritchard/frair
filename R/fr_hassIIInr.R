@@ -20,7 +20,7 @@ hassIIInr_fit <- function(data, samp, start, fixed, boot=FALSE, windows=FALSE) {
 	dat <- data[samp,]
 	out <- fr_setupout(start, fixed, samp)
 
-	try_hassIIInr <- try(mle2(hassIIInr_nll, start=start, fixed=fixed, data=list('X'=dat$X, 'Y'=dat$Y), 
+	try_hassIIInr <- try(bbmle::mle2(hassIIInr_nll, start=start, fixed=fixed, data=list('X'=dat$X, 'Y'=dat$Y), 
 	                         optimizer='optim', method='Nelder-Mead', control=list(maxit=5000)), 
 	                   silent=T)
 	if (inherits(try_hassIIInr, "try-error")) {

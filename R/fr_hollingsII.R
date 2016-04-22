@@ -17,7 +17,7 @@ hollingsII_fit <- function(data, samp, start, fixed, boot=FALSE, windows=FALSE) 
 	dat <- data[samp,]
 	out <- fr_setupout(start, fixed, samp)
 
-    try_hollingsII <- try(mle2(hollingsII_nll, start=start, fixed=fixed, data=list('X'=dat$X, 'Y'=dat$Y), 
+    try_hollingsII <- try(bbmle::mle2(hollingsII_nll, start=start, fixed=fixed, data=list('X'=dat$X, 'Y'=dat$Y), 
                                optimizer='optim', method='Nelder-Mead', control=list(maxit=5000)), 
                           silent=T)
 	if (inherits(try_hollingsII, "try-error")) {
@@ -48,7 +48,7 @@ hollingsII_fit <- function(data, samp, start, fixed, boot=FALSE, windows=FALSE) 
  		}
  	}
 }	
-# hollingsII_nll: Provides negative log-likelihood for estimations via mle2()
+# hollingsII_nll: Provides negative log-likelihood for estimations via bbmle::mle2()
 hollingsII_nll <- function(a, h, T, X, Y) {
     if (a <= 0 || h <= 0) {return(NA)} # Estimates must be > zero
     prop.exp = hollingsII(X, a, h, T)/X

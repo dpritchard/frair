@@ -65,7 +65,7 @@ frair_fit <- function(formula, data, response, start=list(), fixed=NULL){
                        "   Please provide them via 'start' or 'fixed', as appropriate.", sep=''))
         }
     }
-    # Check we don't have superfluious input (MLE2 will bitch it's arse off otherwise [and rightly too!])
+    # Check we don't have superfluious input (bbmle::mle2 will bitch it's arse off otherwise [and rightly too!])
     input_matches <- match(c(names(start), names(fixed)), req_input, NA) # Inverse of above matching
     if(any(is.na(input_matches))){
         missing_input <- c(names(start), names(fixed))[is.na(input_matches)]

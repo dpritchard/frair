@@ -23,7 +23,7 @@ flexp_fit <- function(data, samp, start, fixed, boot=FALSE, windows=FALSE) {
     dat <- data[samp,]
     out <- fr_setupout(start, fixed, samp)
     
-    try_flexp <- try(mle2(flexp_nll, start=start, fixed=fixed, data=list('X'=dat$X, 'Y'=dat$Y), 
+    try_flexp <- try(bbmle::mle2(flexp_nll, start=start, fixed=fixed, data=list('X'=dat$X, 'Y'=dat$Y), 
                            optimizer='optim', method='Nelder-Mead', control=list(maxit=5000)), 
                       silent=T)
     if (inherits(try_flexp, "try-error")) {
@@ -55,7 +55,7 @@ flexp_fit <- function(data, samp, start, fixed, boot=FALSE, windows=FALSE) {
     }
 }
 
-# flexp_nll: Provides negative log-likelihood for estimations via mle2()
+# flexp_nll: Provides negative log-likelihood for estimations via bbmle::mle2()
 flexp_nll <- function(b, q, h, T, X, Y) {
     if (b <= 0 || h <= 0) {return(NA)} # Estimates must be > zero
     if (q < -1){return(NA)} # q+1 must be positive

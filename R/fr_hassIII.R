@@ -22,7 +22,7 @@ hassIII_fit <- function(data, samp, start, fixed, boot=FALSE, windows=FALSE) {
 	dat <- data[samp,]
 	out <- fr_setupout(start, fixed, samp)
 
-    try_hassIII <- try(mle2(hassIII_nll, start=start, fixed=fixed, data=list('X'=dat$X, 'Y'=dat$Y), 
+    try_hassIII <- try(bbmle::mle2(hassIII_nll, start=start, fixed=fixed, data=list('X'=dat$X, 'Y'=dat$Y), 
                             optimizer='optim', method='Nelder-Mead', control=list(maxit=5000)), 
                        silent=T)
 	if (inherits(try_hassIII, "try-error")) {
@@ -53,7 +53,7 @@ hassIII_fit <- function(data, samp, start, fixed, boot=FALSE, windows=FALSE) {
  		}
  	}
 }	
-# hassIII_nll: Provides negative log-likelihood for estimations via mle2()
+# hassIII_nll: Provides negative log-likelihood for estimations via bbmle::mle2()
 hassIII_nll <- function(b, c, h, T, X, Y) {
     if (h <= 0 || b <= 0) {return(NA)} # h and b estimates must be > zero
     if (c < 0) {return(NA)} # c must be positive (can be negative)

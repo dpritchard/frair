@@ -56,12 +56,12 @@ frair_compare <- function(frfit1, frfit2, start=NULL){
     
     # TODO: v0.5 - This is probably bad practice - deal with the method issue properly!
     if(length(unlist(start))>1){
-        try_test <- try(mle2(minuslogl=fr_nll_difffunc, start=start, fixed=fixed, 
+        try_test <- try(bbmle::mle2(minuslogl=fr_nll_difffunc, start=start, fixed=fixed, 
                              data=list('X'=Xin, 'Y'=Yin, grp=grp), optimizer='optim', 
                              method='Nelder-Mead', control=list(maxit=5000)), 
                         silent=TRUE)
     } else {
-        try_test <- try(mle2(minuslogl=fr_nll_difffunc, start=start, fixed=fixed, 
+        try_test <- try(bbmle::mle2(minuslogl=fr_nll_difffunc, start=start, fixed=fixed, 
                              data=list('X'=Xin, 'Y'=Yin, grp=grp), optimizer='optim', 
                              control=list(maxit=5000)), 
                         silent=TRUE)
@@ -71,7 +71,7 @@ frair_compare <- function(frfit1, frfit2, start=NULL){
         stop(paste0('Refitting the model for the test failed with the error: \n', try_test[1], '\nNo fallback exists, please contact the package author.'))
     }
     
-    # Get output from mle2 and calculate statistics
+    # Get output from bbmle::mle2 and calculate statistics
     cmatall <- cbind(Estimate = try_test@coef, 'Std. Error' = sqrt(diag(try_test@vcov)))
     zval <- cmatall[,'Estimate']/cmatall[,'Std. Error']
     pval <- 2*pnorm(-abs(zval))

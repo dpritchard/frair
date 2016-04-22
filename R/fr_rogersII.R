@@ -32,7 +32,7 @@ rogersII_fit <- function(data, samp, start, fixed, boot=FALSE, windows=FALSE) {
 	dat <- data[samp,]
 	out <- fr_setupout(start, fixed, samp)
 
-    try_rogersII <- try(mle2(rogersII_nll, start=start, fixed=fixed, data=list('X'=dat$X, 'Y'=dat$Y), 
+    try_rogersII <- try(bbmle::mle2(rogersII_nll, start=start, fixed=fixed, data=list('X'=dat$X, 'Y'=dat$Y), 
                              optimizer='optim', method='Nelder-Mead', control=list(maxit=5000)), 
                         silent=T) # Remove 'silent=T' for more verbose output
 	if (inherits(try_rogersII, "try-error")) {
@@ -64,7 +64,7 @@ rogersII_fit <- function(data, samp, start, fixed, boot=FALSE, windows=FALSE) {
  	}
 }	
 # rogersII_nll
-# Provides negative log-likelihood for estimations via mle2()
+# Provides negative log-likelihood for estimations via bbmle::mle2()
 # See Ben Bowkers book for more info
 rogersII_nll <- function(a, h, T, X, Y) {
     if (a <= 0 || h <= 0){return(NA)}

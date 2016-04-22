@@ -24,7 +24,7 @@ typeI_fit <- function(data, samp, start, fixed, boot=FALSE, windows=FALSE) {
     dat <- data[samp,]
     out <- fr_setupout(start, fixed, samp)
     
-    try_typeI <- try(mle2(typeI_nll, start=start, fixed=fixed, data=list('X'=dat$X, 'Y'=dat$Y), optimizer='optim'), 
+    try_typeI <- try(bbmle::mle2(typeI_nll, start=start, fixed=fixed, data=list('X'=dat$X, 'Y'=dat$Y), optimizer='optim'), 
                      silent=T)
     ## Remove 'silent=T' for more verbose output
     if (inherits(try_typeI, "try-error")){
@@ -56,7 +56,7 @@ typeI_fit <- function(data, samp, start, fixed, boot=FALSE, windows=FALSE) {
     }
 }	
 # typeI_nll
-# Provides negative log-likelihood for estimations via mle2()
+# Provides negative log-likelihood for estimations via bbmle::mle2()
 # See Bowkers book for more info
 # Generalised from rogersII_nll, should be OK (DP)
 typeI_nll <- function(a, T, X, Y) {

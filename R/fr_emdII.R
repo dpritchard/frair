@@ -26,7 +26,7 @@ emdII_fit <- function(data, samp, start, fixed, boot=FALSE, windows=FALSE) {
 	dat <- data[samp,]
 	out <- fr_setupout(start, fixed, samp)
 
-    try_emdII <- try(mle2(emdII_nll, start=start, fixed=fixed, data=list('X'=dat$X, 'Y'=dat$Y), 
+    try_emdII <- try(bbmle::mle2(emdII_nll, start=start, fixed=fixed, data=list('X'=dat$X, 'Y'=dat$Y), 
                          optimizer='optim', method='Nelder-Mead', control=list(maxit=5000)), 
                     silent=T)
 	if (inherits(try_emdII, "try-error")) {
@@ -58,7 +58,7 @@ emdII_fit <- function(data, samp, start, fixed, boot=FALSE, windows=FALSE) {
  	}
 }	
 # emdII_nll
-# Provides negative log-likelihood for estimations via mle2()
+# Provides negative log-likelihood for estimations via bbmle::mle2()
 # See Bowkers book for more info
 emdII_nll <- function(a, h, P, T, X, Y) {
 	if (a < 0 || h < 0){return(NA)}
