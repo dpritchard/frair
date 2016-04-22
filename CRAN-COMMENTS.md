@@ -1,16 +1,14 @@
+## Bug update
+Kia ora from New Zealand.  
+This is a bug-fix and maintenance release for FRAIR.  
+All of the relevant changes (both user-facing, and back-end) are documented in NEWS.md
+
 ## Test environments
-- local OS X install, R 3.1.2
-- ubuntu 12.04 (on travis-ci), R 3.1.2
-- win-builder (devel and release)
+- Local OS X (El Capitan, v. 10.11.4): R 3.2.4
+- Win-Builder (devel and release)
 
 ## R CMD check results
-There were no ERRORs or WARNINGs. 
-
-There was 1 NOTE:
-
-* checking dependencies in R code ... NOTE
-  Namespace in Imports field not imported from: 'R6'
-
-  R6 is a build-time dependency.
+There were no ERRORs, WARNINGs or NOTEs
 
 ## Downstream dependencies
+This package still has no downstream dependancies, nor am I expecting there to be very many (if any) in the foreseeable future!
