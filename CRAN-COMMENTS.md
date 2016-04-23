@@ -1,5 +1,6 @@
+Kia ora / Hello from New Zealand.  
+
 ## Bug update
-Kia ora from New Zealand.  
 This is a bug-fix and maintenance release for FRAIR.  
 All of the relevant changes (both user-facing, and back-end) are documented in NEWS.md
 
