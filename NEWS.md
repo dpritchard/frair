@@ -1,4 +1,8 @@
-# FRAIR v0.5
+# FRAIR v.0.5.100
+**Development Version**
+
+
+# FRAIR v.0.5
 
 ## Important user-facing changes
 - Changes to the Beddington-DeAngelis Type-II model 
@@ -7,8 +11,8 @@
 	- The original functions are now fully deprecated and removed from FRAIR. Trying to use them will throw an error. 
 	- The original code is now available as `emdII`. Hopefully this name better reflects its heritage. 
 - Changes to the real77 and real77r Models
-    - Prior to version 0.5 the `real77* family was internally consistent, but not terribly well specified. It is probable that the old specification made curves difficult to fit and generated non-sensical 'q' parameters. 
-    - The real77* family has now been fully deprecated and removed from FRAIR. Trying to use these functions will throw an error.  
+    - Prior to version 0.5 the `real77*` family was internally consistent, but not terribly well specified. It is probable that the old specification made curves difficult to fit and generated non-sensical 'q' parameters. 
+    - The `real77*` family has now been fully deprecated and removed from FRAIR. Trying to use these functions will throw an error.  
     - More sensible "flexible exponent" model specifications (`flexp` and `flexpnr`) have been added as a replacement. 
 - Changes to the hassIIIr model
     - Nothing substantive has changed internally, however this model is now called `hassIIInr`, which better reflects that it is a **N**on-**R**eplacement model.  
