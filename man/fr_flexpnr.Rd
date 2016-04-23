@@ -64,22 +64,43 @@ Real LA (1977) The Kinetics of Functional Response. \emph{The American Naturalis
 }
 
 \examples{
+# A 'type-II' example
 data(gammarus)
 
-pulex <- gammarus[gammarus$spp=='G.pulex',]
-
-rogfit <- frair_fit(eaten~density, data=pulex, 
+rogfit <- frair_fit(eaten~density, data=gammarus, 
                 response='rogersII', start=list(a = 1.2, h = 0.015), 
                 fixed=list(T=1))
-expofit <- frair_fit(eaten~density, data=pulex, 
+expofit <- frair_fit(eaten~density, data=gammarus, 
                 response='flexpnr', start=list(b = 1.2, q = 0, h = 0.015), 
                 fixed=list(T=1))
-# Plot
+## Plot
 plot(rogfit)
 lines(rogfit)
 lines(expofit, col=2)
 
+## Inspect
 summary(rogfit$fit)
-summary(expofit$fit)
-# No evidence that q is different from zero...
+summary(expofit$fit) # No evidence that q is different from zero...
+AIC(rogfit$fit)
+AIC(expofit$fit) # The exponent model is *not* preferred
+
+# A 'type-III' example
+data(bythotrephes)
+
+rogfit <- frair_fit(eaten~density, data=bythotrephes, 
+                response='rogersII', start=list(a = 1.2, h = 0.015), 
+                fixed=list(T=1))
+expofit <- frair_fit(eaten~density, data=bythotrephes, 
+                response='flexpnr', start=list(b = 1.2, q = 0, h = 0.015), 
+                fixed=list(T=1))
+## Plot
+plot(rogfit)
+lines(rogfit)
+lines(expofit, col=2)
+
+## Inspect
+summary(rogfit$fit)
+summary(expofit$fit) # Some evidence that q is different from zero...
+AIC(rogfit$fit)
+AIC(expofit$fit) # The exponent model is preferred
 }

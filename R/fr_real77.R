@@ -2,7 +2,7 @@
 # Now fully deprecated
 
 real77 <- function(...) {
-    msg <- paste0("The real77* family was deprecated in version 0.4.1.\n",
+    msg <- paste0("The real77* family was deprecated in version 0.5.\n",
                   "A more sensible alternative (the flexp* family) has been added.\n",
                   "See ?real77 for more information.\n")
     stop(msg, call. = FALSE)  

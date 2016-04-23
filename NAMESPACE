@@ -34,15 +34,23 @@ S3method(print,frconf)
 S3method(print,frtest)
 
 # Imports
-importFrom(parallel, detectCores)
-importFrom(boot, boot, boot.ci)
-importFrom(lamW, lambertW0)
+importFrom("parallel", "detectCores")
+importFrom("boot", "boot", "boot.ci")
+importFrom("lamW", "lambertW0")
 
 # Extra imports for depends objects (just to be sure!)
-importFrom(stats4,
-           coef, confint, logLik, summary, vcov, profile,
-           AIC, BIC)
-importFrom(bbmle, 
-           mle2, coef, confint, logLik, summary, vcov, profile,
-           AIC, AICc, qAICc, qAIC,
-           anova, deviance, residuals, simulate, predict, formula)
+importFrom("stats4",
+           "coef", "confint", "logLik", "summary", "vcov", "profile",
+           "AIC", "BIC")
+importFrom("bbmle", 
+           "mle2", "coef", "confint", "logLik", "summary", "vcov", "profile",
+           "AIC", "AICc", "qAICc", "qAIC",
+           "anova", "deviance", "residuals", "simulate", "predict", "formula")
+
+
+# Imports for 'core' packages
+importFrom("grDevices", "adjustcolor")
+importFrom("graphics", "lines", "plot", "polygon")
+importFrom("stats", "binomial", "dbinom", "glm", "na.omit", "pnorm",
+           "printCoefmat", "quantile", "terms")
+importFrom("utils", "flush.console")

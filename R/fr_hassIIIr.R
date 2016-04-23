@@ -1,5 +1,6 @@
-## Hassell's Type III pred-prey function not assuming replacement.
-# Now deprecated (gracefully). TODO: Remove in future versions.
+# Hassell's Type III pred-prey function not assuming replacement.
+# Now deprecated (gracefully). 
+# TODO: Remove in future versions (> 1.0).
 hassIIIr <- function(...) {
     warning("hassIIIr has been renamed and deprecated. Use hassIIInr instead.")
     hassIIInr(...)

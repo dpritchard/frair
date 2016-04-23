@@ -64,7 +64,16 @@ Flynn KJ, Fasham MJR, Hipkin CR (1997) Modelling the interactions between ammoni
 }
 
 \examples{
-# TODO: For v.0.5 
-# Find / generate example data that doesn't have Hessian problems!
-# See examples at help(flexpnr)
+data(bythotrephes)
+# NB: The flexpnr model is not correct for the experimental design of the bythotrephes data
+
+expofit <- frair_fit(eaten~density, data=bythotrephes, 
+                response='flexpnr', start=list(b = 0.5, q = 1, h = 0.15), 
+                fixed=list(T=1))
+## Plot
+plot(expofit)
+lines(expofit, col=2)
+
+## Inspect
+summary(expofit$fit) 
 }

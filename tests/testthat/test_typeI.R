@@ -51,6 +51,6 @@ test_that("different values for 'T' have the intended outcome", {
 })
 
 # With real data (albeit an inappropriate model for these data)
-## TODO: gammarus?
+## TODO: Gammarus?
 
 

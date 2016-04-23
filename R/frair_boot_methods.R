@@ -64,7 +64,7 @@ drawpoly <- function(x, upper, lower, ...) UseMethod("drawpoly")
 
 drawpoly.default <- function(x, upper, lower, ...){
     polygon(x=c(x, rev(x), x[1]), y=c(upper, rev(lower), upper[1]), ...)
-    # TODO, drawpoly should return this info invisibly?
+    # TODO: https://github.com/dpritchard/frair/issues/26
 }
 
 drawpoly.frboot <- function(x, ..., probs=c(0.025, 0.975), tozero=FALSE){

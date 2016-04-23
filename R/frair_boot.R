@@ -77,8 +77,7 @@ frair_boot <- function(frfit, start=NULL, strata=NULL, nboot=999, para=TRUE, nco
     # Get the response...
     frfunc <- get(unlist(frair_responses(show=FALSE)[[frfit$response]])[1], pos = "package:frair")
     # Do it!
-    ## NB: we are not using the "boot::boot" syntax here becuase it confuses boot:::print.boot, which relies on the exact phrase "boot" not "boot::boot"
-    ## TODO: contact package author of boot and discuss.  
+    ## TODO: https://github.com/dpritchard/frair/issues/25  
     if(stdo){
         frout <- boot(data=moddata, statistic=frfunc, R=nboot, sim = "ordinary", stype = "i", strata=stdat, 
                       start=start, fixed=fixed, boot=TRUE, windows=iswindows, 

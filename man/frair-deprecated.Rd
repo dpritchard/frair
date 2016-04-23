@@ -62,11 +62,11 @@
 
 \details{
 
-\code{bdII}, \code{bdII_fit} and \code{bdII_nll} were deprecated and removed from FRAIR in version 0.4.1. Although internally consistent, this code did not actually model the Beddington-DeAngelis type-II curve, as advertised. This code used in these functions was renamed \link{emdII}. A correct implementation of the Beddington-DeAngelis type-II curve (assuming replacement) will be added at some point in the future.  
+\code{bdII}, \code{bdII_fit} and \code{bdII_nll} were deprecated and removed from FRAIR in version 0.5. Although internally consistent, this code did not actually model the Beddington-DeAngelis type-II curve, as advertised. This code used in these functions was renamed \link{emdII}. A correct implementation of the Beddington-DeAngelis type-II curve (assuming replacement) will be added at some point in the future.  
 
-The \code{real77*} family were deprecated and removed from FRAIR in version 0.4.1. These functions were poorly specified, with unhelpful (that is to say: incorrect) definitions of the exponent term (\code{q}). More sensible flexible exponent model specifications (\code{\link{flexp}} and \code{\link{flexpnr}}) have been added as a replacement.  
+The \code{real77*} family were deprecated and removed from FRAIR in version 0.5. These functions were poorly specified, with unhelpful (that is to say: incorrect) definitions of the exponent term (\code{q}). More sensible flexible exponent model specifications (\code{\link{flexp}} and \code{\link{flexpnr}}) have been added as a replacement.  
 
-The \code{hassIIIr} model was renamed to \code{\link{hassIIInr}} in version 0.4.1. The previous name was confusing. The new name better reflects that it is a '\strong{n}on-\strong{r}eplacement' model.  
+The \code{hassIIIr} model was renamed to \code{\link{hassIIInr}} in version 0.5. The previous name was confusing. The new name better reflects that it is a '\strong{n}on-\strong{r}eplacement' model.  
 }
 
 \author{

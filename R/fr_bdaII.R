@@ -1,2 +1,2 @@
 # ## Beddington-DeAngelis Type-II curve
-# TODO > v0.5
+# TODO: https://github.com/dpritchard/frair/issues/19

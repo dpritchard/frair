@@ -1,5 +1,5 @@
 ## The Ecological Models and Data in R (EMD) Type-II curve
-# Formally known as the Beddington-DeAngelis Type-II curve in FRAIR < 0.4.1
+# Formally known as the Beddington-DeAngelis Type-II curve in FRAIR < 0.5
 # Reduces to rogers_II when P == 1
 # N0 replaced with 'X' for simplicity and consistency.
 # X = Number of 'prey' (prey density / concentration)
