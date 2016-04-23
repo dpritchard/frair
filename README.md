@@ -7,13 +7,13 @@ This code is developed by former members of the Functional Response Analysis gro
 ## Installation
 The "stable" version of FRAIR can be installed from CRAN. 
 
-````
+````r
 install.packages('frair')
 ````
 
 The version on Github is under development, but users who are keen to have a crack can install it from here using Hadley Wickham's `devtools` package.
 
-````  
+````r  
 install.packages('devtools')
 devtools::install_github('dpritchard/frair')
 library(frair)
