@@ -47,7 +47,7 @@ frair_boot <- function(frfit, start=NULL, strata=NULL, nboot=999, para=TRUE, nco
     
     # Get data out of frfit and setup output
     moddata <- data.frame('Y'=frfit$y, 'X'=frfit$x)
-    response <- frfit['response']
+    response <- frfit[['response']]
     # Check start
     if(is.null(start)){
         if(length(frfit$optimvars)==0){start <- NULL} else {start <- as.list(coef(frfit)[frfit$optimvars])}
@@ -75,7 +75,8 @@ frair_boot <- function(frfit, start=NULL, strata=NULL, nboot=999, para=TRUE, nco
     
     ## Go! ##
     # Get the response...
-    frfunc <- get(unlist(frair_responses(show=FALSE)[[frfit$response]])[1], pos = "package:frair")
+    #frfunc <- get(unlist(frair_responses(show=FALSE)[[frfit$response]])[1], pos = "package:frair")
+    frfunc <- get(unlist(frair_responses(show=FALSE)[[response]])[1]) # Get from anywhere, including the global NS
     # Do it!
     ## TODO: https://github.com/dpritchard/frair/issues/25  
     if(stdo){

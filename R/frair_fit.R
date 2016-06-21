@@ -87,7 +87,8 @@ frair_fit <- function(formula, data, response, start=list(), fixed=NULL){
     # In this instance, the sample is just the data itself...
     samp=c(1:nrow(moddata))
     ## Case specific fitting...
-    frfunc <- get(unlist(frair_responses(show=FALSE)[[response]])[1], pos = "package:frair")
+    #frfunc <- get(unlist(frair_responses(show=FALSE)[[response]])[1], pos = "package:frair")
+    frfunc <- get(unlist(frair_responses(show=FALSE)[[response]])[1]) # Get from anywhere, including the global NS
     frout <- frfunc(data=moddata, samp=c(1:nrow(moddata)), start=start, fixed=fixed)
     ## End case specific fitting...
     

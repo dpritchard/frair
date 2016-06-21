@@ -11,7 +11,8 @@ frair_compare <- function(frfit1, frfit2, start=NULL){
     }
     # Get the name of the 'XX_nll_diff' function
     #fr_nll_difffunc <- get(paste0(unlist(frair_responses(show=FALSE)[[frfit1$response]])[1],'_nll_diff'), pos = "package:frair")
-    fr_nll_difffunc <- get(paste0(frfit1$response,'_nll_diff'), pos = "package:frair")
+    #fr_nll_difffunc <- get(paste0(frfit1$response,'_nll_diff'), pos = "package:frair")
+    fr_nll_difffunc <- get(paste0(frfit1$response,'_nll_diff'))
     
     if(any(frfit1$optimvars!=frfit2$optimvars)){
         stop('Both inputs must have the same optimised variables.')

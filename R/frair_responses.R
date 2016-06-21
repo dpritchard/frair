@@ -3,21 +3,24 @@
 ## fr_resp_known is the master list of usable functions.
 ## each named entry here must have a corresponding function entry (e.g. fr_rogersII.R) and vice versa.
 
+fr_resp_known <- list(
+    "typeI"=list("typeI_fit", "A generic linear (type I) response", FALSE, 'a'),
+    "hollingsII"=list("hollingsII_fit", "Holling's orginal type II function", FALSE, c('a','h')),
+    "rogersII"=list("rogersII_fit", "Roger's type II decreasing prey function", TRUE, c('a','h')), 
+    "hassIII"=list("hassIII_fit", "Hassell's original type III function", FALSE, c('b','c','h')),
+    "hassIIInr"=list("hassIIInr_fit", "Hassell's type III function, not assuming replacement", TRUE, c('b','c','h')),
+    
+    "emdII"=list("emdII_fit", "Ecological Models and Data in R type II function", TRUE, c('a','h')),
+    "flexp"=list("flexp_fit", "Flexible exponent model, assuming replacement", FALSE, c('b','q','h')),
+    "flexpnr"=list("flexpnr_fit", "Flexible exponent model, not assuming replacement", TRUE, c('b','q','h'))
+)
+# "bdII"=list("bdII_fit", "Beddington-DeAngelis type II function", TRUE, c('a','h'))
+# "real77"=list("real77_fit", "Real (1977) curve (assuming replacement)", FALSE, c('b','q','h'))
+# "real77r"=list("real77r_fit", "Real (1977) curve (not assuming replacement)", TRUE, c('b','q','h'))
+
+
 frair_responses <- function(show=TRUE){
-    fr_resp_known <- list(
-        "typeI"=list("typeI_fit", "A generic linear (type I) response", FALSE, 'a'),
-        "hollingsII"=list("hollingsII_fit", "Holling's orginal type II function", FALSE, c('a','h')),
-        "rogersII"=list("rogersII_fit", "Roger's type II decreasing prey function", TRUE, c('a','h')), 
-        "hassIII"=list("hassIII_fit", "Hassell's original type III function", FALSE, c('b','c','h')),
-        "hassIIInr"=list("hassIIInr_fit", "Hassell's type III function, not assuming replacement", TRUE, c('b','c','h')),
-        
-        "emdII"=list("emdII_fit", "Ecological Models and Data in R type II function", TRUE, c('a','h')),
-        "flexp"=list("flexp_fit", "Flexible exponent model, assuming replacement", FALSE, c('b','q','h')),
-        "flexpnr"=list("flexpnr_fit", "Flexible exponent model, not assuming replacement", TRUE, c('b','q','h'))
-    )
-    # "bdII"=list("bdII_fit", "Beddington-DeAngelis type II function", TRUE, c('a','h'))
-    # "real77"=list("real77_fit", "Real (1977) curve (assuming replacement)", FALSE, c('b','q','h'))
-    # "real77r"=list("real77r_fit", "Real (1977) curve (not assuming replacement)", TRUE, c('b','q','h'))
+    
     if(show){
         C1 <- c('Response',names(fr_resp_known))
         C2 <- 'Replacement?'
@@ -26,7 +29,8 @@ frair_responses <- function(show=TRUE){
         
         for (a in 1:length(fr_resp_known)) { 
             C2 <- c(C2, ifelse(unlist(lapply(fr_resp_known, '[[', 3)), "No", "Yes"))
-            C3 <- c(C3, paste(names(formals(fun=get(names(fr_resp_known)[a], pos = "package:frair"))), collapse=','))
+            #C3 <- c(C3, paste(names(formals(fun=get(names(fr_resp_known)[a], pos = "package:frair"))), collapse=','))
+            C3 <- c(C3, paste(names(formals(fun=get(names(fr_resp_known)[a]))), collapse=','))
             C4 <- c(C4, unlist(fr_resp_known[[a]][2]))
         }
         pad <- 2
