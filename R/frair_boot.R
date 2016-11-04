@@ -67,9 +67,9 @@ frair_boot <- function(frfit, start=NULL, strata=NULL, nboot=999, para=TRUE, nco
     class(out)[class(out)=='frfit'] <- 'frboot'
     
     # Print some output to calm people's nerves!
-    cat('BOOTSTRAPPING.\n')
+    message('BOOTSTRAPPING.')
     if(frair_responses(show=FALSE)[[frfit$response]][[3]]){
-        cat(paste0('NB: This function calls the lambertW function. Please be patient.'))
+        message(paste0('NB: This function calls the lambertW function. Please be patient.'))
     }
     flush.console()
     

@@ -18,7 +18,7 @@ print.frboot <- function(x, ...){
     btconf <- confint(x, citypes='bca')
     
     print(btconf)
-    cat('\nNOTE: It is recomended you inspect the raw fit too (see: ?frair_boot)\n')
+    cat('\nNOTE: It is recommended you inspect the raw fit too (see: ?frair_boot)\n')
 }
 
 plot.frboot <- function(x, xlab=x$xvar, ylab=x$yvar, ...){
@@ -85,7 +85,7 @@ drawpoly.frboot <- function(x, ..., probs=c(0.025, 0.975), tozero=FALSE){
     bootcoefs <- na.omit(x$bootcoefs)
     outdd <- matrix(ncol=length(newx), nrow=nrow(bootcoefs))
     
-    cat('\nCalculating polygons.\n\n')
+    message('Calculating polygons.')
     flush.console()
     for(a in 1:nrow(bootcoefs)){
         outdd[a,] <- fitfun(newx, as.list(as.list(bootcoefs[a,])))

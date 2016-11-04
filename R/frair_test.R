@@ -56,9 +56,9 @@ print.frtest <- function(x, ...){
     # If the first coefficient isn't significant, it is flat and therefore a type-I
     #if(T2CoefOut[1,4]>=0.05){
     #    t1sig <- TRUE
-    #    cat('Evidence for type-I reponse:\tYes\n')
-    #    cat('Evidence for type-II reponse:\t-\n')
-    #    cat('Evidence for type-III reponse:\t-\n\n')
+    #    cat('Evidence for type-I response:\tYes\n')
+    #    cat('Evidence for type-II response:\t-\n')
+    #    cat('Evidence for type-III response:\t-\n\n')
     #
     # If the first coefficient is negative and significant, it is a type-II
     #} else if(T2CoefOut[1,1]<0 & T2CoefOut[1,4]<0.05){
@@ -66,9 +66,9 @@ print.frtest <- function(x, ...){
     # If the first coefficient is negative and significant, it is a type-II
     if(T2CoefOut[1,1]<0 & T2CoefOut[1,4]<0.05){
         t2sig <- TRUE
-        #cat('Evidence for type-I reponse:\tNo\n')
-        cat('Evidence for type-II reponse:\tYes\n')
-        cat('Evidence for type-III reponse:\t-\n\n')
+        #cat('Evidence for type-I response:\tNo\n')
+        cat('Evidence for type-II response:\tYes\n')
+        cat('Evidence for type-III response:\t-\n\n')
     
     # If nothing has been triggered yet then it might be a type-III
     # The first must be positve, and significant
@@ -76,9 +76,9 @@ print.frtest <- function(x, ...){
     } else if(T3CoefOut[1,1]>0 & T3CoefOut[1,4]<0.05 & 
               T3CoefOut[2,1]<0 & T3CoefOut[2,4]<0.05){
         t3sig <- TRUE
-        #cat('Evidence for type-I reponse:\tNo\n')
-        cat('Evidence for type-II reponse:\tNo\n')
-        cat('Evidence for type-III reponse:\tYes\n\n')
+        #cat('Evidence for type-I response:\tNo\n')
+        cat('Evidence for type-II response:\tNo\n')
+        cat('Evidence for type-III response:\tYes\n\n')
     
     # If nothing else has been triggered, we might have a problem
     } else {

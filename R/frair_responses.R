@@ -6,7 +6,7 @@
 frair_responses <- function(show=TRUE){
     fr_resp_known <- list(
         "typeI"=list("typeI_fit", "A generic linear (type I) response", FALSE, 'a'),
-        "hollingsII"=list("hollingsII_fit", "Holling's orginal type II function", FALSE, c('a','h')),
+        "hollingsII"=list("hollingsII_fit", "Holling's original type II function", FALSE, c('a','h')),
         "rogersII"=list("rogersII_fit", "Roger's type II decreasing prey function", TRUE, c('a','h')), 
         "hassIII"=list("hassIII_fit", "Hassell's original type III function", FALSE, c('b','c','h')),
         "hassIIInr"=list("hassIIInr_fit", "Hassell's type III function, not assuming replacement", TRUE, c('b','c','h')),
