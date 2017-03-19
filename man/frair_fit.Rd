@@ -107,6 +107,26 @@ summary(outI$fit)
 # Compare models using AIC
 AIC(outI$fit,outII$fit)
 
+# Bythotrephes
+data("bythotrephes")
+# Fit several models and examine them using AIC. 
+b_flex <- frair_fit(eaten~density, data=bythotrephes, 
+                    response='flexpnr', 
+                    start=list(b = 1.2, q = 0, h = 0.015), 
+                    fixed=list(T=1))
+b_II <- frair_fit(eaten~density, data=bythotrephes, 
+                  response='flexpnr', 
+                  start=list(b = 1.2, h = 0.015), 
+                  fixed=list(T=1, q = 0))
+b_rogersII <- frair_fit(eaten~density, data=bythotrephes, 
+                  response='rogersII', 
+                  start=list(a = 1.2, h = 0.015), 
+                  fixed=list(T=1))
+AIC(b_flex$fit, b_II$fit, b_rogersII$fit)
+AICtab(b_flex$fit, b_II$fit, b_rogersII$fit)
+# b_II and b_rogersII are identical, by definition when q = 0
+# b_flex is strongly preferred (delta AIC = 16.9)
+
 \dontrun{
 ## Fitting curves outside of FRAIR (to diagnose problems)
 # Using mle2 or mle manually:
