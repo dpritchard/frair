@@ -128,12 +128,22 @@ AICtab(b_flex$fit, b_II$fit, b_rogersII$fit)
 # b_flex is strongly preferred (delta AIC = 16.9)
 
 \dontrun{
-## Fitting curves outside of FRAIR (to diagnose problems)
+## Fitting curves outside of FRAIR
+# Many advanced users will not be satisfied with FRAIR current limitations.
+# To fit models outside FRAIR, you could proceed as follows:
+
 # Using mle2 or mle manually:
-manual_fit <- mle2(rogersII_nll, start=list(a = 1.2, h = 0.015), 
-        fixed=list(T=1), method='SANN', 
-        data=list('X'=gammarus$density, 'Y'=gammarus$eaten))
+strt <- list(a = 1.2, h = 0.015)
+fxd <- list(T=1)
+dat <- list('X'=gammarus$density, 'Y'=gammarus$eaten)
+manual_fit <- mle2(rogersII_nll, start=strt, fixed=fxd, 
+                   method='SANN', data=dat)
 # Note that the SANN method is *not* a general-purpose algorithm, 
-#   but it will return *something*
+# but it will return *something*, so might be helpful for finding starting values.
+
+# Controlling iterations, optimisers, etc... See ?mle2 and ?optim
+cntrl <- list(trace = 3, maxit = 1000)
+manual_fit_2 <- mle2(rogersII_nll, start=strt, fixed=fxd, 
+                     method='BFGS', data=dat, control=cntrl)
 }
 }
