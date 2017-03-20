@@ -69,10 +69,10 @@ data(gammarus)
 
 rogfit <- frair_fit(eaten~density, data=gammarus, 
                 response='rogersII', start=list(a = 1.2, h = 0.015), 
-                fixed=list(T=1))
+                fixed=list(T=40/24))
 expofit <- frair_fit(eaten~density, data=gammarus, 
                 response='flexpnr', start=list(b = 1.2, q = 0, h = 0.015), 
-                fixed=list(T=1))
+                fixed=list(T=40/24))
 ## Plot
 plot(rogfit)
 lines(rogfit)
@@ -89,10 +89,10 @@ data(bythotrephes)
 
 rogfit <- frair_fit(eaten~density, data=bythotrephes, 
                 response='rogersII', start=list(a = 1.2, h = 0.015), 
-                fixed=list(T=1))
+                fixed=list(T=12/24))
 expofit <- frair_fit(eaten~density, data=bythotrephes, 
                 response='flexpnr', start=list(b = 1.2, q = 0, h = 0.015), 
-                fixed=list(T=1))
+                fixed=list(T=12/24))
 ## Plot
 plot(rogfit)
 lines(rogfit)

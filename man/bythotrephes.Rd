@@ -12,7 +12,7 @@
 		size: \tab A factor with levels 'small', 'medium' and 'large'. The size of prey items.
 	}
 }
-\details{\emph{Bythotrephes} spp. (water fleas) preying on prey items of different sizes. Prey were not replaced during the experiment. Provides a  example dataset for type-III and flexible exponent models. }
+\details{\emph{Bythotrephes} spp. (water fleas) preying on prey items of different sizes. Prey were not replaced during the experiment and total experimental time was 12 hours. Provides a  example dataset for type-III and flexible exponent models. }
 \source{Daniel Barrios-O'Neill.}
 \examples{
 data(bythotrephes)

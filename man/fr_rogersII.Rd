@@ -65,10 +65,10 @@ celt <- gammarus[gammarus$spp=='G.d.celticus',]
 
 pulexfit <- frair_fit(eaten~density, data=pulex, 
                 response='rogersII', start=list(a = 1.2, h = 0.015), 
-                fixed=list(T=1))
+                fixed=list(T=40/24))
 celtfit <- frair_fit(eaten~density, data=celt, 
                 response='rogersII', start=list(a = 1.2, h = 0.015), 
-                fixed=list(T=1))
+                fixed=list(T=40/24))
 
 plot(c(0,30), c(0,30), type='n', xlab='Density', ylab='No. Eaten')
 points(pulexfit)

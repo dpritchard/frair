@@ -65,7 +65,7 @@ data(gammarus)
 frair_responses() # See what is available
 # A typeII fit
 outII <- frair_fit(eaten~density, data=gammarus, response='rogersII', 
-        start=list(a = 1.2, h = 0.015), fixed=list(T=1))
+        start=list(a = 1.2, h = 0.015), fixed=list(T=40/24))
         
 \dontrun{
 outIIb <- frair_boot(outII) # Slow

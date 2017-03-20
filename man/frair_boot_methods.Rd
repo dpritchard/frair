@@ -94,7 +94,7 @@ data(gammarus)
 # Holling's is the wrong fit for these data based on the experimental design
 # But it runs more quickly, so is a useful demonstration
 outhol <- frair_fit(eaten~density, data=gammarus, response='hollingsII', 
-        start=list(a = 1, h = 0.08), fixed=list(T=1))
+        start=list(a = 1, h = 0.08), fixed=list(T=40/24))
 outholb <- frair_boot(outhol)
 
 confint(outholb)

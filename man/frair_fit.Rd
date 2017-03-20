@@ -90,11 +90,11 @@ data(gammarus)
 frair_responses() # See what is available
 # A typeII fit
 outII <- frair_fit(eaten~density, data=gammarus, response='rogersII', 
-        start=list(a = 1.2, h = 0.015), fixed=list(T=1))
+        start=list(a = 1.2, h = 0.015), fixed=list(T=40/24))
 
 # A linear fit
 outI <- frair_fit(eaten~density, data=gammarus, response='typeI', 
-        start=list(a=0.5), fixed=list(T=1))
+        start=list(a=0.5), fixed=list(T=40/24))
 
 # Visualise fits
 plot(outII, pch=20, col=rgb(0,0,0,0.2), xlim=c(0,30))
@@ -113,15 +113,15 @@ data("bythotrephes")
 b_flex <- frair_fit(eaten~density, data=bythotrephes, 
                     response='flexpnr', 
                     start=list(b = 1.2, q = 0, h = 0.015), 
-                    fixed=list(T=1))
+                    fixed=list(T=12/24))
 b_II <- frair_fit(eaten~density, data=bythotrephes, 
                   response='flexpnr', 
                   start=list(b = 1.2, h = 0.015), 
-                  fixed=list(T=1, q = 0))
+                  fixed=list(T=12/24, q = 0))
 b_rogersII <- frair_fit(eaten~density, data=bythotrephes, 
                   response='rogersII', 
                   start=list(a = 1.2, h = 0.015), 
-                  fixed=list(T=1))
+                  fixed=list(T=12/24))
 AIC(b_flex$fit, b_II$fit, b_rogersII$fit)
 AICtab(b_flex$fit, b_II$fit, b_rogersII$fit)
 # b_II and b_rogersII are identical, by definition when q = 0
@@ -134,7 +134,7 @@ AICtab(b_flex$fit, b_II$fit, b_rogersII$fit)
 
 # Using mle2 or mle manually:
 strt <- list(a = 1.2, h = 0.015)
-fxd <- list(T=1)
+fxd <- list(T=40/24)
 dat <- list('X'=gammarus$density, 'Y'=gammarus$eaten)
 manual_fit <- mle2(rogersII_nll, start=strt, fixed=fxd, 
                    method='SANN', data=dat)

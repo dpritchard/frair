@@ -3,6 +3,7 @@
 
 - Messages are now dispatched via `message()` not via `cat()`.  This is the right thing to do.  
 - Speeling mistakes corrected, throughout (this will probably be an ongoing issue!).
+- 
 
 # FRAIR v.0.5
 

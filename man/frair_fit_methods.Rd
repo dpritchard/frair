@@ -45,7 +45,7 @@ Daniel Pritchard
 \examples{
 data(gammarus)
 outII <- frair_fit(eaten~density, data=gammarus, response='rogersII', 
-        start=list(a = 1.2, h = 0.015), fixed=list(T=1))
+        start=list(a = 1.2, h = 0.015), fixed=list(T=40/24))
 
 # Visualise fit
 plot(outII, pch=20, col=rgb(0,0,0,0.2), xlim=c(0,30))

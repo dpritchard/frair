@@ -69,7 +69,7 @@ data(bythotrephes)
 
 expofit <- frair_fit(eaten~density, data=bythotrephes, 
                 response='flexpnr', start=list(b = 0.5, q = 1, h = 0.15), 
-                fixed=list(T=1))
+                fixed=list(T=12/24))
 ## Plot
 plot(expofit)
 lines(expofit, col=2)
