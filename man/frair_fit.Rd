@@ -127,6 +127,23 @@ AICtab(b_flex$fit, b_II$fit, b_rogersII$fit)
 # b_II and b_rogersII are identical, by definition when q = 0
 # b_flex is strongly preferred (delta AIC = 16.9)
 
+# The role of T
+## Users need to be aware that changing T will change 
+## the units of fitted coefficients.  
+## For example, with the Gammarus dataset:
+g_T1 <- frair_fit(formula = eaten~density, data = gammarus, 
+                  response = "rogersII", 
+                  start = list(a = 2, h = 0.1), fixed = list(T = 1))
+g_Td <- frair_fit(formula = eaten~density, data = gammarus, 
+                  response = "rogersII", 
+                  start = list(a = 1, h = 0.1), fixed = list(T = 40/24))
+g_Th <- frair_fit(formula = eaten~density, data = gammarus, 
+                  response = "rogersII", 
+                  start = list(a = 0.05, h = 4), fixed = list(T = 40))
+diff_t <- round(rbind(coef(g_T1), coef(g_Td), coef(g_Th)), 2)
+row.names(diff_t) <- c("g_T1 (Experimental Time)", "g_Td (Days)", "g_Th (Hours)")
+print(diff_t)
+
 \dontrun{
 ## Fitting curves outside of FRAIR
 # Many advanced users will not be satisfied with FRAIR current limitations.
