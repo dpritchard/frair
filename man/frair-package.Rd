@@ -7,8 +7,6 @@
 \details{
 The main workhorses are \code{\link{frair_test}}, \code{\link{frair_fit}}, \code{\link{frair_compare}} and \code{\link{frair_boot}}. These should be the starting points for most users.
 
-A full vignette with examples will be released with version 0.5. In the meantime users will find help on the relevant help pages.  
-
 }
 \author{
 Development hosted on GitHub: \url{https://github.com/dpritchard/frair}  
