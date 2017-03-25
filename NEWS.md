@@ -1,9 +1,15 @@
 # FRAIR v.0.5.100
-**Development Version**
 
 - Messages are now dispatched via `message()` not via `cat()`.  This is the right thing to do.  
 - Speeling mistakes corrected, throughout (this will probably be an ongoing issue!).
-- 
+- Update T in examples using Gammarus and Bythotrephes.
+	- It is best practice to use either "day" or "hour" as the basis for "T". We have chosen "day".
+- Update frair_fit help page
+	- Provide an example on using AIC to compare (nested) models
+	- Provide an example of how T modifies units on coefficients.  
+	- Provide more information for users looking to circumvent FRAIR’s limitations.
+- Update the rogers_II help page
+	- Note that Royama (1971) described the Rogers equation first.
 
 # FRAIR v.0.5
 

@@ -5,7 +5,7 @@ This is a bug-fix and maintenance release for FRAIR.
 All of the relevant changes (both user-facing, and back-end) are documented in NEWS.md
 
 ## Test environments
-- Local OS X (El Capitan, v. 10.11.4): R 3.2.4
+- Local macOS (Sierra, v. 10.12.3): R 3.3.2
 - Win-Builder (devel and release)
 
 ## R CMD check results
