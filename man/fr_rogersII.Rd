@@ -53,8 +53,15 @@ Daniel Pritchard
 \code{\link{frair_fit}}.
 }
 
+\note{
+Note that although Rogers (1972) is the most commonly cited reference for this equation, Royama (1971) described it one year earlier than Rogers and thus should also be given credit. 
+}
+
 \references{
 Bolker BM (2008) \emph{Ecological Models and Data in R}. Princeton University Press, Princeton, NJ.
+Rogers, D. (1972). Random search and insect population models. The Journal of Animal Ecology, 369–383.
+Royama, T. (1971). A comparative study of models for predation and parasitism. Researches on Population Ecology, 13, 1–91.
+
 }
 
 \examples{
