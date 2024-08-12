@@ -13,7 +13,9 @@ rogersII <- function(X, a, h, T) {
         coefs <- a
         a <- coefs[['a']]
         h <- coefs[['h']]
-        T <- coefs[['T']]
+        if(T in names(coef)){
+        	T <- coefs[['T']]
+        }
     }
     return(X - lamW::lambertW0(a * h * X * exp(-a * (T - h * X)))/(a * h))
 
@@ -34,7 +36,7 @@ rogersII_fit <- function(data, samp, start, fixed, boot=FALSE, windows=FALSE) {
 
     try_rogersII <- try(bbmle::mle2(rogersII_nll, start=start, fixed=fixed, data=list('X'=dat$X, 'Y'=dat$Y), 
                              optimizer='optim', method='Nelder-Mead', control=list(maxit=5000)), 
-                        silent=T) # Remove 'silent=T' for more verbose output
+                        silent=TRUE) # Remove 'silent=T' for more verbose output
 	if (inherits(try_rogersII, "try-error")) {
  		# The fit failed...
  		if(boot){
