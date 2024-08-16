@@ -25,7 +25,9 @@ frair_fit <- function(formula, data, response, start=list(), fixed=NULL, T=NULL)
     if(!is.character(response)){
         response <- as.character(mf_list$response)
     }
-   
+   if(response != "rogersII"){
+   	stop("This fork of the original packae only works with response = 'rogersII' because we were in a hurry. If you need varible T and other responses, then you must modfify the relevant 'fr_response.R' file.")
+   }
     # Check we can deal with the requested response
     resp_known <- names(frair_responses(show=FALSE))
     resp_check <- match(response, resp_known, 0L)
