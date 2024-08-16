@@ -39,30 +39,35 @@ frair_compare <- function(frfit1, frfit2, start=NULL){
     if(any(frfit1$fixedvars!=frfit2$fixedvars)){
         stop('Both inputs must have the same fixed variables.')
     }
-    # Get fixed values
-    fixed=list()
-    for(a in 1:length(frfit1$fixedvars)){
-        fname <- frfit1$fixedvars[a]
-        if(frfit1$coefficients[fname]!=frfit2$coefficients[fname]){
-            stop('Fixed variables must have the same numerical value')
-        }
-        fixed[fname] <- frfit1$coefficients[fname]
+    if(!is.null(frfit1$fixedvars)){
+    	# Get fixed values
+    	fixed=list()
+    	for(a in 1:length(frfit1$fixedvars)){
+    		fname <- frfit1$fixedvars[a]
+    		if(frfit1$coefficients[fname]!=frfit2$coefficients[fname]){
+    			stop('Fixed variables must have the same numerical value')
+    		}
+    		fixed[fname] <- frfit1$coefficients[fname]
+    	}
+    } else {
+    	fixed=NULL
     }
     
     # Get X and Y and setup dummy coding for the model
     Xin <- c(frfit1$x,frfit2$x)
     Yin <- c(frfit1$y,frfit2$y)
+    Tin <- c(frfit1$t,frfit2$t)
     grp <- c(rep(0,times=length(frfit1$x)), rep(1,times=length(frfit2$x)))
     
     # https://github.com/dpritchard/frair/issues/23
     if(length(unlist(start))>1){
         try_test <- try(bbmle::mle2(minuslogl=fr_nll_difffunc, start=start, fixed=fixed, 
-                             data=list('X'=Xin, 'Y'=Yin, grp=grp), optimizer='optim', 
+                             data=list('X'=Xin, 'Y'=Yin,'T'=Tin, grp=grp), optimizer='optim', 
                              method='Nelder-Mead', control=list(maxit=5000)), 
                         silent=TRUE)
     } else {
         try_test <- try(bbmle::mle2(minuslogl=fr_nll_difffunc, start=start, fixed=fixed, 
-                             data=list('X'=Xin, 'Y'=Yin, grp=grp), optimizer='optim', 
+                             data=list('X'=Xin, 'Y'=Yin, 'T'=Tin, grp=grp), optimizer='optim', 
                              control=list(maxit=5000)), 
                         silent=TRUE)
     }
