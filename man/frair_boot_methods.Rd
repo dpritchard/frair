@@ -31,13 +31,13 @@
   \item{ylab }{Label for the y-axis.}
   \item{bootcol }{A valid colour for the bootstrapped lines.}
   \item{bootalpha }{A numeric (0-1). A transparency for the (inevitably overlapping) lines.}
-  \item{probs }{Lower and upper tails for confidence interval polygons. See \code{\link{quantile}}.}
+  \item{probs }{Lower and upper tails for confidence interval polygons. See \code{\link[stats]{quantile}}.}
   \item{\ldots }{Other items passed to underlying functions.}
 }
 
 
 \details{
-This documents standard methods for FRAIR objects of class \code{frboot}. However, because standard naming conventions have been used, some undocumented utility functions might also work (e.g. \code{\link{coefficients}})
+This documents standard methods for FRAIR objects of class \code{frboot}. However, because standard naming conventions have been used, some undocumented utility functions might also work (e.g. \code{\link[stats]{coefficients}})
 
 The code underlying \code{confint.frboot} is quite complex and relies heavily on the excellent work done by Brian Ripley in \code{\link[boot]{boot.ci}}. Some of the complexity of \code{boot.ci} is hidden, but, like all FRAIR objects you can access the original method by passing the output directly (e.g. \code{boot.ci(object$fit)}). 
 

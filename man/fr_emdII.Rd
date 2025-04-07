@@ -40,7 +40,7 @@ None of these functions are designed to be called directly, though they are all 
 
 \code{emdII_fit} does the heavy lifting and also pulls double duty as the \code{statistic} function for bootstrapping (\emph{via} \code{boot()} in the boot package).  The \code{windows} argument if required to prevent needless calls to \code{require(frair)} on platforms that can manage sane parallel processing.
 
-The core fitting is done by \code{\link{mle2}} from the \code{bbmle} package and users are directed there for more information. \code{mle2} uses the \code{emdII_nll} function to optimise \code{emdII}.
+The core fitting is done by \code{\link[bbmle]{mle2}} from the \code{bbmle} package and users are directed there for more information. \code{mle2} uses the \code{emdII_nll} function to optimise \code{emdII}.
 
 Further references and recommended reading can be found on the help page for \link{frair_fit}.
 }
