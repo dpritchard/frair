@@ -1,6 +1,9 @@
 Kia ora anō (Hello again) from New Zealand.
 
-This is a resubmission of 0.05.201, with a version bump to 0.5.202
+This is a resubmission of 0.05.203, with a version bump to 0.5.203
+
+## 0.5.203
+Finally I understand the pre-test NOTEs about 
 
 ## 0.5.202
 Still tracking down NOTEs in the pre-tests that don't flag elsewhere. I have expanded the scope of the `\donttest{}` blocks, which I think (hope) might now be sufficient.

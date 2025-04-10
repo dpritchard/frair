@@ -1,8 +1,8 @@
 Package: frair
 Type: Package
 Title: Tools for Functional Response Analysis
-Version: 0.5.202
-Date: 2025-04-08
+Version: 0.5.203
+Date: 2025-04-10
 Authors@R: c(
     person("Daniel", "Pritchard", email = "daniel@pritchard.co", role = c("aut", "cre")),
     person("Daniel", "Barrios-O'Neill", email = "danny_of_neill@yahoo.co.uk", role = "ctb"),
@@ -11,7 +11,7 @@ Authors@R: c(
     )
 Description: Tools to support sensible statistics for functional response analysis.
 Depends: R (>= 3.0.0), stats4, bbmle
-Imports: lamW (>= 1.0), boot, parallel
+Imports: lamW (>= 1.0), boot, parallel, RcppParallel
 License: GPL-2
 Suggests: testthat
 LazyData: TRUE

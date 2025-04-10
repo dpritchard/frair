@@ -1,3 +1,8 @@
+# frair 0.5.203
+- Roll back expanded use of `\donttest{}` in favour of `setThreadOptions(numThreads = 2)`
+- Now imports `RcppParallel::setThreadOptions()`
+- Update typos in the help for `fr_flexp`. It used to use the `fr_flexpnr` model, which is not useful when trying to demonstrate the `fr_flexp` model. A comment in the examples also incorrectly stated that the "*The flexpnr model is not correct for the experimental design of the bythotrephes data*". It is actually the **fr_flexp** model that is inappropriate.
+
 # frair 0.5.202
 
 - Expand the scope of `\donttest{}`. This is likely due to some parallelism in external packages that is currently difficult (for FRAIR) to control.

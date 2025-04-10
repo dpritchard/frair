@@ -44,6 +44,7 @@ Daniel Pritchard
 
 \examples{
 data(gammarus)
+\dontshow{RcppParallel::setThreadOptions(numThreads = 2)}
 outII <- frair_fit(eaten~density, data=gammarus, response='rogersII', 
         start=list(a = 1.2, h = 0.015), fixed=list(T=40/24))
 

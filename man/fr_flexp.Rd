@@ -65,10 +65,9 @@ Flynn KJ, Fasham MJR, Hipkin CR (1997) Modelling the interactions between ammoni
 
 \examples{
 data(bythotrephes)
-# NB: The flexpnr model is not correct for the experimental design of the bythotrephes data
-
+# NB: The flexp model is not correct for the experimental design of the bythotrephes data
 expofit <- frair_fit(eaten~density, data=bythotrephes, 
-                response='flexpnr', start=list(b = 0.5, q = 1, h = 0.15), 
+                response='flexp', start=list(b = 0.5, q = 1, h = 0.15), 
                 fixed=list(T=12/24))
 ## Plot
 plot(expofit)

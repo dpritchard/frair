@@ -60,8 +60,8 @@ Bolker, BM (2008) \emph{Ecological Models and Data in R}. Princeton University P
 }
 
 \examples{
-\donttest{
 data(gammarus)
+\dontshow{RcppParallel::setThreadOptions(numThreads = 2)}
 fitP1 <- frair_fit(eaten~density, data=gammarus, 
                 response='emdII', start=list(a = 1.2, h = 0.015), 
                 fixed=list(T=40/24, P=1))
@@ -81,5 +81,4 @@ coef(rogII)
 
 stopifnot(coef(fitP1)[1]==coef(rogII)[1])
 stopifnot(coef(fitP1)[2]==coef(rogII)[2])
-}
 }

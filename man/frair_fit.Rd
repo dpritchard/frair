@@ -86,7 +86,7 @@ Daniel Pritchard
 
 \examples{
 data(gammarus)
-
+\dontshow{RcppParallel::setThreadOptions(numThreads = 2)}
 frair_responses() # See what is available
 # A typeII fit
 outII <- frair_fit(eaten~density, data=gammarus, response='rogersII', 
@@ -106,9 +106,6 @@ summary(outII$fit)
 summary(outI$fit)
 # Compare models using AIC
 AIC(outI$fit,outII$fit)
-
-\donttest{
-# Extra examples (skipped for CRAN incoming tests). 
 
 # Bythotrephes
 data("bythotrephes")
@@ -146,7 +143,6 @@ g_Th <- frair_fit(formula = eaten~density, data = gammarus,
 diff_t <- round(rbind(coef(g_T1), coef(g_Td), coef(g_Th)), 2)
 row.names(diff_t) <- c("g_T1 (Experimental Time)", "g_Td (Days)", "g_Th (Hours)")
 print(diff_t)
-}
 
 \dontrun{
 ## Fitting curves outside of FRAIR

@@ -65,9 +65,8 @@ Royama, T. (1971). A comparative study of models for predation and parasitism. R
 }
 
 \examples{
-\donttest{
 data(gammarus)
-
+\dontshow{RcppParallel::setThreadOptions(numThreads = 2)}
 pulex <- gammarus[gammarus$spp=='G.pulex',]
 celt <- gammarus[gammarus$spp=='G.d.celticus',]
 
@@ -85,7 +84,6 @@ lines(pulexfit)
 lines(celtfit, col=4)
 
 frair_compare(pulexfit, celtfit)
-}
 
 \dontrun{
 pulexfit_b <- frair_boot(pulexfit)

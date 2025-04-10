@@ -37,6 +37,7 @@ S3method(print,frtest)
 importFrom("parallel", "detectCores")
 importFrom("boot", "boot", "boot.ci")
 importFrom("lamW", "lambertW0")
+importFrom("RcppParallel", "setThreadOptions")
 
 # Extra imports for depends objects (just to be sure!)
 importFrom("stats4",

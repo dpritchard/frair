@@ -87,7 +87,7 @@ Daniel Pritchard
 }
 \examples{
 data(gammarus)
-
+\dontshow{RcppParallel::setThreadOptions(numThreads = 2)}
 pulex <- gammarus[gammarus$spp=='G.pulex',]
 celt <- gammarus[gammarus$spp=='G.d.celticus',]
 
@@ -98,12 +98,9 @@ celtfit <- frair_fit(eaten~density, data=celt,
                 response='rogersII', start=list(a = 1.2, h = 0.015), 
                 fixed=list(T=40/24))
 
-\donttest{
-## Relatively slow, so skip for CRAN and R CMD check:
 # The following tests the null hypothesis that the 
 # true difference between the coefficients is zero:
 frair_compare(pulexfit, celtfit) # Reject null for 'h', do not reject for 'a'
-}
 
 \dontrun{
 # Provides a similar conclusion to bootstrapping followed by 95\% CIs

@@ -64,10 +64,9 @@ Real LA (1977) The Kinetics of Functional Response. \emph{The American Naturalis
 }
 
 \examples{
-\donttest{
 # A 'type-II' example
 data(gammarus)
-
+\dontshow{RcppParallel::setThreadOptions(numThreads = 2)}
 rogfit <- frair_fit(eaten~density, data=gammarus, 
                 response='rogersII', start=list(a = 1.2, h = 0.015), 
                 fixed=list(T=40/24))
@@ -87,7 +86,7 @@ AIC(expofit$fit) # The exponent model is *not* preferred
 
 # A 'type-III' example
 data(bythotrephes)
-
+\dontshow{RcppParallel::setThreadOptions(numThreads = 2)}
 rogfit <- frair_fit(eaten~density, data=bythotrephes, 
                 response='rogersII', start=list(a = 1.2, h = 0.015), 
                 fixed=list(T=12/24))
@@ -104,5 +103,4 @@ summary(rogfit$fit)
 summary(expofit$fit) # Some evidence that q is different from zero...
 AIC(rogfit$fit)
 AIC(expofit$fit) # The exponent model is preferred
-}
 }
