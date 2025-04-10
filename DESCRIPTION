@@ -1,7 +1,7 @@
 Package: frair
 Type: Package
 Title: Tools for Functional Response Analysis
-Version: 0.5.201
+Version: 0.5.202
 Date: 2025-04-08
 Authors@R: c(
     person("Daniel", "Pritchard", email = "daniel@pritchard.co", role = c("aut", "cre")),

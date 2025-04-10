@@ -1,6 +1,10 @@
+# frair 0.5.202
+
+- Expand the scope of `\donttest{}`. This is likely due to some parallelism in external packages that is currently difficult (for FRAIR) to control.
+
 # frair 0.5.201
 
-- Wrap some examples in `\donttest{}` to speed up automated checks on CRAN. All examples are still there, but some do not run by default with `R CMD check` or `example()`
+- Wrap some examples in `\donttest{}` to speed up automated checks on CRAN. All examples are still there, but some do not run by default with `R CMD check` or `example()` (when `interactive()` returns FALSE)
 
 # frair 0.5.200
 

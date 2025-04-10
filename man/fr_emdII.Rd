@@ -60,6 +60,7 @@ Bolker, BM (2008) \emph{Ecological Models and Data in R}. Princeton University P
 }
 
 \examples{
+\donttest{
 data(gammarus)
 fitP1 <- frair_fit(eaten~density, data=gammarus, 
                 response='emdII', start=list(a = 1.2, h = 0.015), 
@@ -70,9 +71,6 @@ fitP2 <- frair_fit(eaten~density, data=gammarus,
 # Note that the coefficients are scaled to per prey item
 coef(fitP1)
 coef(fitP2)
-
-\donttest{
-# FYI (skipped for CRAN incoming tests). 
 
 # Should give identical answers to rogersII when P=1
 rogII <- frair_fit(eaten~density, data=gammarus, 

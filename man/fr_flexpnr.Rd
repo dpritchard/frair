@@ -64,6 +64,7 @@ Real LA (1977) The Kinetics of Functional Response. \emph{The American Naturalis
 }
 
 \examples{
+\donttest{
 # A 'type-II' example
 data(gammarus)
 
@@ -83,9 +84,6 @@ summary(rogfit$fit)
 summary(expofit$fit) # No evidence that q is different from zero...
 AIC(rogfit$fit)
 AIC(expofit$fit) # The exponent model is *not* preferred
-
-\donttest{
-# Extra examples (skipped for CRAN incoming tests). 
 
 # A 'type-III' example
 data(bythotrephes)

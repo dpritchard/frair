@@ -54,6 +54,7 @@ Hassell M, Lawton J, Beddington J (1977) Sigmoid functional responses by inverte
 }
 
 \examples{
+\donttest{
 datx <- rep(c(1,2,3,4,6,12,24,50,100), times=10)
 daty1 <- round(hassIIInr(X=datx, 
             b=0.08*rnorm(length(datx), mean=1, sd=0.1), 
@@ -78,8 +79,6 @@ points(hassIIInr_2, col=4)
 lines(hassIIInr_1)
 lines(hassIIInr_2, col=4)
 
-\donttest{
-## Relatively slow, so skip for CRAN and R CMD check:
 frair_compare(hassIIInr_1, hassIIInr_2)
 }
 }
