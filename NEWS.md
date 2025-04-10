@@ -1,8 +1,13 @@
+# frair 0.5.201
+
+- Wrap some examples in `\donttest{}` to speed up automated checks on CRAN. All examples are still there, but some do not run by default with `R CMD check` or `example()`
+
 # frair 0.5.200
 
 - Update Rd cross-references to Rd package anchors, where relevant. 
 - Reformat NEWS.md, removing "v." in front of the version number. Should parse now.
 - Cleaned up deprecated functions in tests.
+- Tidy up URLs in README.md
 
 # frair 0.5.100
 

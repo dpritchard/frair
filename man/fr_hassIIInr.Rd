@@ -78,5 +78,8 @@ points(hassIIInr_2, col=4)
 lines(hassIIInr_1)
 lines(hassIIInr_2, col=4)
 
+\donttest{
+## Relatively slow, so skip for CRAN and R CMD check:
 frair_compare(hassIIInr_1, hassIIInr_2)
+}
 }

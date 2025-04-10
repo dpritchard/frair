@@ -1,3 +1,4 @@
+skip_on_cran() # Some test are running long and kicking up NOTEs
 library(frair)
 data("gammarus")
 data("bythotrephes")

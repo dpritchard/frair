@@ -83,7 +83,10 @@ points(celtfit, col=4)
 lines(pulexfit)
 lines(celtfit, col=4)
 
+\donttest{
+## Relatively slow, so skip for CRAN and R CMD check:
 frair_compare(pulexfit, celtfit)
+}
 
 \dontrun{
 pulexfit_b <- frair_boot(pulexfit)

@@ -71,6 +71,9 @@ fitP2 <- frair_fit(eaten~density, data=gammarus,
 coef(fitP1)
 coef(fitP2)
 
+\donttest{
+# FYI (skipped for CRAN incoming tests). 
+
 # Should give identical answers to rogersII when P=1
 rogII <- frair_fit(eaten~density, data=gammarus, 
                 response='rogersII', start=list(a = 1.2, h = 0.015), 
@@ -80,5 +83,5 @@ coef(rogII)
 
 stopifnot(coef(fitP1)[1]==coef(rogII)[1])
 stopifnot(coef(fitP1)[2]==coef(rogII)[2])
-
+}
 }

@@ -107,6 +107,9 @@ summary(outI$fit)
 # Compare models using AIC
 AIC(outI$fit,outII$fit)
 
+\donttest{
+# Extra examples (skipped for CRAN incoming tests). 
+
 # Bythotrephes
 data("bythotrephes")
 # Fit several models and examine them using AIC. 
@@ -143,6 +146,7 @@ g_Th <- frair_fit(formula = eaten~density, data = gammarus,
 diff_t <- round(rbind(coef(g_T1), coef(g_Td), coef(g_Th)), 2)
 row.names(diff_t) <- c("g_T1 (Experimental Time)", "g_Td (Days)", "g_Th (Hours)")
 print(diff_t)
+}
 
 \dontrun{
 ## Fitting curves outside of FRAIR
