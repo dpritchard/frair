@@ -12,7 +12,7 @@ install.packages('frair')
 ```
 
 ## Citing
-**Pritchard, D. W.**, Paterson, R. A., Bovy, H. C. and Barrios-O'Neill, D.  2017.  [FRAIR: an R package for fitting and comparing consumer functional responses][pritchard:2017:8].  *Methods in Ecology and Evolution*, 8:11 1528-1534.
+Pritchard, D. W., Paterson, R. A., Bovy, H. C. and Barrios-O'Neill, D.  2017.  [FRAIR: an R package for fitting and comparing consumer functional responses][pritchard:2017:8].  *Methods in Ecology and Evolution*, 8:11 1528-1534.
 
 ## Contributing
 We welcome contributors of all skill levels!  If you would like to contribute to this project please [contact Daniel][dpcontact].  
