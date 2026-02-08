@@ -46,7 +46,7 @@ frair_boot <- function(frfit, start=NULL, strata=NULL, nboot=999, para=TRUE, nco
     }
     
     # Get data out of frfit and setup output
-    moddata <- data.frame('Y'=frfit$y, 'X'=frfit$x)
+    moddata <- data.frame('Y'=frfit$y, 'X'=frfit$x, 'T'=frfit$t)
     response <- frfit['response']
     # Check start
     if(is.null(start)){

@@ -19,7 +19,7 @@ hollingsII_fit <- function(data, samp, start, fixed, boot=FALSE, windows=FALSE) 
 
     try_hollingsII <- try(bbmle::mle2(hollingsII_nll, start=start, fixed=fixed, data=list('X'=dat$X, 'Y'=dat$Y), 
                                optimizer='optim', method='Nelder-Mead', control=list(maxit=5000)), 
-                          silent=T)
+                          silent=TRUE)
 	if (inherits(try_hollingsII, "try-error")) {
  		# The fit failed...
  		if(boot){

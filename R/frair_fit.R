@@ -1,7 +1,7 @@
 ## frair_fit
 # Wrapper function to fit functional response curves
 # The one of the core functions of the frair package
-frair_fit <- function(formula, data, response, start=list(), fixed=NULL){
+frair_fit <- function(formula, data, response, start=list(), fixed=NULL, T=NULL){
     # Parse call, can check formula...
     call <- match.call()
     mf <- match.call(expand.dots = FALSE)
@@ -11,26 +11,28 @@ frair_fit <- function(formula, data, response, start=list(), fixed=NULL){
     leftside <- all.vars(expandform[[2]])
     rightside <- all.vars(expandform[[3]])
     if(length(leftside)!=1 || length(rightside)!=1) {
-        stop('Only simple formulae (e.g. y ~ x) are supported.')
+       stop('Only simple formulae (e.g. y ~ x) are supported.')
     }
-    m <- match(c("formula", "data"), names(mf), 0L)
+    m <- match(c("formula", "data", "T"), names(mf), 0L)
     mf <- mf[c(1L, m)]
     mf$drop.unused.levels <- TRUE
     mf[[1]] <- as.name("model.frame")
     # moddata is the data we need for the fitting...
     moddata <- eval.parent(mf)
-    names(moddata) <- c('Y', 'X')
+    names(moddata) <- c('Y', 'X', 'T')
     
     # Plausibly, 'response' might be the function itself (if the user hasen't provided a quoted string as they should have). Rather than bitch about it, we deal.
     if(!is.character(response)){
         response <- as.character(mf_list$response)
     }
-   
+   if(response != "rogersII"){
+   	stop("This fork of the original packae only works with response = 'rogersII' because we were in a hurry. If you need varible T and other responses, then you must modfify the relevant 'fr_response.R' file.")
+   }
     # Check we can deal with the requested response
     resp_known <- names(frair_responses(show=FALSE))
     resp_check <- match(response, resp_known, 0L)
     if(resp_check==0){
-        stop(paste0(deparse(substitute(response)), ' is not a recognised response.\n   Use frair_responses(show=T) to see what has been implemented.'))
+        stop(paste0(deparse(substitute(response)), ' is not a recognised response.\n   Use frair_responses(show=TRUE) to see what has been implemented.'))
     }
     
     # Check start
@@ -52,6 +54,7 @@ frair_fit <- function(formula, data, response, start=list(), fixed=NULL){
     # Check we have everything we need
     req_input <- names(formals(response))
     req_input  <- req_input[req_input!='X']
+    req_input  <- req_input[req_input!='T'] #hack! Check if there's a cleaner way
     input_matches <- match(req_input, c(names(start), names(fixed)), NA)
     if(any(is.na(input_matches))){
         missing_input <- req_input[is.na(input_matches)]
@@ -82,7 +85,9 @@ frair_fit <- function(formula, data, response, start=list(), fixed=NULL){
     
     ## Go time!
     # Setup output
-    out <- list('call' = call, 'x' = moddata$X, 'y'=moddata$Y, 'response'=response, 'xvar' = rightside, 'yvar' = leftside, optimvars=names(start), fixedvars=names(fixed))
+    out <- list('call' = call, 'x' = moddata$X, 'y'=moddata$Y, 't'=moddata$T, 
+    						'response'=response, 'xvar' = rightside, 'yvar' = leftside, 'tvar' = mf_list[['T']],
+    						optimvars=names(start), fixedvars=names(fixed))
     class(out) <- c('frfit', class(out))
     # In this instance, the sample is just the data itself...
     samp=c(1:nrow(moddata))

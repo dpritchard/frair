@@ -25,7 +25,7 @@ typeI_fit <- function(data, samp, start, fixed, boot=FALSE, windows=FALSE) {
     out <- fr_setupout(start, fixed, samp)
     
     try_typeI <- try(bbmle::mle2(typeI_nll, start=start, fixed=fixed, data=list('X'=dat$X, 'Y'=dat$Y), optimizer='optim'), 
-                     silent=T)
+                     silent=TRUE)
     ## Remove 'silent=T' for more verbose output
     if (inherits(try_typeI, "try-error")){
         # The fit failed...

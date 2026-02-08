@@ -24,7 +24,7 @@ hassIII_fit <- function(data, samp, start, fixed, boot=FALSE, windows=FALSE) {
 
     try_hassIII <- try(bbmle::mle2(hassIII_nll, start=start, fixed=fixed, data=list('X'=dat$X, 'Y'=dat$Y), 
                             optimizer='optim', method='Nelder-Mead', control=list(maxit=5000)), 
-                       silent=T)
+                       silent=TRUE)
 	if (inherits(try_hassIII, "try-error")) {
  		# The fit failed...
  		if(boot){

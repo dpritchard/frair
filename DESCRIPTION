@@ -7,7 +7,9 @@ Authors@R: c(
     person("Daniel", "Pritchard", email = "daniel@pritchard.co", role = c("aut", "cre")),
     person("Daniel", "Barrios-O'Neill", email = "danny_of_neill@yahoo.co.uk", role = "ctb"),
     person("Helene", "Bovy", email = "helene.bovy@gmail.com", role = "ctb"),
-    person("Rachel", "Paterson", email = "rachelpatersonnz@gmail.com", role = "ctb")
+    person("Rachel", "Paterson", email = "rachelpatersonnz@gmail.com", role = "ctb"),
+    person("Mollie","Brooks", comment=c(ORCID="0000-0001-6963-8326"), role = "ctb"),
+    person("Ben","Bolker", role="aut", comment=c(ORCID="0000-0002-2127-0443"), role = "ctb"),
     )
 Description: Tools to support sensible statistics for functional response analysis.
 Depends: R (>= 3.0.0), stats4, bbmle
