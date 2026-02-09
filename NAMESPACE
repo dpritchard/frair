@@ -18,7 +18,6 @@ export(real77, real77_fit, real77_nll, real77_diff, real77_nll_diff)
 export(real77r, real77r_fit, real77r_nll, real77r_diff, real77r_nll_diff)
 
 # Methods
-S3method(predict, frfit)
 S3method(print, frfit)
 S3method(plot, frfit)
 S3method(lines, frfit)
