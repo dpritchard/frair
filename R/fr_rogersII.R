@@ -4,7 +4,6 @@
 # N0 replaced with 'X' for simplicity and consistency.
 # X = Number of 'prey' (prey density / concentration)
 # Y = Number of prey eaten / consumed / killed / absorbed
-# T = total time for each observation
 
 ## Rogers Type II decreasing prey function ##
 # Same as ?emdbook::lambertW
@@ -14,9 +13,7 @@ rogersII <- function(X, a, h, T) {
         coefs <- a
         a <- coefs[['a']]
         h <- coefs[['h']]
-        if(T %in% names(coef)){
-        	T <- coefs[['T']]
-        }
+        T <- coefs[['T']]
     }
     return(X - lamW::lambertW0(a * h * X * exp(-a * (T - h * X)))/(a * h))
 
@@ -35,9 +32,9 @@ rogersII_fit <- function(data, samp, start, fixed, boot=FALSE, windows=FALSE) {
 	dat <- data[samp,]
 	out <- fr_setupout(start, fixed, samp)
 
-    try_rogersII <- try(bbmle::mle2(rogersII_nll, start=start, fixed=fixed, data=list('X'=dat$X, 'Y'=dat$Y, 'T'=dat$T), 
+    try_rogersII <- try(bbmle::mle2(rogersII_nll, start=start, fixed=fixed, data=list('X'=dat$X, 'Y'=dat$Y), 
                              optimizer='optim', method='Nelder-Mead', control=list(maxit=5000)), 
-                        silent=TRUE) # Remove 'silent=T' for more verbose output
+                        silent=T) # Remove 'silent=T' for more verbose output
 	if (inherits(try_rogersII, "try-error")) {
  		# The fit failed...
  		if(boot){
@@ -68,7 +65,7 @@ rogersII_fit <- function(data, samp, start, fixed, boot=FALSE, windows=FALSE) {
 }	
 # rogersII_nll
 # Provides negative log-likelihood for estimations via bbmle::mle2()
-# See Ben Bolkers book for more info
+# See Ben Bowkers book for more info
 rogersII_nll <- function(a, h, T, X, Y) {
     if (a <= 0 || h <= 0){return(NA)}
     prop.exp = rogersII(X, a, h, T)/X

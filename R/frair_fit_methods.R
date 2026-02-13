@@ -35,32 +35,3 @@ lines.frfit <- function(x, tozero=FALSE, ...){
     newy <- fitfun(newx, as.list(x$coefficients))
     lines(x=newx, y=newy, ...)
 }
-
-#' @param object fitted frair model
-#' @param newdata specified densities for prediction; data frame
-#' with density column name matching that of original model (\code{object$xvar})
-#' @param boot output of \code{frair_boot}
-#' @param quantiles for confidence intervals
-
-predict.frfit <- function(object, newdata = NULL, boot = NULL, quantiles = c(0.025, 0.975)) {
-	fitfun <- get(object$response, pos = "package:frair")
-	if (!is.null(newdata)) {
-		newx <- newdata[[object$xvar]]
-		newt <- newdata[[object$tvar]]
-	} else {
-		newx <- object$x
-		newt <- object$t
-	}
-	fitcoefs <- as.list(object$coefficients)
-	fitted <- fitfun(X=newx, T=newt, a=fitcoefs[['a']], h=fitcoefs[['h']])
-	if (is.null(boot)) return(fitted)
-	nms <- names(object$coefficients)
-	bootvars <- boot$fit$t[,names(boot$fit$t0) %in% nms]
-	colnames(bootvars) <- nms
-	bootres <- apply(bootvars, 1,
-									 function(b) fitfun(X=newx, T=newt, a = as.list(b)[['a']], h = as.list(b)[['h']]))
-	envelope <- t(apply(bootres, 1, quantile, quantiles))
-	ret <- data.frame(fitted, envelope)
-	names(ret) <- c(object$yvar, "lwr", "upr")
-	return(ret)
-}
